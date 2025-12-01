@@ -48,12 +48,7 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-center">
             
             {/* Content */}
-            <div className="lg:col-span-8 flex flex-col justify-center animate-fade-in-up pt-20">
-               <div className="flex items-center gap-4 mb-6">
-                 <div className={`h-[1px] w-12 ${sysConfig ? 'bg-green-500' : 'bg-[#7F6A47]'}`}></div>
-                 <span className={`text-xs font-bold uppercase tracking-[0.4em] ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>{sysConfig ? t.sys_active : t.hero.exp}</span>
-               </div>
-               
+            <div className="lg:col-span-7 flex flex-col justify-center animate-fade-in-up pt-20">
                <h1 className={`text-5xl lg:text-8xl font-serif text-[#F8F3E6] mb-8 leading-tight drop-shadow-2xl`}>
                  <span className="block animate-slide-in-left delay-100">{t.hero.title}</span> 
                  <span className={`italic animate-slide-in-left delay-300 ${sysConfig ? 'text-green-500 glitch' : 'text-[#7F6A47]'}`} data-text={t.hero.subtitle}>{t.hero.subtitle}</span>
@@ -79,11 +74,18 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
                </div>
             </div>
 
-            {/* Right side - Abstract premium element or empty for clean look */}
-            <div className="lg:col-span-4 hidden lg:block h-full relative">
-                {/* Decorative circle */}
-                <div className={`absolute top-1/2 right-0 transform -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-[#7F6A47]/10 pointer-events-none ${sysConfig ? 'border-green-500/20' : ''}`}></div>
-                <div className={`absolute top-1/2 right-10 transform -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-[#7F6A47]/20 pointer-events-none ${sysConfig ? 'border-green-500/30' : ''}`}></div>
+            {/* Right side - Doctor photo with 9 Years badge */}
+            <div className="lg:col-span-5 hidden lg:flex items-center justify-center h-full relative">
+                <div className="relative group view-cursor">
+                   <img 
+                      src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=600&auto=format&fit=crop" 
+                      className="w-[400px] h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl"
+                      alt="Həkim"
+                   />
+                   <div className="absolute -bottom-8 -right-8 bg-[#7F6A47] text-[#F8F3E6] p-6 shadow-2xl">
+                      <div className="text-4xl font-serif font-bold text-center">{t.hero.doctor_exp || t.hero.exp}</div>
+                   </div>
+                </div>
             </div>
 
           </div>
@@ -93,36 +95,34 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
       {/* --- JOINT PROJECT (AZ + TR) --- */}
       <section className={`py-32 relative overflow-hidden ${sysConfig ? 'bg-gray-900 text-white' : 'bg-[#F8F3E6]'}`}>
         {!sysConfig && <AzePatternBackground />}
-        {/* Decorative Background */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#f0ebd9] -skew-x-12 hidden lg:block -z-0 pointer-events-none mix-blend-multiply opacity-50"></div>
         
         <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-             <div className="lg:w-1/2 relative group view-cursor">
-                <div className="absolute top-4 -left-4 w-full h-full border-2 border-[#7F6A47] transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2"></div>
-                <div className="grid grid-cols-2 h-80 w-full relative z-10 shadow-2xl">
-                   <div className="bg-[#EBEBEB] flex items-center justify-center text-6xl grayscale group-hover:grayscale-0 transition-all duration-500 overflow-hidden group hover:scale-105 transform origin-right">
-                      <span className="transform transition-transform duration-500 group-hover:scale-110">🇦🇿</span>
-                   </div>
-                   <div className="bg-[#3A3A3A] flex items-center justify-center text-6xl grayscale group-hover:grayscale-0 transition-all duration-500 overflow-hidden group hover:scale-105 transform origin-left">
-                      <span className="transform transition-transform duration-500 group-hover:scale-110">🇹🇷</span>
-                   </div>
-                </div>
-             </div>
-             <div className="lg:w-1/2">
-                <span className={`text-[10px] font-bold uppercase tracking-[0.3em] ${theme.gold}`}>{t.joint_project.subtitle}</span>
-                <h2 className={`text-5xl font-serif mt-4 mb-8 ${theme.text}`}>{t.joint_project.title}</h2>
-                <p className={`leading-relaxed font-light text-lg ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/80'}`}>{t.joint_project.desc}</p>
-                <div className="mt-10 flex gap-12">
-                   {t.joint_project.badges.map((badge: string, idx: number) => (
-                      <div key={idx} className="flex flex-col gap-2 group">
-                        {idx === 0 ? <Shield size={32} className={`${theme.gold} transition-transform duration-300 group-hover:rotate-12`} strokeWidth={1} /> : <Award size={32} className={`${theme.gold} transition-transform duration-300 group-hover:rotate-12`} strokeWidth={1} />}
-                        <span className={`text-xs font-bold uppercase tracking-wider ${theme.text}`}>{badge}</span>
-                      </div>
-                   ))}
-                </div>
-             </div>
+          {/* Main Heading */}
+          <div className="text-center mb-16">
+             <h2 className={`text-4xl lg:text-5xl font-serif mb-6 ${theme.text}`}>{t.joint_project.title}</h2>
+             <p className={`text-lg leading-relaxed max-w-4xl mx-auto ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/80'}`}>
+               {t.joint_project.desc}
+             </p>
           </div>
+
+          {/* Advantages Title */}
+          {t.joint_project.advantages_title && (
+            <h3 className={`text-2xl font-serif text-center mb-12 ${theme.gold}`}>
+              {t.joint_project.advantages_title}
+            </h3>
+          )}
+
+          {/* 3 Advantages Cards */}
+          {t.joint_project.advantages && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+              {t.joint_project.advantages.map((advantage: any, idx: number) => (
+                <TiltCard key={idx} className={`p-8 bg-white border border-[#7F6A47]/20 shadow-lg hover:shadow-2xl transition-all duration-500 ${sysConfig ? 'bg-gray-800 border-green-900/30' : ''}`}>
+                  <h4 className={`text-xl font-bold mb-4 ${theme.text}`}>{advantage.title}</h4>
+                  <p className={`leading-relaxed ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/70'}`}>{advantage.desc}</p>
+                </TiltCard>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -135,16 +135,57 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-               {t.services.items.map((item: any, idx: number) => (
-                  <TiltCard key={idx} className={`interactive group relative p-10 border border-[#F8F3E6]/10 bg-[#F8F3E6]/[0.02] hover:bg-[#F8F3E6]/[0.08] transition-all duration-500 overflow-hidden cursor-none ${sysConfig ? 'hover:bg-green-900/10 border-green-900/30' : ''}`}>
-                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                        <ArrowRight className={theme.gold} />
-                     </div>
-                     <span className={`text-5xl font-serif block mb-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 ${theme.gold}`}>0{idx+1}</span>
-                     <h3 className="text-xl font-serif mb-4 text-[#F8F3E6]">{item.t}</h3>
-                     <p className="text-[#F8F3E6]/60 text-sm font-light leading-relaxed group-hover:text-[#F8F3E6] transition-colors">{item.d}</p>
-                  </TiltCard>
-               ))}
+               {/* Saç Əkimi */}
+               <MagneticButton 
+                  onClick={() => handleNavigation('men-hair')} 
+                  className={`interactive group relative p-10 border border-[#F8F3E6]/10 bg-[#F8F3E6]/[0.02] hover:bg-[#F8F3E6]/[0.08] transition-all duration-500 overflow-hidden cursor-pointer ${sysConfig ? 'hover:bg-green-900/10 border-green-900/30' : ''}`}
+               >
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
+                     <ArrowRight className={theme.gold} />
+                  </div>
+                  <span className={`text-5xl font-serif block mb-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 ${theme.gold}`}>01</span>
+                  <h3 className="text-xl font-serif mb-4 text-[#F8F3E6]">Saç Əkimi</h3>
+                  <p className="text-[#F8F3E6]/60 text-sm font-light leading-relaxed group-hover:text-[#F8F3E6] transition-colors">FUE və DHI metodları ilə maksimum sıxlıq.</p>
+               </MagneticButton>
+
+               {/* Kaş Əkimi */}
+               <MagneticButton 
+                  onClick={() => handleNavigation('women-eyebrow')} 
+                  className={`interactive group relative p-10 border border-[#F8F3E6]/10 bg-[#F8F3E6]/[0.02] hover:bg-[#F8F3E6]/[0.08] transition-all duration-500 overflow-hidden cursor-pointer ${sysConfig ? 'hover:bg-green-900/10 border-green-900/30' : ''}`}
+               >
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
+                     <ArrowRight className={theme.gold} />
+                  </div>
+                  <span className={`text-5xl font-serif block mb-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 ${theme.gold}`}>02</span>
+                  <h3 className="text-xl font-serif mb-4 text-[#F8F3E6]">Kaş Əkimi</h3>
+                  <p className="text-[#F8F3E6]/60 text-sm font-light leading-relaxed group-hover:text-[#F8F3E6] transition-colors">Təbii baxışlar üçün estetik toxunuş.</p>
+               </MagneticButton>
+
+               {/* Sakal Əkimi */}
+               <MagneticButton 
+                  onClick={() => handleNavigation('men-beard')} 
+                  className={`interactive group relative p-10 border border-[#F8F3E6]/10 bg-[#F8F3E6]/[0.02] hover:bg-[#F8F3E6]/[0.08] transition-all duration-500 overflow-hidden cursor-pointer ${sysConfig ? 'hover:bg-green-900/10 border-green-900/30' : ''}`}
+               >
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
+                     <ArrowRight className={theme.gold} />
+                  </div>
+                  <span className={`text-5xl font-serif block mb-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 ${theme.gold}`}>03</span>
+                  <h3 className="text-xl font-serif mb-4 text-[#F8F3E6]">Sakal Əkimi</h3>
+                  <p className="text-[#F8F3E6]/60 text-sm font-light leading-relaxed group-hover:text-[#F8F3E6] transition-colors">Üz cizgilərini tamamlayan bərpa.</p>
+               </MagneticButton>
+
+               {/* FUE Yöntəmi */}
+               <MagneticButton 
+                  onClick={() => handleNavigation('men-hair')} 
+                  className={`interactive group relative p-10 border border-[#F8F3E6]/10 bg-[#F8F3E6]/[0.02] hover:bg-[#F8F3E6]/[0.08] transition-all duration-500 overflow-hidden cursor-pointer ${sysConfig ? 'hover:bg-green-900/10 border-green-900/30' : ''}`}
+               >
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
+                     <ArrowRight className={theme.gold} />
+                  </div>
+                  <span className={`text-5xl font-serif block mb-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 ${theme.gold}`}>04</span>
+                  <h3 className="text-xl font-serif mb-4 text-[#F8F3E6]">FUE Yöntəmi</h3>
+                  <p className="text-[#F8F3E6]/60 text-sm font-light leading-relaxed group-hover:text-[#F8F3E6] transition-colors">İzsiz, ağrısız və sürətli sağalma.</p>
+               </MagneticButton>
             </div>
          </div>
       </section>
@@ -154,29 +195,49 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
          {!sysConfig && <AzePatternBackground />}
          <div className="container mx-auto px-6 relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-16">
+               {/* Left: Smiling couple photo */}
                <div className="lg:w-1/2 order-2 lg:order-1 view-cursor">
                   <div className="relative group">
                      <div className="absolute -inset-4 border-2 border-[#7F6A47] hidden lg:block transition-all duration-500 group-hover:inset-0"></div>
-                     <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?q=80&w=1000" className="relative z-10 w-full h-[500px] object-cover grayscale hover:grayscale-0 transition duration-700 shadow-2xl" alt="Long Hair"/>
+                     <div className="relative z-10 w-full h-[500px] overflow-hidden shadow-2xl">
+                        <img 
+                           src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1000" 
+                           className="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700" 
+                           alt="Happy Couple"
+                        />
+                     </div>
                   </div>
                </div>
+               
+               {/* Right: Content */}
                <div className="lg:w-1/2 order-1 lg:order-2">
                   <span className="bg-[#7F6A47] text-[#F8F3E6] px-4 py-1 text-[10px] font-bold uppercase tracking-widest mb-6 inline-block">{t.long_fue.badge}</span>
-                  <h2 className="text-5xl lg:text-7xl font-serif mb-4 text-[#3A3A3A]">{t.long_fue.title}</h2>
-                  <h3 className="text-xl mb-8 font-light italic text-[#7F6A47]">{t.long_fue.subtitle}</h3>
+                  <h2 className="text-4xl lg:text-6xl font-serif mb-4 text-[#3A3A3A]">{t.long_fue.title}</h2>
+                  {t.long_fue.subtitle && <h3 className="text-xl mb-8 font-light italic text-[#7F6A47]">{t.long_fue.subtitle}</h3>}
                   <p className="text-[#3A3A3A]/70 font-light text-lg leading-relaxed mb-10">{t.long_fue.desc}</p>
                   
-                  <ul className="space-y-4 mb-10">
-                    {t.long_fue.features.map((feature: string, idx: number) => (
-                        <li key={idx} className="flex items-center gap-3 text-sm font-medium text-[#3A3A3A]">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#7F6A47]"></div>
-                            {feature}
-                        </li>
-                    ))}
-                  </ul>
+                  {/* 3 Advantages */}
+                  {t.long_fue.features_title && (
+                     <h4 className="text-2xl font-serif text-[#7F6A47] mb-6">{t.long_fue.features_title}</h4>
+                  )}
+                  
+                  {Array.isArray(t.long_fue.features) && t.long_fue.features.length > 0 && (
+                     <div className="space-y-6 mb-10">
+                        {t.long_fue.features.map((feature: any, idx: number) => (
+                           <div key={idx} className="p-6 bg-white border border-[#7F6A47]/20 shadow-md hover:shadow-xl transition-shadow">
+                              <h5 className="font-bold text-[#3A3A3A] mb-2">
+                                 {typeof feature === 'string' ? feature : feature.title}
+                              </h5>
+                              {typeof feature === 'object' && feature.desc && (
+                                 <p className="text-sm text-[#3A3A3A]/70 leading-relaxed">{feature.desc}</p>
+                              )}
+                           </div>
+                        ))}
+                     </div>
+                  )}
 
                   <MagneticButton onClick={() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })} className="flex items-center gap-3 text-[#3A3A3A] font-bold uppercase text-xs tracking-widest hover:text-[#7F6A47] transition-colors border-b border-[#3A3A3A] pb-1 hover:border-[#7F6A47]">
-                     {t.nav.contact} <ArrowRight size={16}/>
+                     Məlumat Al <ArrowRight size={16}/>
                   </MagneticButton>
                </div>
             </div>
@@ -186,19 +247,33 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
       {/* --- DOCTORS --- */}
       <section className={`py-32 ${sysConfig ? 'bg-black' : 'bg-[#3A3A3A]'}`}>
         <div className="container mx-auto px-6">
-            <div className="flex flex-col lg:flex-row justify-between items-end mb-16">
-                 <div>
-                    <span className={`text-[10px] font-bold uppercase tracking-[0.3em] ${theme.gold}`}>{t.doctors.title}</span>
-                    <h2 className="text-4xl lg:text-5xl font-serif text-[#F8F3E6] mt-4">Professional Team</h2>
-                 </div>
-                 <button className={`hidden lg:block text-[#F8F3E6] text-xs uppercase tracking-widest border-b border-[#F8F3E6]/30 pb-2 hover:text-[#7F6A47] hover:border-[#7F6A47] transition-all`}>
-                    {t.doctors.btn}
-                 </button>
+            <div className="text-center mb-16">
+                 <h2 className="text-4xl lg:text-5xl font-serif text-[#F8F3E6]">{t.doctors.title}</h2>
+                 <div className="w-24 h-[1px] bg-[#7F6A47] mx-auto mt-6"></div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
                 {t.doctors.items.map((doc: any, idx: number) => (
-                    <DoctorCard key={idx} {...doc} specialMode={sysConfig} />
+                    <div key={idx} className="group relative overflow-hidden bg-[#F8F3E6]/5 border border-[#F8F3E6]/10 hover:bg-[#F8F3E6]/10 transition-all duration-500">
+                        <div className="p-8">
+                           <div className="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#7F6A47]">
+                              <img src={doc.image} alt={doc.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                           </div>
+                           <div className={`text-[10px] uppercase tracking-widest mb-2 text-center ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>{doc.specialty}</div>
+                           <h3 className="text-2xl font-serif text-[#F8F3E6] mb-2 text-center">{doc.name}</h3>
+                           <p className="text-sm text-[#F8F3E6]/60 mb-4 text-center">{doc.title}</p>
+                           <div className={`h-[1px] w-full bg-[#7F6A47] mb-6`}></div>
+                           {doc.bio && (
+                              <p className="text-sm text-[#F8F3E6]/80 leading-relaxed text-center">
+                                 {doc.bio}
+                              </p>
+                           )}
+                           <div className="mt-4 flex items-center justify-center gap-2 text-[#F8F3E6]/80 text-xs">
+                               <span className="text-[#7F6A47]">✓</span>
+                               <span>{doc.exp}</span>
+                           </div>
+                        </div>
+                    </div>
                 ))}
             </div>
         </div>
@@ -216,6 +291,54 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
                     <WhyUsCard key={idx} {...item} specialMode={sysConfig} idx={idx} />
                 ))}
             </div>
+
+            {/* Patient Testimonials */}
+            {t.why_us.testimonials && (
+               <div className="mt-24">
+                  <h3 className={`text-3xl font-serif text-center mb-12 ${theme.text}`}>Xəstə Rəyləri</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                     {t.why_us.testimonials.map((testimonial: any, idx: number) => (
+                        <div key={idx} className={`p-6 bg-white border border-[#7F6A47]/20 shadow-lg hover:shadow-2xl transition-all ${sysConfig ? 'bg-gray-800 border-green-900/30' : ''}`}>
+                           <div className="flex gap-1 mb-4">
+                              {Array.from({ length: testimonial.rating }).map((_, i) => (
+                                 <span key={i} className="text-[#7F6A47]">★</span>
+                              ))}
+                           </div>
+                           <p className={`text-sm italic mb-4 leading-relaxed ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/80'}`}>
+                              "{testimonial.comment}"
+                           </p>
+                           <p className={`text-xs font-bold ${theme.gold}`}>— {testimonial.name}</p>
+                        </div>
+                     ))}
+                  </div>
+               </div>
+            )}
+
+            {/* Before & After Photos */}
+            {t.why_us.before_after && (
+               <div className="mt-24">
+                  <h3 className={`text-3xl font-serif text-center mb-12 ${theme.text}`}>Öncə və Sonra</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                     {t.why_us.before_after.map((item: any, idx: number) => (
+                        <div key={idx} className={`overflow-hidden shadow-xl border border-[#7F6A47]/20 hover:shadow-2xl transition-all ${sysConfig ? 'border-green-900/30' : ''}`}>
+                           <div className="grid grid-cols-2 h-64">
+                              <div className="relative">
+                                 <img src={item.before} className="w-full h-full object-cover grayscale" alt="Before" />
+                                 <div className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 uppercase">Öncə</div>
+                              </div>
+                              <div className="relative">
+                                 <img src={item.after} className="w-full h-full object-cover" alt="After" />
+                                 <div className="absolute top-2 right-2 bg-[#7F6A47] text-white text-xs px-2 py-1 uppercase">Sonra</div>
+                              </div>
+                           </div>
+                           <div className={`p-4 text-center font-bold text-sm ${theme.text} ${sysConfig ? 'bg-gray-800' : 'bg-white'}`}>
+                              {item.desc}
+                           </div>
+                        </div>
+                     ))}
+                  </div>
+               </div>
+            )}
         </div>
       </section>
 
@@ -395,73 +518,44 @@ export default function App() {
                   </div>
                </div>
 
-               {/* Form */}
+               {/* Simplified Form */}
                <div className="lg:w-1/2 bg-[#F8F3E6]/5 p-8 lg:p-16 border border-[#F8F3E6]/10 backdrop-blur-sm">
                   <h2 className={`text-4xl font-serif mb-10 ${theme.text} text-[#F8F3E6]`}>{t.form.header}</h2>
-                  <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                  <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
                      
-                     {/* Name & Phone */}
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="group relative">
-                            <input type="text" className={`peer w-full border-b border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] ${sysConfig ? 'text-green-500 focus:border-green-500' : 'text-[#F8F3E6]'}`} placeholder=" " />
-                            <label className={`absolute left-0 top-4 text-[#F8F3E6]/50 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#7F6A47] ${sysConfig ? 'peer-focus:text-green-500' : ''}`}>{t.form.name}</label>
-                        </div>
-                        <div className="group relative">
-                            <input type="tel" className={`peer w-full border-b border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] ${sysConfig ? 'text-green-500 focus:border-green-500' : 'text-[#F8F3E6]'}`} placeholder=" " />
-                            <label className={`absolute left-0 top-4 text-[#F8F3E6]/50 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#7F6A47] ${sysConfig ? 'peer-focus:text-green-500' : ''}`}>{t.form.phone}</label>
-                        </div>
-                     </div>
-
-                     {/* Email */}
+                     {/* Name */}
                      <div className="group relative">
-                        <input type="email" className={`peer w-full border-b border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] ${sysConfig ? 'text-green-500 focus:border-green-500' : 'text-[#F8F3E6]'}`} placeholder=" " />
-                        <label className={`absolute left-0 top-4 text-[#F8F3E6]/50 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#7F6A47] ${sysConfig ? 'peer-focus:text-green-500' : ''}`}>{t.form.email}</label>
+                        <input 
+                           type="text" 
+                           className={`peer w-full border-b-2 border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] ${sysConfig ? 'text-green-500 focus:border-green-500' : 'text-[#F8F3E6]'}`} 
+                           placeholder=" " 
+                        />
+                        <label className={`absolute left-0 top-4 text-[#F8F3E6]/50 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#7F6A47] ${sysConfig ? 'peer-focus:text-green-500' : ''}`}>
+                           {t.form.name}
+                        </label>
                      </div>
 
-                     {/* Gender & Procedure */}
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                        <div>
-                            <label className="text-xs text-[#F8F3E6]/50 uppercase tracking-widest block mb-3">{t.form.gender}</label>
-                            <div className="flex gap-4">
-                                {t.form.gender_options.map((opt: string, i: number) => (
-                                    <label key={i} className="flex items-center gap-2 cursor-pointer group">
-                                        <div className="w-4 h-4 border border-[#F8F3E6]/30 rounded-full flex items-center justify-center group-hover:border-[#7F6A47]">
-                                            <div className="w-2 h-2 rounded-full bg-[#7F6A47] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                        </div>
-                                        <span className="text-sm text-[#F8F3E6]/80">{opt}</span>
-                                    </label>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="group relative">
-                             <select className={`w-full border-b border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] text-[#F8F3E6] appearance-none cursor-pointer`}>
-                                <option value="" disabled selected>{t.form.procedure}</option>
-                                {t.form.procedure_options.map((opt: string, i: number) => (
-                                    <option key={i} value={opt} className="bg-[#3A3A3A]">{opt}</option>
-                                ))}
-                             </select>
-                             <div className="absolute right-0 top-4 pointer-events-none text-[#7F6A47]">
-                                 <ArrowRight size={14} className="rotate-90"/>
-                             </div>
+                     {/* Phone with country code selector */}
+                     <div className="group relative flex gap-4">
+                        <select className={`w-32 border-b-2 border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] text-[#F8F3E6] cursor-pointer ${sysConfig ? 'focus:border-green-500' : ''}`}>
+                           <option value="+994" className="bg-[#3A3A3A]">🇦🇿 +994</option>
+                           <option value="+90" className="bg-[#3A3A3A]">🇹🇷 +90</option>
+                           <option value="+7" className="bg-[#3A3A3A]">🇷🇺 +7</option>
+                           <option value="+1" className="bg-[#3A3A3A]">🇺🇸 +1</option>
+                        </select>
+                        <div className="flex-1 relative">
+                           <input 
+                              type="tel" 
+                              className={`peer w-full border-b-2 border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] ${sysConfig ? 'text-green-500 focus:border-green-500' : 'text-[#F8F3E6]'}`} 
+                              placeholder=" " 
+                           />
+                           <label className={`absolute left-0 top-4 text-[#F8F3E6]/50 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#7F6A47] ${sysConfig ? 'peer-focus:text-green-500' : ''}`}>
+                              {t.form.phone}
+                           </label>
                         </div>
                      </div>
 
-                     {/* File Upload */}
-                     <div className="border border-dashed border-[#F8F3E6]/20 p-6 rounded-sm text-center cursor-pointer hover:border-[#7F6A47] hover:bg-[#F8F3E6]/5 transition-all">
-                        <div className="flex flex-col items-center gap-2">
-                             <Upload size={20} className="text-[#7F6A47]" />
-                             <span className="text-sm text-[#F8F3E6]/60">{t.form.upload}</span>
-                        </div>
-                     </div>
-                     
-                     {/* Consent */}
-                     <div className="flex items-start gap-3 mt-4">
-                        <div className="mt-1 w-4 h-4 border border-[#F8F3E6]/30 flex items-center justify-center">
-                             <div className="w-2 h-2 bg-[#7F6A47]"></div>
-                        </div>
-                        <p className="text-xs text-[#F8F3E6]/40 leading-tight">{t.form.consent}</p>
-                     </div>
-
+                     {/* Submit Button */}
                      <MagneticButton className={`w-full py-5 mt-8 font-bold uppercase tracking-widest text-xs transition-all hover:bg-[#F8F3E6] hover:text-[#3A3A3A] ${sysConfig ? 'bg-green-600 text-black' : 'bg-[#7F6A47] text-[#F8F3E6]'}`}>
                         {t.form.btn}
                      </MagneticButton>

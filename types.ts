@@ -19,13 +19,16 @@ export interface HeroSection {
   desc: string;
   btn_consult: string;
   btn_whatsapp: string;
+  doctor_exp?: string;
 }
 
 export interface JointProjectSection {
   title: string;
   subtitle: string;
   desc: string;
-  badges: string[];
+  advantages_title?: string;
+  advantages?: { title: string; desc: string; }[];
+  badges?: string[];
 }
 
 export interface ServiceItem {
@@ -43,7 +46,8 @@ export interface LongFueSection {
   subtitle: string;
   badge: string;
   desc: string;
-  features: string[];
+  features_title?: string;
+  features: { title: string; desc: string; }[] | string[];
 }
 
 export interface DoctorItem {
@@ -52,6 +56,7 @@ export interface DoctorItem {
   exp: string;
   specialty: string;
   image: string;
+  bio?: string;
 }
 
 export interface DoctorsSection {
@@ -68,6 +73,8 @@ export interface WhyUsItem {
 export interface WhyUsSection {
   title: string;
   items: WhyUsItem[];
+  testimonials?: { name: string; comment: string; rating: number; }[];
+  before_after?: { before: string; after: string; desc: string; }[];
 }
 
 export interface FaqItem {
@@ -85,16 +92,16 @@ export interface FormSection {
   header: string;
   name: string;
   phone: string;
-  email: string;
-  gender: string;
-  gender_options: string[];
-  procedure: string;
-  procedure_options: string[];
-  upload: string;
-  message: string;
-  consent: string;
   btn: string;
   success: string;
+  email?: string;
+  gender?: string;
+  gender_options?: string[];
+  procedure?: string;
+  procedure_options?: string[];
+  upload?: string;
+  message?: string;
+  consent?: string;
 }
 
 // --- New Pages Interfaces ---

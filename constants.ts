@@ -21,14 +21,29 @@ export const content: ContentMap = {
       title: "Mükəmməlliyin",
       subtitle: "Zirvəsi",
       desc: "Azərbaycan həkimləri və Türk komandasının ortaq layihəsi – premium saç ekimi və estetik mərkəzi.",
-      btn_consult: "Konsultasiya Al",
-      btn_whatsapp: "WhatsApp İlə Yaz"
+      btn_consult: "Məlumat Al",
+      btn_whatsapp: "WhatsApp İlə Yaz",
+      doctor_exp: "9 İl Peşəkar Xidmət"
     },
     joint_project: {
-      title: "Güclərin Vəhdəti",
-      subtitle: "Azərbaycan & Türkiyə Ortaq Layihəsi",
-      desc: "Yerli həkimlərimizin dərin təcrübəsi və Türkiyənin qabaqcıl saç ekim texnologiyaları birləşdi. Bu əməkdaşlıq, regionda tayı bərabəri olmayan nəticələr vəd edir.",
-      badges: ["Zəmanətli", "Sertifikatlı"]
+      title: "Beynəlxalq keyfiyyətli saç əkimi artıq Bakıda",
+      subtitle: "",
+      desc: "Sizin rahatlığınız üçün türk saç əkimi mütəxəssislərinin və klinikamızın dermatoloqlarının birgə layihəsini təqdim edirik. Beləcə prosedurlarınızı daha rahat, daha sərfəli və daha təhlükəsiz edirik. Artıq Türkiyəyə getmədən, əlavə xərc çəkmədən türk keyfiyyəti, müasir metodlar və peşəkarların təcrübəsindən burada elə öz şəhərimiz Bakıda yararlana bilərsiniz.",
+      advantages_title: "Üstünlüklər",
+      advantages: [
+        {
+          title: "1. Prosedurlar Bakıda aparılır",
+          desc: "Artıq saç əkimi üçün xaricə getməyə, səyahət üçün əlavə xərc çəkməyə və uzun yola vaxt itirməyə ehtiyac yoxdur. Proseduru Bakıda keçirə və həmin gün rahat şəkildə evinizə qayıda bilərsiniz. Əlavə vaxt, enerji və maliyyə itkisi olmadan."
+        },
+        {
+          title: "2. Yüksək saç əkimi standartları",
+          desc: "Türkiyə uzun illərdir ki, tibbi turizmin dünya liderlərindən biri kimi tanınır. Türk həkimləri ən müasir əməliyyat metodlarına və yüksək texnoloji standartlara sahibdir. İndi bu standartlardan birbaşa Bakıda faydalana bilərsiniz."
+        },
+        {
+          title: "3. Prosedurdan sonra peşəkar qulluq",
+          desc: "Saç əkimindən sonra həkimlərimizin nəzarəti altında olacaqsınız. Dr. Zülfüqar, Dr. Günay və komandamız nəticəni tam əldə edənə qədər sizə peşəkar şəkildə xidmət edəcəyik."
+        }
+      ]
     },
     services: {
       title: "Xidmətlərimiz",
@@ -43,19 +58,46 @@ export const content: ContentMap = {
       ]
     },
     long_fue: {
-      title: "LONG FUE",
-      subtitle: "Saçları kəsdirmədən əməliyyat",
+      title: "LONG FUE – Saç əkimində ən müasir və rahat metod",
+      subtitle: "",
       badge: "Özəl Təklif",
-      desc: "Müasir texnologiya ilə görünmədən saç ekimi. Həyat tərzinizi dəyişmədən, iş həyatına ara vermədən yeni görünüşə qovuşun.",
-      features: ["İşə ara vermədən", "Tam məxfilik", "Sürətli sağalma"]
+      desc: "Long FUE saç əkimi zamanı saçlarınızı 1 mm belə qırxdırmadan, təbii görünüşünüzü qoruyaraq əkim aparmağa imkan verən premium bir metoddur. Bu prosedur həm estetik üstünlüyü, həm də rahatlığı ilə seçilir. Xüsusilə gündəlik işindən geri qalmaq istəməyən və prosedurun gizli qalmağını istəyən pasiyentlər üçün əla seçimdir.",
+      features_title: "Long FUE-nin 3 əsas üstünlüyü",
+      features: [
+        {
+          title: "1. Saç qırxılmadan əkim imkanı",
+          desc: "Görünüşünüz dəyişmir, prosedur olduğunuz nəzərə çarpmır. İşinizə, sosial həyatınıza heç bir kəsinti olmadan davam edə bilərsiniz."
+        },
+        {
+          title: "2. Daha sürətli bərpa",
+          desc: "Donor sahəsi daha az travma gördüyü üçün sağalma müddəti qısalır və diskomfort minimum səviyyədə qalır."
+        },
+        {
+          title: "3. Daha təbii və estetik nəticə",
+          desc: "Saçların uzun halda çıxarılması həkimə istiqaməti, sıxlığı və açıları daha dəqiq təyin etməyə imkan verir. Nəticəni prosedurdan dərhal sonra görmək imkanı verir."
+        }
+      ]
     },
     doctors: {
-      title: "Həkimlərimiz",
+      title: "Doktorlarımız və Ekibimiz",
       btn: "Komandamızı Tanıyın",
       items: [
-        { name: "Dr. Emil Əliyev", title: "Baş Həkim", exp: "12 İl Təcrübə", specialty: "Saç Cərrahı", image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1000&auto=format&fit=crop" },
-        { name: "Uzm. Dr. Leyla Məmmədova", title: "Dermatoloq", exp: "9 İl Təcrübə", specialty: "Medikal Estetik", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1000&auto=format&fit=crop" },
-        { name: "Op. Dr. Kənan Vəliyev", title: "Plastik Cərrah", exp: "15 İl Təcrübə", specialty: "Estetik Cərrahiyyə", image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop" }
+        { 
+          name: "Professor Həkim ZÜLFÜQAR FƏRƏCOV", 
+          title: "Professor, Həkim", 
+          exp: "150+ Elmi Məqalə", 
+          specialty: "Baş Dermatoveneroloq", 
+          image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1000&auto=format&fit=crop",
+          bio: "Azərbaycan Tibb Universitetində təhsil almışdır. 150-dən artıq elmi məqalə, monoqrafiya, dərsliklər, tövsiyyələrlə yanaşı 4 elmi ixtiranın müəllifidir. Azərbaycan Respublikası Səhiyyə Nazirliyinin Baş Dermatoveneroloqu."
+        },
+        { 
+          name: "Həkim GÜNAY FƏRƏCOVA", 
+          title: "Həkim, Tibb Elmləri Namizədi", 
+          exp: "Asistent", 
+          specialty: "Dermatoloq", 
+          image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1000&auto=format&fit=crop",
+          bio: "Azərbaycan Tibb Universitenin \"Dəri-zöhrəvi xəstəliklər\" kafedrasının asistenti, tibb elmləri namizədi."
+        }
       ]
     },
     why_us: {
@@ -67,6 +109,18 @@ export const content: ContentMap = {
         { title: "Yüksək Məmnuniyyət", desc: "98% müsbət rəy." },
         { title: "Təbii Dizayn", desc: "Üz cizgilərinə uyğun planlama." },
         { title: "Şəffaf Qiymət", desc: "Gizli ödəniş yoxdur." }
+      ],
+      testimonials: [
+        { name: "Rəşad M.", comment: "Türkiyəyə getməyə ehtiyac olmadan Bakıda ən yüksək keyfiyyətdə xidmət aldım. Professor Zülfüqar və komandası əla peşəkarlardır.", rating: 5 },
+        { name: "Aynur H.", comment: "Long FUE metodunu seçdim. Heç kəs prosedur olduğumu anlamadı. Nəticə möhtəşəmdir!", rating: 5 },
+        { name: "Elçin Y.", comment: "Sakal əkimi etdirdim. Çox təbii görsəl əldə etdim. Minnətdaram!", rating: 5 },
+        { name: "Nigar R.", comment: "Qadın saç əkimi proseduru çox rahat keçdi. Saçımı kəsdirmədim və nəticə əladır.", rating: 5 }
+      ],
+      before_after: [
+        { before: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=500", after: "https://images.unsplash.com/photo-1614786269829-d24616faf56d?q=80&w=500", desc: "Saç Əkimi" },
+        { before: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=500", after: "https://images.unsplash.com/photo-1592124549776-a7f0cc973b24?q=80&w=500", desc: "Sakal Əkimi" },
+        { before: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=500", after: "https://images.unsplash.com/photo-1512413316925-fd52bd015e0a?q=80&w=500", desc: "Kaş Əkimi" },
+        { before: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=500", after: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=500", desc: "Qadın Saç Əkimi" }
       ]
     },
     faq: {
@@ -81,18 +135,10 @@ export const content: ContentMap = {
       ]
     },
     form: {
-      header: "Konsultasiya Formu",
-      name: "Ad Soyad",
-      phone: "Əlaqə Nömrəsi",
-      email: "E-poçt Ünvanı",
-      gender: "Cinsiyyət",
-      gender_options: ["Kişi", "Qadın"],
-      procedure: "Prosedur Seçimi",
-      procedure_options: ["Saç Əkimi", "Sakal Əkimi", "Kaş Əkimi", "PRP/Mezoterapiya"],
-      upload: "Fotoğraf Yüklə (Ön, Sağ, Sol, Təpə)",
-      message: "Əlavə Qeydlər",
-      consent: "Fərdi məlumatlarımın işlənməsini qəbul edirəm.",
-      btn: "Göndər",
+      header: "Məlumat Al",
+      name: "Ad və Soyad",
+      phone: "Telefon nömrəsi",
+      btn: "Təsdiqlə",
       success: "Təşəkkürlər! Operatörlerimiz ən qısa zamanda sizinlə əlaqə saxlayacaq."
     },
     men_hair_page: {
@@ -246,13 +292,28 @@ export const content: ContentMap = {
       subtitle: "Совершенства",
       desc: "Совместный проект врачей Азербайджана и турецкой команды – центр премиальной пересадки волос и эстетики.",
       btn_consult: "Получить Консультацию",
-      btn_whatsapp: "Написать в WhatsApp"
+      btn_whatsapp: "Написать в WhatsApp",
+      doctor_exp: "9 Лет Профессионализма"
     },
     joint_project: {
-      title: "Единство Силы",
-      subtitle: "Совместный Проект Азербайджан & Турция",
-      desc: "Глубокий опыт наших местных врачей объединился с передовыми технологиями пересадки волос Турции. Это сотрудничество обещает непревзойденные результаты в регионе.",
-      badges: ["Гарантия", "Сертификат"]
+      title: "Пересадка волос международного качества теперь в Баку",
+      subtitle: "",
+      desc: "Для вашего комфорта мы представляем совместный проект турецких специалистов по пересадке волос и дерматологов нашей клиники. Так мы делаем ваши процедуры более комфортными, экономичными и более безопасными. Теперь вы можете воспользоваться турецким качеством, современными методами и опытом профессионалов прямо здесь, в Баку, без поездки в Турцию и дополнительных расходов.",
+      advantages_title: "Преимущества",
+      advantages: [
+        {
+          title: "1. Процедуры проводятся в Баку",
+          desc: "Теперь нет необходимости ехать за границу, нести дополнительные расходы на поездку и терять время на дорогу. Вы можете пройти процедуру в Баку и в тот же день вернуться домой. Без потерь времени, энергии и финансов."
+        },
+        {
+          title: "2. Высокие стандарты пересадки волос",
+          desc: "Турция уже много лет является одним из мировых лидеров медицинского туризма. Турецкие врачи обладают самыми современными методами операций и высокими технологическими стандартами. Теперь вы можете воспользоваться этими стандартами напрямую в Баку."
+        },
+        {
+          title: "3. Профессиональный уход после процедуры",
+          desc: "После пересадки волос вы будете под наблюдением наших врачей. Др. Зюльфюгар, Др. Гюнай и наша команда будут обслуживать вас профессионально до получения полного результата."
+        }
+      ]
     },
     services: {
       title: "Наши Услуги",
