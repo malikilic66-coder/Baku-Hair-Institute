@@ -89,16 +89,23 @@ export const SocialMediaDesigner = () => {
       // @ts-ignore - html2canvas dinamik olarak yüklenecek
       const html2canvas = (await import('html2canvas')).default;
       
+      // Get the actual dimensions we want
+      const width = format === 'square' ? 1080 : 1080;
+      const height = format === 'square' ? 1080 : 1920;
+      
       const canvas = await html2canvas(canvasRef.current, {
-        scale: 2,
+        scale: width / canvasRef.current.offsetWidth, // Calculate proper scale
         backgroundColor: null,
         logging: false,
-        useCORS: true
+        useCORS: true,
+        allowTaint: true,
+        width: canvasRef.current.offsetWidth,
+        height: canvasRef.current.offsetHeight
       });
 
       const link = document.createElement('a');
       link.download = `bhi-post-${Date.now()}.png`;
-      link.href = canvas.toDataURL('image/png');
+      link.href = canvas.toDataURL('image/png', 1.0); // Maximum quality
       link.click();
     } catch (error) {
       console.error('Download error:', error);
@@ -303,11 +310,15 @@ export const SocialMediaDesigner = () => {
                 >
                   {/* Uploaded Image */}
                   {uploadedImage && (
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
                       <img
                         src={uploadedImage}
                         alt="Uploaded"
-                        className="w-full h-full object-cover opacity-40"
+                        className="w-full h-full opacity-40"
+                        style={{
+                          objectFit: 'cover',
+                          objectPosition: 'center'
+                        }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50" />
                     </div>

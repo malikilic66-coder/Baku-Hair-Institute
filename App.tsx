@@ -6,6 +6,8 @@ import { content } from './constants';
 import { ScrollProgress, CustomCursor, MagneticButton, TiltCard, Preloader, PageTransitionLoader, Dropdown, Accordion, DoctorCard, WhyUsCard, AzePatternBackground } from './components/ui';
 import { MenHairPage, MenBeardPage, LongFuePage, HairlineDesignPage, WomenHairPage, EyebrowPage, AnesthesiaPage, PrpPage, MesotherapyPage, MedicalPage } from './components/Pages';
 import { SocialMediaDesigner } from './components/SocialMediaDesigner';
+import { CanvasDesigner } from './components/CanvasDesigner';
+import { BeforeAfterDesigner } from './components/BeforeAfterDesigner';
 
 // --- Custom Hooks ---
 
@@ -421,7 +423,7 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
 export default function App() {
   const [lang, setLang] = useState<'az' | 'ru'>('az');
   const [scrolled, setScrolled] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'men-hair' | 'men-beard' | 'long-fue' | 'hairline-design' | 'women-hair' | 'women-eyebrow' | 'anesthesia' | 'prp' | 'mesotherapy' | 'medical' | 'social-designer'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'men-hair' | 'men-beard' | 'long-fue' | 'hairline-design' | 'women-hair' | 'women-eyebrow' | 'anesthesia' | 'prp' | 'mesotherapy' | 'medical' | 'social-designer' | 'canvas-designer' | 'before-after'>('home');
   const [isNavigating, setIsNavigating] = useState(false); // Navigation state for Loader
   const sysConfig = useSecretAccess();
   const t = content[lang];
@@ -533,6 +535,8 @@ export default function App() {
           {currentView === 'mesotherapy' && <MesotherapyPage content={t.meso_page} sysConfig={sysConfig} />}
           {currentView === 'medical' && <MedicalPage content={t.medical_page} sysConfig={sysConfig} />}
           {currentView === 'social-designer' && <SocialMediaDesigner />}
+          {currentView === 'canvas-designer' && <CanvasDesigner />}
+          {currentView === 'before-after' && <BeforeAfterDesigner />}
       </main>
 
       {/* --- CONTACT / FORM (Shared across all pages) --- */}
@@ -630,14 +634,34 @@ export default function App() {
             </div>
             
             {/* Social Media Designer Link */}
-            <button
-              onClick={() => handleNavigation('social-designer')}
-              className="inline-flex items-center gap-2 text-sm text-[#F8F3E6]/60 hover:text-[#7F6A47] transition-colors mb-8 uppercase tracking-wider interactive"
-            >
-              <Sparkles size={16} />
-              Sosial Media Dizayner
-              <Sparkles size={16} />
-            </button>
+            <div className="flex flex-col gap-3 mb-8">
+              <button
+                onClick={() => handleNavigation('social-designer')}
+                className="inline-flex items-center gap-2 text-sm text-[#F8F3E6]/60 hover:text-[#7F6A47] transition-colors uppercase tracking-wider interactive"
+              >
+                <Sparkles size={16} />
+                Sosial Media Dizayner (Basic)
+                <Sparkles size={16} />
+              </button>
+
+              <button
+                onClick={() => handleNavigation('canvas-designer')}
+                className="inline-flex items-center gap-2 text-sm text-[#F8F3E6]/80 hover:text-[#7F6A47] transition-colors uppercase tracking-wider interactive font-semibold"
+              >
+                <Sparkles size={16} />
+                Creative Studio (PRO)
+                <Sparkles size={16} />
+              </button>
+
+              <button
+                onClick={() => handleNavigation('before-after')}
+                className="inline-flex items-center gap-2 text-sm text-[#F8F3E6]/70 hover:text-[#7F6A47] transition-colors uppercase tracking-wider interactive"
+              >
+                <Sparkles size={16} />
+                Əvvəl & Sonra Modulu
+                <Sparkles size={16} />
+              </button>
+            </div>
             
             <p className="text-[10px] uppercase tracking-widest text-[#F8F3E6]/40">&copy; 2024 Baku Hair Institute. All rights reserved.</p>
          </div>
