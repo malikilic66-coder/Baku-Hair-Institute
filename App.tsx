@@ -32,62 +32,58 @@ const heroBanner = "https://images.unsplash.com/photo-1539650116455-29cb5563cc41
 const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: boolean }) => (
   <>
       {/* --- HERO BANNER SECTION --- */}
-      <header className="relative w-full h-[90vh] min-h-[600px] overflow-hidden bg-[#3A3A3A]">
-        {/* Background: Static Banner with subtle zoom */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+      <header className="relative w-full h-screen min-h-[700px] overflow-hidden">
+        {/* Full Width Banner Image */}
+        <div className="absolute inset-0 z-0">
            <img 
-            src={heroBanner} 
-            className={`w-full h-full object-cover transition-transform duration-[10s] ease-out scale-110 hover:scale-100 ${sysConfig ? 'grayscale invert opacity-30' : ''}`} 
-            alt="Baku Hair Institute Premium Banner"
+            src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2000&auto=format&fit=crop" 
+            className={`w-full h-full object-cover ${sysConfig ? 'grayscale invert opacity-30' : ''}`} 
+            alt="Baku Hair Institute"
           />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a]/50 to-transparent opacity-90"></div>
+          {/* Gradient Overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
         </div>
 
-        <div className="relative z-30 container mx-auto px-6 h-full flex items-center">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-center">
-            
-            {/* Content */}
-            <div className="lg:col-span-7 flex flex-col justify-center animate-fade-in-up pt-20">
-               <h1 className={`text-5xl lg:text-8xl font-serif text-[#F8F3E6] mb-8 leading-tight drop-shadow-2xl`}>
-                 <span className="block animate-slide-in-left delay-100">{t.hero.title}</span> 
-                 <span className={`italic animate-slide-in-left delay-300 ${sysConfig ? 'text-green-500 glitch' : 'text-[#7F6A47]'}`} data-text={t.hero.subtitle}>{t.hero.subtitle}</span>
+        {/* Centered Content */}
+        <div className="relative z-10 container mx-auto px-6 h-full flex items-center justify-center">
+          <div className="text-center max-w-5xl animate-fade-in-up">
+               <div className="flex items-center justify-center gap-4 mb-6">
+                 <div className={`h-[1px] w-20 ${sysConfig ? 'bg-green-500' : 'bg-[#7F6A47]'}`}></div>
+                 <span className={`text-sm font-bold uppercase tracking-[0.4em] ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>
+                   {t.hero.doctor_exp || t.hero.exp}
+                 </span>
+                 <div className={`h-[1px] w-20 ${sysConfig ? 'bg-green-500' : 'bg-[#7F6A47]'}`}></div>
+               </div>
+               
+               <h1 className={`text-6xl lg:text-9xl font-serif text-[#F8F3E6] mb-6 leading-tight drop-shadow-2xl`}>
+                 {t.hero.title} <span className={`italic ${sysConfig ? 'text-green-500 glitch' : 'text-[#7F6A47]'}`}>{t.hero.subtitle}</span>
                </h1>
                
-               <p className="text-[#F8F3E6]/80 font-light text-lg max-w-xl mb-12 leading-relaxed border-l-2 border-[#7F6A47]/30 pl-6">
+               <p className="text-[#F8F3E6] text-xl lg:text-2xl font-light max-w-3xl mx-auto mb-12 leading-relaxed">
                  {t.hero.desc}
                </p>
                
-               <div className="flex flex-col sm:flex-row gap-6">
+               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <MagneticButton 
                     onClick={() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })} 
-                    className={`w-fit px-10 py-4 bg-[#7F6A47] text-[#F8F3E6] font-bold uppercase tracking-widest text-xs shadow-xl shadow-[#7F6A47]/20 hover:shadow-[#7F6A47]/40 hover:bg-[#F8F3E6] hover:text-[#3A3A3A] ${sysConfig ? 'bg-green-600 shadow-green-500/50 hover:bg-black hover:text-green-500 border border-green-500' : ''}`}
+                    className={`px-12 py-5 bg-[#7F6A47] text-[#F8F3E6] font-bold uppercase tracking-widest text-sm shadow-2xl hover:bg-[#F8F3E6] hover:text-[#3A3A3A] transition-all ${sysConfig ? 'bg-green-600 shadow-green-500/50 hover:bg-black hover:text-green-500 border border-green-500' : ''}`}
                   >
                     {t.hero.btn_consult}
                   </MagneticButton>
                   <MagneticButton 
-                    className={`w-fit px-10 py-4 border border-[#F8F3E6]/20 text-[#F8F3E6] font-bold uppercase tracking-widest text-xs hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-colors flex items-center gap-2`}
+                    className={`px-12 py-5 border-2 border-[#F8F3E6] text-[#F8F3E6] font-bold uppercase tracking-widest text-sm hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all flex items-center justify-center gap-3`}
                   >
-                     <Phone size={16} />
+                     <Phone size={20} />
                     {t.hero.btn_whatsapp}
                   </MagneticButton>
                </div>
-            </div>
+          </div>
+        </div>
 
-            {/* Right side - Doctor photo with 9 Years badge */}
-            <div className="lg:col-span-5 hidden lg:flex items-center justify-center h-full relative">
-                <div className="relative group view-cursor">
-                   <img 
-                      src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=600&auto=format&fit=crop" 
-                      className="w-[400px] h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl"
-                      alt="Həkim"
-                   />
-                   <div className="absolute -bottom-8 -right-8 bg-[#7F6A47] text-[#F8F3E6] p-6 shadow-2xl">
-                      <div className="text-4xl font-serif font-bold text-center">{t.hero.doctor_exp || t.hero.exp}</div>
-                   </div>
-                </div>
-            </div>
-
+        {/* Scroll Down Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+          <div className="w-6 h-10 border-2 border-[#F8F3E6]/30 rounded-full flex justify-center pt-2">
+            <div className="w-1 h-2 bg-[#7F6A47] rounded-full"></div>
           </div>
         </div>
       </header>
@@ -127,65 +123,91 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
       </section>
 
       {/* --- SERVICES GRID --- */}
-      <section className={`py-32 ${sysConfig ? 'bg-black' : 'bg-[#3A3A3A] text-[#F8F3E6]'}`}>
-         <div className="container mx-auto px-6">
+      <section className={`py-32 relative overflow-hidden ${sysConfig ? 'bg-black' : 'bg-[#F8F3E6]'}`}>
+         {!sysConfig && <AzePatternBackground />}
+         <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-20">
-               <h2 className="text-4xl lg:text-5xl font-serif text-[#F8F3E6]">{t.services.title}</h2>
-               <div className="w-24 h-[1px] bg-[#7F6A47] mx-auto mt-6"></div>
+               <span className={`text-sm font-bold uppercase tracking-[0.3em] ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>
+                  Premium Xidmətlər
+               </span>
+               <h2 className={`text-5xl lg:text-7xl font-serif mt-4 mb-6 ${sysConfig ? 'text-green-500' : 'text-[#3A3A3A]'}`}>
+                  {t.services.title}
+               </h2>
+               <div className={`w-32 h-[2px] mx-auto ${sysConfig ? 'bg-green-500' : 'bg-[#7F6A47]'}`}></div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                {/* Saç Əkimi */}
-               <MagneticButton 
-                  onClick={() => handleNavigation('men-hair')} 
-                  className={`interactive group relative p-10 border border-[#F8F3E6]/10 bg-[#F8F3E6]/[0.02] hover:bg-[#F8F3E6]/[0.08] transition-all duration-500 overflow-hidden cursor-pointer ${sysConfig ? 'hover:bg-green-900/10 border-green-900/30' : ''}`}
-               >
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                     <ArrowRight className={theme.gold} />
+               <TiltCard className={`group relative bg-white p-10 border-2 border-transparent hover:border-[#7F6A47] shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${sysConfig ? 'bg-gray-800 hover:border-green-500' : ''}`}>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F6A47]/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className={`w-16 h-16 mb-6 rounded-full flex items-center justify-center ${sysConfig ? 'bg-green-500/10' : 'bg-[#7F6A47]/10'}`}>
+                     <span className={`text-3xl ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>💇</span>
                   </div>
-                  <span className={`text-5xl font-serif block mb-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 ${theme.gold}`}>01</span>
-                  <h3 className="text-xl font-serif mb-4 text-[#F8F3E6]">Saç Əkimi</h3>
-                  <p className="text-[#F8F3E6]/60 text-sm font-light leading-relaxed group-hover:text-[#F8F3E6] transition-colors">FUE və DHI metodları ilə maksimum sıxlıq.</p>
-               </MagneticButton>
+                  <h3 className={`text-2xl font-serif mb-4 ${sysConfig ? 'text-green-500' : 'text-[#3A3A3A]'}`}>Saç Əkimi</h3>
+                  <p className={`text-sm leading-relaxed mb-8 ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/70'}`}>
+                     FUE və DHI metodları ilə maksimum sıxlıq və təbii görünüş.
+                  </p>
+                  <MagneticButton 
+                     onClick={() => handleNavigation('men-hair')}
+                     className={`w-full py-3 text-sm font-bold uppercase tracking-widest border-2 transition-all ${sysConfig ? 'border-green-500 text-green-500 hover:bg-green-500 hover:text-black' : 'border-[#7F6A47] text-[#7F6A47] hover:bg-[#7F6A47] hover:text-white'}`}
+                  >
+                     Ətraflı
+                  </MagneticButton>
+               </TiltCard>
 
                {/* Kaş Əkimi */}
-               <MagneticButton 
-                  onClick={() => handleNavigation('women-eyebrow')} 
-                  className={`interactive group relative p-10 border border-[#F8F3E6]/10 bg-[#F8F3E6]/[0.02] hover:bg-[#F8F3E6]/[0.08] transition-all duration-500 overflow-hidden cursor-pointer ${sysConfig ? 'hover:bg-green-900/10 border-green-900/30' : ''}`}
-               >
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                     <ArrowRight className={theme.gold} />
+               <TiltCard className={`group relative bg-white p-10 border-2 border-transparent hover:border-[#7F6A47] shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${sysConfig ? 'bg-gray-800 hover:border-green-500' : ''}`}>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F6A47]/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className={`w-16 h-16 mb-6 rounded-full flex items-center justify-center ${sysConfig ? 'bg-green-500/10' : 'bg-[#7F6A47]/10'}`}>
+                     <span className={`text-3xl ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>👁️</span>
                   </div>
-                  <span className={`text-5xl font-serif block mb-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 ${theme.gold}`}>02</span>
-                  <h3 className="text-xl font-serif mb-4 text-[#F8F3E6]">Kaş Əkimi</h3>
-                  <p className="text-[#F8F3E6]/60 text-sm font-light leading-relaxed group-hover:text-[#F8F3E6] transition-colors">Təbii baxışlar üçün estetik toxunuş.</p>
-               </MagneticButton>
+                  <h3 className={`text-2xl font-serif mb-4 ${sysConfig ? 'text-green-500' : 'text-[#3A3A3A]'}`}>Kaş Əkimi</h3>
+                  <p className={`text-sm leading-relaxed mb-8 ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/70'}`}>
+                     Təbii baxışlar üçün estetik və incə toxunuş.
+                  </p>
+                  <MagneticButton 
+                     onClick={() => handleNavigation('women-eyebrow')}
+                     className={`w-full py-3 text-sm font-bold uppercase tracking-widest border-2 transition-all ${sysConfig ? 'border-green-500 text-green-500 hover:bg-green-500 hover:text-black' : 'border-[#7F6A47] text-[#7F6A47] hover:bg-[#7F6A47] hover:text-white'}`}
+                  >
+                     Ətraflı
+                  </MagneticButton>
+               </TiltCard>
 
                {/* Sakal Əkimi */}
-               <MagneticButton 
-                  onClick={() => handleNavigation('men-beard')} 
-                  className={`interactive group relative p-10 border border-[#F8F3E6]/10 bg-[#F8F3E6]/[0.02] hover:bg-[#F8F3E6]/[0.08] transition-all duration-500 overflow-hidden cursor-pointer ${sysConfig ? 'hover:bg-green-900/10 border-green-900/30' : ''}`}
-               >
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                     <ArrowRight className={theme.gold} />
+               <TiltCard className={`group relative bg-white p-10 border-2 border-transparent hover:border-[#7F6A47] shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${sysConfig ? 'bg-gray-800 hover:border-green-500' : ''}`}>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F6A47]/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className={`w-16 h-16 mb-6 rounded-full flex items-center justify-center ${sysConfig ? 'bg-green-500/10' : 'bg-[#7F6A47]/10'}`}>
+                     <span className={`text-3xl ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>🧔</span>
                   </div>
-                  <span className={`text-5xl font-serif block mb-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 ${theme.gold}`}>03</span>
-                  <h3 className="text-xl font-serif mb-4 text-[#F8F3E6]">Sakal Əkimi</h3>
-                  <p className="text-[#F8F3E6]/60 text-sm font-light leading-relaxed group-hover:text-[#F8F3E6] transition-colors">Üz cizgilərini tamamlayan bərpa.</p>
-               </MagneticButton>
+                  <h3 className={`text-2xl font-serif mb-4 ${sysConfig ? 'text-green-500' : 'text-[#3A3A3A]'}`}>Sakal Əkimi</h3>
+                  <p className={`text-sm leading-relaxed mb-8 ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/70'}`}>
+                     Üz cizgilərini tamamlayan professional bərpa.
+                  </p>
+                  <MagneticButton 
+                     onClick={() => handleNavigation('men-beard')}
+                     className={`w-full py-3 text-sm font-bold uppercase tracking-widest border-2 transition-all ${sysConfig ? 'border-green-500 text-green-500 hover:bg-green-500 hover:text-black' : 'border-[#7F6A47] text-[#7F6A47] hover:bg-[#7F6A47] hover:text-white'}`}
+                  >
+                     Ətraflı
+                  </MagneticButton>
+               </TiltCard>
 
-               {/* FUE Yöntəmi */}
-               <MagneticButton 
-                  onClick={() => handleNavigation('men-hair')} 
-                  className={`interactive group relative p-10 border border-[#F8F3E6]/10 bg-[#F8F3E6]/[0.02] hover:bg-[#F8F3E6]/[0.08] transition-all duration-500 overflow-hidden cursor-pointer ${sysConfig ? 'hover:bg-green-900/10 border-green-900/30' : ''}`}
-               >
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                     <ArrowRight className={theme.gold} />
+               {/* PRP */}
+               <TiltCard className={`group relative bg-white p-10 border-2 border-transparent hover:border-[#7F6A47] shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${sysConfig ? 'bg-gray-800 hover:border-green-500' : ''}`}>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F6A47]/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className={`w-16 h-16 mb-6 rounded-full flex items-center justify-center ${sysConfig ? 'bg-green-500/10' : 'bg-[#7F6A47]/10'}`}>
+                     <span className={`text-3xl ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>💉</span>
                   </div>
-                  <span className={`text-5xl font-serif block mb-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 ${theme.gold}`}>04</span>
-                  <h3 className="text-xl font-serif mb-4 text-[#F8F3E6]">FUE Yöntəmi</h3>
-                  <p className="text-[#F8F3E6]/60 text-sm font-light leading-relaxed group-hover:text-[#F8F3E6] transition-colors">İzsiz, ağrısız və sürətli sağalma.</p>
-               </MagneticButton>
+                  <h3 className={`text-2xl font-serif mb-4 ${sysConfig ? 'text-green-500' : 'text-[#3A3A3A]'}`}>PRP Müalicəsi</h3>
+                  <p className={`text-sm leading-relaxed mb-8 ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/70'}`}>
+                     Öz qanınızla saç köklərini canlandırın və gücləndir.
+                  </p>
+                  <MagneticButton 
+                     onClick={() => handleNavigation('prp')}
+                     className={`w-full py-3 text-sm font-bold uppercase tracking-widest border-2 transition-all ${sysConfig ? 'border-green-500 text-green-500 hover:bg-green-500 hover:text-black' : 'border-[#7F6A47] text-[#7F6A47] hover:bg-[#7F6A47] hover:text-white'}`}
+                  >
+                     Ətraflı
+                  </MagneticButton>
+               </TiltCard>
             </div>
          </div>
       </section>
@@ -247,30 +269,54 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
       {/* --- DOCTORS --- */}
       <section className={`py-32 ${sysConfig ? 'bg-black' : 'bg-[#3A3A3A]'}`}>
         <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-                 <h2 className="text-4xl lg:text-5xl font-serif text-[#F8F3E6]">{t.doctors.title}</h2>
-                 <div className="w-24 h-[1px] bg-[#7F6A47] mx-auto mt-6"></div>
+            <div className="text-center mb-20">
+                 <h2 className="text-4xl lg:text-6xl font-serif text-[#F8F3E6] mb-4">{t.doctors.title}</h2>
+                 <div className="w-32 h-[2px] bg-[#7F6A47] mx-auto"></div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div className="max-w-6xl mx-auto space-y-24">
                 {t.doctors.items.map((doc: any, idx: number) => (
-                    <div key={idx} className="group relative overflow-hidden bg-[#F8F3E6]/5 border border-[#F8F3E6]/10 hover:bg-[#F8F3E6]/10 transition-all duration-500">
-                        <div className="p-8">
-                           <div className="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#7F6A47]">
-                              <img src={doc.image} alt={doc.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                    <div key={idx} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center group`}>
+                        {/* Bio Section */}
+                        <div className="lg:w-1/2 space-y-6">
+                           <div className={`inline-block px-4 py-2 border border-[#7F6A47] ${sysConfig ? 'border-green-500' : ''}`}>
+                              <span className={`text-xs uppercase tracking-widest font-bold ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>
+                                {doc.specialty}
+                              </span>
                            </div>
-                           <div className={`text-[10px] uppercase tracking-widest mb-2 text-center ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>{doc.specialty}</div>
-                           <h3 className="text-2xl font-serif text-[#F8F3E6] mb-2 text-center">{doc.name}</h3>
-                           <p className="text-sm text-[#F8F3E6]/60 mb-4 text-center">{doc.title}</p>
-                           <div className={`h-[1px] w-full bg-[#7F6A47] mb-6`}></div>
+                           
+                           <h3 className="text-3xl lg:text-4xl font-serif text-[#F8F3E6] leading-tight">
+                              {doc.name}
+                           </h3>
+                           
+                           <p className="text-[#F8F3E6]/60 text-lg font-light">{doc.title}</p>
+                           
+                           <div className={`h-[2px] w-24 ${sysConfig ? 'bg-green-500' : 'bg-[#7F6A47]'}`}></div>
+                           
                            {doc.bio && (
-                              <p className="text-sm text-[#F8F3E6]/80 leading-relaxed text-center">
+                              <p className="text-[#F8F3E6]/80 leading-relaxed text-base">
                                  {doc.bio}
                               </p>
                            )}
-                           <div className="mt-4 flex items-center justify-center gap-2 text-[#F8F3E6]/80 text-xs">
-                               <span className="text-[#7F6A47]">✓</span>
-                               <span>{doc.exp}</span>
+                           
+                           <div className="flex items-center gap-3 text-[#F8F3E6]/70">
+                               <Award size={20} className={`${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`} />
+                               <span className="text-sm">{doc.exp}</span>
+                           </div>
+                        </div>
+
+                        {/* Photo Section */}
+                        <div className="lg:w-1/2">
+                           <div className="relative overflow-hidden group-hover:shadow-2xl transition-shadow duration-500">
+                              <div className="absolute inset-0 bg-gradient-to-t from-[#7F6A47]/30 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                              <img 
+                                 src={doc.image} 
+                                 alt={doc.name} 
+                                 className="w-full h-[600px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
+                              />
+                              {/* Decorative Corner */}
+                              <div className={`absolute ${idx % 2 === 0 ? 'top-0 left-0' : 'top-0 right-0'} w-32 h-32 border-t-4 ${idx % 2 === 0 ? 'border-l-4' : 'border-r-4'} ${sysConfig ? 'border-green-500' : 'border-[#7F6A47]'} opacity-50`}></div>
+                              <div className={`absolute ${idx % 2 === 0 ? 'bottom-0 right-0' : 'bottom-0 left-0'} w-32 h-32 border-b-4 ${idx % 2 === 0 ? 'border-r-4' : 'border-l-4'} ${sysConfig ? 'border-green-500' : 'border-[#7F6A47]'} opacity-50`}></div>
                            </div>
                         </div>
                     </div>
