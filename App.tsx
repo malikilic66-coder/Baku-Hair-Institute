@@ -458,8 +458,8 @@ export default function App() {
     text: sysConfig ? 'text-green-500' : 'text-[#3A3A3A]', // Dark Text
     gold: sysConfig ? 'text-green-500' : 'text-[#7F6A47]', // Gold Text
     navBg: sysConfig ? 'bg-black/90 border-b border-green-900' : (scrolled ? 'bg-white/80 backdrop-blur-xl shadow-sm py-2' : 'bg-white/10 backdrop-blur-md py-6 border-b border-white/10'),
-    navText: sysConfig ? 'text-green-500' : 'text-white',
-    navLogo: sysConfig ? 'text-green-500' : 'text-white',
+    navText: sysConfig ? 'text-green-500' : (scrolled ? 'text-[#3A3A3A]' : 'text-white'),
+    navLogo: sysConfig ? 'text-green-500' : (scrolled ? 'text-[#3A3A3A]' : 'text-white'),
   };
 
   return (
@@ -489,7 +489,7 @@ export default function App() {
             {/* LEFT: LOGO */}
             <a href="#" onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="flex flex-col items-center justify-center group interactive z-20">
               <span className={`font-serif font-black tracking-tighter leading-none transition-all duration-500 ${scrolled ? 'text-3xl' : 'text-4xl lg:text-5xl'} ${theme.navLogo} ${sysConfig ? 'animate-pulse text-green-500' : 'group-hover:text-[#7F6A47]'}`}>BHI</span>
-              <span className={`font-bold uppercase tracking-[0.2em] whitespace-nowrap transition-all duration-500 ease-out group-hover:tracking-[0.3em] ${scrolled ? 'text-[8px] opacity-70' : 'text-[10px] mt-1'} ${scrolled ? 'text-[#7F6A47]' : 'text-white/90'}`}>Baku Hair Institute</span>
+              <span className={`font-bold uppercase tracking-[0.2em] whitespace-nowrap transition-all duration-500 ease-out group-hover:tracking-[0.3em] ${scrolled ? 'text-[8px] opacity-70' : 'text-[10px] mt-1'} ${scrolled ? 'text-[#3A3A3A]' : 'text-white/90'}`}>Baku Hair Institute</span>
             </a>
 
             {/* RIGHT: MENU */}
