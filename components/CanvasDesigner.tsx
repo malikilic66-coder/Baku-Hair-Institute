@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+// @ts-ignore - Fabric.js types
 import { fabric } from 'fabric';
 import { 
   Download, Upload, Type, Image as ImageIcon, 
@@ -13,7 +14,7 @@ interface CanvasLayer {
   type: 'image' | 'text' | 'shape' | 'background';
   visible: boolean;
   locked: boolean;
-  fabricObject?: fabric.Object;
+  fabricObject?: any; // fabric.Object type
 }
 
 interface Template {
@@ -74,7 +75,7 @@ const templates: Template[] = [
 ];
 
 export const CanvasDesigner = () => {
-  const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
+  const [canvas, setCanvas] = useState<any>(null); // fabric.Canvas type
   const [selectedTemplate, setSelectedTemplate] = useState<Template>(templates[0]);
   const [format, setFormat] = useState<'square' | 'story'>('square');
   const [layers, setLayers] = useState<CanvasLayer[]>([]);
@@ -174,7 +175,8 @@ export const CanvasDesigner = () => {
     reader.onload = (event) => {
       const imgUrl = event.target?.result as string;
       
-      fabric.Image.fromURL(imgUrl, (img) => {
+      // @ts-ignore - Fabric Image.fromURL
+      fabric.Image.fromURL(imgUrl, (img: any) => {
         const canvasWidth = canvas.width || 500;
         const canvasHeight = canvas.height || 500;
         
@@ -284,7 +286,8 @@ export const CanvasDesigner = () => {
     const activeObject = canvas?.getActiveObject();
     if (!activeObject || activeObject.type !== 'text') return;
 
-    (activeObject as fabric.Text).set(property as any, value);
+    // @ts-ignore
+    activeObject.set(property, value);
     canvas?.renderAll();
   };
 
