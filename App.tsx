@@ -29,7 +29,7 @@ const useSecretAccess = () => {
 const heroBanner = "https://images.unsplash.com/photo-1539650116455-29cb5563cc41?q=80&w=2574&auto=format&fit=crop"; 
 
 // --- Home View Component ---
-const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: boolean }) => (
+const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sysConfig: boolean, onNavigate: (view: string) => void }) => (
   <>
       {/* --- HERO BANNER SECTION --- */}
       <header className="relative w-full h-screen min-h-[700px] overflow-hidden">
@@ -136,19 +136,21 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
                <div className={`w-32 h-[2px] mx-auto ${sysConfig ? 'bg-green-500' : 'bg-[#7F6A47]'}`}></div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                {/* Saç Əkimi */}
                <TiltCard className={`group relative bg-white p-10 border-2 border-transparent hover:border-[#7F6A47] shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${sysConfig ? 'bg-gray-800 hover:border-green-500' : ''}`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F6A47]/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className={`w-16 h-16 mb-6 rounded-full flex items-center justify-center ${sysConfig ? 'bg-green-500/10' : 'bg-[#7F6A47]/10'}`}>
-                     <span className={`text-3xl ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>💇</span>
+                     <svg className={`w-8 h-8 ${sysConfig ? 'stroke-green-500' : 'stroke-[#7F6A47]'}`} fill="none" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                     </svg>
                   </div>
                   <h3 className={`text-2xl font-serif mb-4 ${sysConfig ? 'text-green-500' : 'text-[#3A3A3A]'}`}>Saç Əkimi</h3>
                   <p className={`text-sm leading-relaxed mb-8 ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/70'}`}>
                      FUE və DHI metodları ilə maksimum sıxlıq və təbii görünüş.
                   </p>
                   <MagneticButton 
-                     onClick={() => handleNavigation('men-hair')}
+                     onClick={() => onNavigate('men-hair')}
                      className={`w-full py-3 text-sm font-bold uppercase tracking-widest border-2 transition-all ${sysConfig ? 'border-green-500 text-green-500 hover:bg-green-500 hover:text-black' : 'border-[#7F6A47] text-[#7F6A47] hover:bg-[#7F6A47] hover:text-white'}`}
                   >
                      Ətraflı
@@ -159,14 +161,17 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
                <TiltCard className={`group relative bg-white p-10 border-2 border-transparent hover:border-[#7F6A47] shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${sysConfig ? 'bg-gray-800 hover:border-green-500' : ''}`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F6A47]/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className={`w-16 h-16 mb-6 rounded-full flex items-center justify-center ${sysConfig ? 'bg-green-500/10' : 'bg-[#7F6A47]/10'}`}>
-                     <span className={`text-3xl ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>👁️</span>
+                     <svg className={`w-8 h-8 ${sysConfig ? 'stroke-green-500' : 'stroke-[#7F6A47]'}`} fill="none" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                     </svg>
                   </div>
                   <h3 className={`text-2xl font-serif mb-4 ${sysConfig ? 'text-green-500' : 'text-[#3A3A3A]'}`}>Kaş Əkimi</h3>
                   <p className={`text-sm leading-relaxed mb-8 ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/70'}`}>
                      Təbii baxışlar üçün estetik və incə toxunuş.
                   </p>
                   <MagneticButton 
-                     onClick={() => handleNavigation('women-eyebrow')}
+                     onClick={() => onNavigate('women-eyebrow')}
                      className={`w-full py-3 text-sm font-bold uppercase tracking-widest border-2 transition-all ${sysConfig ? 'border-green-500 text-green-500 hover:bg-green-500 hover:text-black' : 'border-[#7F6A47] text-[#7F6A47] hover:bg-[#7F6A47] hover:text-white'}`}
                   >
                      Ətraflı
@@ -177,14 +182,17 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
                <TiltCard className={`group relative bg-white p-10 border-2 border-transparent hover:border-[#7F6A47] shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${sysConfig ? 'bg-gray-800 hover:border-green-500' : ''}`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F6A47]/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className={`w-16 h-16 mb-6 rounded-full flex items-center justify-center ${sysConfig ? 'bg-green-500/10' : 'bg-[#7F6A47]/10'}`}>
-                     <span className={`text-3xl ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>🧔</span>
+                     <svg className={`w-8 h-8 ${sysConfig ? 'stroke-green-500' : 'stroke-[#7F6A47]'}`} fill="none" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 14c0-1 .5-2 2-2.5M16 14c0-1-.5-2-2-2.5" />
+                     </svg>
                   </div>
                   <h3 className={`text-2xl font-serif mb-4 ${sysConfig ? 'text-green-500' : 'text-[#3A3A3A]'}`}>Sakal Əkimi</h3>
                   <p className={`text-sm leading-relaxed mb-8 ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/70'}`}>
                      Üz cizgilərini tamamlayan professional bərpa.
                   </p>
                   <MagneticButton 
-                     onClick={() => handleNavigation('men-beard')}
+                     onClick={() => onNavigate('men-beard')}
                      className={`w-full py-3 text-sm font-bold uppercase tracking-widest border-2 transition-all ${sysConfig ? 'border-green-500 text-green-500 hover:bg-green-500 hover:text-black' : 'border-[#7F6A47] text-[#7F6A47] hover:bg-[#7F6A47] hover:text-white'}`}
                   >
                      Ətraflı
@@ -195,14 +203,16 @@ const HomeView = ({ t, theme, sysConfig }: { t: any, theme: any, sysConfig: bool
                <TiltCard className={`group relative bg-white p-10 border-2 border-transparent hover:border-[#7F6A47] shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${sysConfig ? 'bg-gray-800 hover:border-green-500' : ''}`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F6A47]/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className={`w-16 h-16 mb-6 rounded-full flex items-center justify-center ${sysConfig ? 'bg-green-500/10' : 'bg-[#7F6A47]/10'}`}>
-                     <span className={`text-3xl ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>💉</span>
+                     <svg className={`w-8 h-8 ${sysConfig ? 'stroke-green-500' : 'stroke-[#7F6A47]'}`} fill="none" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                     </svg>
                   </div>
                   <h3 className={`text-2xl font-serif mb-4 ${sysConfig ? 'text-green-500' : 'text-[#3A3A3A]'}`}>PRP Müalicəsi</h3>
                   <p className={`text-sm leading-relaxed mb-8 ${sysConfig ? 'text-green-700' : 'text-[#3A3A3A]/70'}`}>
                      Öz qanınızla saç köklərini canlandırın və gücləndir.
                   </p>
                   <MagneticButton 
-                     onClick={() => handleNavigation('prp')}
+                     onClick={() => onNavigate('prp')}
                      className={`w-full py-3 text-sm font-bold uppercase tracking-widest border-2 transition-all ${sysConfig ? 'border-green-500 text-green-500 hover:bg-green-500 hover:text-black' : 'border-[#7F6A47] text-[#7F6A47] hover:bg-[#7F6A47] hover:text-white'}`}
                   >
                      Ətraflı
@@ -447,13 +457,9 @@ export default function App() {
     bg: sysConfig ? 'bg-black' : 'bg-[#F8F3E6]', // Ivory Background
     text: sysConfig ? 'text-green-500' : 'text-[#3A3A3A]', // Dark Text
     gold: sysConfig ? 'text-green-500' : 'text-[#7F6A47]', // Gold Text
-    navBg: sysConfig ? 'bg-black/90 border-b border-green-900' : (scrolled ? 'bg-[#F8F3E6]/95 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-6 border-b border-white/10'),
-    navText: sysConfig 
-      ? 'text-green-500' 
-      : (scrolled 
-          ? 'text-[#3A3A3A]' 
-          : (isLightHero ? 'text-[#3A3A3A]' : 'text-[#F8F3E6]')
-        ),
+    navBg: sysConfig ? 'bg-black/90 border-b border-green-900' : (scrolled ? 'bg-white/80 backdrop-blur-xl shadow-sm py-2' : 'bg-white/10 backdrop-blur-md py-6 border-b border-white/10'),
+    navText: sysConfig ? 'text-green-500' : 'text-white',
+    navLogo: sysConfig ? 'text-green-500' : 'text-white',
   };
 
   return (
@@ -482,8 +488,8 @@ export default function App() {
             
             {/* LEFT: LOGO */}
             <a href="#" onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="flex flex-col items-center justify-center group interactive z-20">
-              <span className={`font-serif font-black tracking-tighter leading-none transition-all duration-500 ${scrolled ? 'text-3xl' : 'text-4xl lg:text-5xl'} ${theme.navText} ${sysConfig ? 'animate-pulse text-green-500' : 'group-hover:text-[#7F6A47]'}`}>BHI</span>
-              <span className={`font-bold uppercase tracking-[0.2em] whitespace-nowrap transition-all duration-500 ease-out group-hover:tracking-[0.3em] ${scrolled ? 'text-[8px] opacity-70' : 'text-[10px] mt-1'} ${theme.gold}`}>Baku Hair Institute</span>
+              <span className={`font-serif font-black tracking-tighter leading-none transition-all duration-500 ${scrolled ? 'text-3xl' : 'text-4xl lg:text-5xl'} ${theme.navLogo} ${sysConfig ? 'animate-pulse text-green-500' : 'group-hover:text-[#7F6A47]'}`}>BHI</span>
+              <span className={`font-bold uppercase tracking-[0.2em] whitespace-nowrap transition-all duration-500 ease-out group-hover:tracking-[0.3em] ${scrolled ? 'text-[8px] opacity-70' : 'text-[10px] mt-1'} ${scrolled ? 'text-[#7F6A47]' : 'text-white/90'}`}>Baku Hair Institute</span>
             </a>
 
             {/* RIGHT: MENU */}
@@ -514,7 +520,7 @@ export default function App() {
 
       {/* --- DYNAMIC CONTENT --- */}
       <main className="transition-opacity duration-500 ease-in-out">
-          {currentView === 'home' && <HomeView t={t} theme={theme} sysConfig={sysConfig} />}
+          {currentView === 'home' && <HomeView t={t} theme={theme} sysConfig={sysConfig} onNavigate={handleNavigation} />}
           {currentView === 'men-hair' && <MenHairPage content={t.men_hair_page} sysConfig={sysConfig} />}
           {currentView === 'men-beard' && <MenBeardPage content={t.men_beard_page} sysConfig={sysConfig} />}
           {currentView === 'long-fue' && <LongFuePage content={t.long_fue_page} sysConfig={sysConfig} />}
