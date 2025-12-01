@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-// @ts-ignore - Fabric.js types
-import { fabric } from 'fabric';
+// @ts-ignore - Fabric.js import
+import * as fabric from 'fabric';
 import { 
   Download, Upload, Type, Image as ImageIcon, 
   Layers, Trash2, Eye, EyeOff, Lock, Unlock,
