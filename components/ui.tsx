@@ -197,19 +197,35 @@ export const Dropdown: React.FC<{
           onClick={(e) => {
             e.preventDefault();
             if (onNavigate) {
+              // Men items
               if (item.includes("Saç Əkimi") || item.includes("Пересадка Волос")) {
-                if (item.includes("Qadın") || item.includes("Женщины")) onNavigate('women-hair');
-                else onNavigate('men-hair');
+                onNavigate('men-hair');
               }
-              else if (item.includes("Sakal Əkimi") || item.includes("Пересадка Бороды")) onNavigate('men-beard');
-              else if (item.includes("LONG FUE")) onNavigate('long-fue');
-              else if (item.includes("Ön Çizgi") || item.includes("Дизайн Линии")) onNavigate('hairline-design');
-              else if (item.includes("Kaş Əkimi") || item.includes("Пересадка Бровей")) onNavigate('women-eyebrow');
-              else if (item.includes("Lokal Anesteziya") || item.includes("Локальная Анестезия")) onNavigate('anesthesia');
-              else if (item.includes("PRP") || item.includes("PRP")) onNavigate('prp');
-              else if (item.includes("Mezoterapiya") || item.includes("Мезотерапия")) onNavigate('mesotherapy');
-              else if (item.includes("Medikal") || item.includes("Медицинское")) onNavigate('medical');
-              else if (onNavigate) onNavigate('home'); 
+              else if (item.includes("Sakal Əkimi") || item.includes("Пересадка Бороды")) {
+                onNavigate('men-beard');
+              }
+              // Women items
+              else if (item.includes("Kaş Əkimi") || item.includes("Пересадка Бровей")) {
+                onNavigate('women-eyebrow');
+              }
+              // Other procedures
+              else if (item === "PRP") {
+                onNavigate('prp');
+              }
+              else if (item.includes("Mezoterapiya") || item.includes("Мезотерапия")) {
+                onNavigate('mesotherapy');
+              }
+              else if (item.includes("Medikal") || item.includes("Медицинское")) {
+                onNavigate('medical');
+              }
+              // About & Contact - scroll to sections
+              else if (item.includes("Konsültasyon") || item.includes("Форма")) {
+                onNavigate('home');
+                setTimeout(() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }
+              else {
+                onNavigate('home');
+              }
             }
           }}
           className={`block px-6 py-3 text-xs font-medium uppercase tracking-wider hover:bg-[#7F6A47]/10 hover:pl-8 transition-all duration-300 ${specialMode ? 'text-green-500 hover:bg-green-900/20' : 'text-[#3A3A3A] hover:text-[#7F6A47]'}`}

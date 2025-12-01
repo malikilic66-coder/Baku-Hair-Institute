@@ -10,11 +10,11 @@ export const content: ContentMap = {
       other: "Digər Prosedurlar",
       about: "Haqqımızda",
       contact: "Əlaqə",
-      men_items: ["Saç Əkimi", "Sakal Əkimi", "LONG FUE", "Ön Çizgi Dizaynı"],
-      women_items: ["Qadın Saç Əkimi", "Kaş Əkimi", "Lokal Anesteziya"],
-      other_items: ["PRP Müalicəsi", "Mezoterapiya", "Medikal Müalicə"],
-      about_items: ["Haqqımızda", "Vizyonumuz", "Missiyamız", "Klinika", "Həkimlər"],
-      contact_items: ["Konsultasiya Formu", "Xəritə", "Ünvan"]
+      men_items: ["Saç Əkimi", "Sakal Əkimi"],
+      women_items: ["Saç Əkimi", "Kaş Əkimi"],
+      other_items: ["PRP", "Mezoterapiya", "Medikal Tedavi"],
+      about_items: ["İsmimiz", "Vizyonumuz", "Misyonumuz", "Klinik", "Doktorlar"],
+      contact_items: ["Konsültasyon Formu", "Xəritə", "Ünvan"]
     },
     hero: {
       exp: "9 İl Peşəkar Xidmət",
@@ -280,10 +280,10 @@ export const content: ContentMap = {
       other: "Другие Процедуры",
       about: "О Нас",
       contact: "Контакты",
-      men_items: ["Пересадка Волос", "Пересадка Бороды", "LONG FUE", "Дизайн Линии Волос"],
-      women_items: ["Пересадка Волос (Женщины)", "Пересадка Бровей", "Локальная Анестезия"],
-      other_items: ["PRP Терапия", "Мезотерапия", "Медицинское Лечение"],
-      about_items: ["О Нас", "Видение", "Миссия", "Клиника", "Врачи"],
+      men_items: ["Пересадка Волос", "Пересадка Бороды"],
+      women_items: ["Пересадка Волос", "Пересадка Бровей"],
+      other_items: ["PRP", "Мезотерапия", "Медицинское Лечение"],
+      about_items: ["Наше Имя", "Видение", "Миссия", "Клиника", "Врачи"],
       contact_items: ["Форма Консультации", "Карта", "Адрес"]
     },
     hero: {
