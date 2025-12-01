@@ -1,16 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
-  X, Maximize2, Minimize2, Download, Upload, Type, 
-  Layers, Eye, EyeOff, Lock, Unlock, Trash2,
-  ZoomIn, ZoomOut, Move, RotateCw, Copy,
-  ChevronLeft, ChevronRight, Grid, Sparkles,
-  Image as ImageIcon
+  Maximize2, Minimize2, Download, Type, Upload,
+  Layers, Eye, EyeOff,
+  ZoomIn, ZoomOut, Grid, Sparkles,
+  Image as ImageIcon, FileText, Star, MessageCircle,
+  Award, TrendingUp, Clock, BookOpen, Frame,
+  Circle, Square, Zap, Hash, AlignCenter
 } from 'lucide-react';
 
 interface EditableLayer {
   id: string;
-  type: 'text' | 'image' | 'logo' | 'background';
+  type: 'text' | 'image' | 'logo' | 'background' | 'mask' | 'frame' | 'pattern';
   locked: boolean;
+  visible?: boolean;
   content?: string;
   src?: string;
   position: { x: number; y: number };
@@ -21,8 +23,8 @@ interface EditableLayer {
 interface Template {
   id: string;
   name: string;
-  category: 'case-study' | 'faq' | 'testimonial' | 'before-after' | 'quote' | 'promo' | 'countdown' | 'info';
-  thumbnail: string;
+  category: 'case-study' | 'faq' | 'testimonial' | 'before-after' | 'quote' | 'promo' | 'countdown' | 'info' | 
+            'center-mask' | 'opacity-bg' | 'golden-frame' | 'clinical-lines' | 'typography';
   bgColor: string;
   layers: EditableLayer[];
 }
@@ -33,7 +35,6 @@ const templates: Template[] = [
     id: 'case-study-1',
     name: 'Vaka Analizi - Klassik',
     category: 'case-study',
-    thumbnail: '📊',
     bgColor: '#F8F3E6',
     layers: [
       { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
@@ -49,7 +50,6 @@ const templates: Template[] = [
     id: 'case-study-2',
     name: 'Vaka Analizi - Premium',
     category: 'case-study',
-    thumbnail: '💎',
     bgColor: '#1A1A1A',
     layers: [
       { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#1A1A1A' } },
@@ -66,7 +66,6 @@ const templates: Template[] = [
     id: 'faq-1',
     name: 'Tez-Tez Verilən Suallar',
     category: 'faq',
-    thumbnail: '❓',
     bgColor: '#FFFFFF',
     layers: [
       { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
@@ -80,7 +79,6 @@ const templates: Template[] = [
     id: 'faq-2',
     name: 'Məlumat Kartı',
     category: 'faq',
-    thumbnail: 'ℹ️',
     bgColor: '#F0EBD9',
     layers: [
       { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F0EBD9' } },
@@ -95,7 +93,6 @@ const templates: Template[] = [
     id: 'testimonial-1',
     name: 'Müştəri Rəyi',
     category: 'testimonial',
-    thumbnail: '⭐',
     bgColor: '#3A3A3A',
     layers: [
       { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#3A3A3A' } },
@@ -111,7 +108,6 @@ const templates: Template[] = [
     id: 'before-after-1',
     name: 'Əvvəl & Sonra - Klassik',
     category: 'before-after',
-    thumbnail: '🔄',
     bgColor: '#1A1A1A',
     layers: [
       { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#1A1A1A' } },
@@ -129,7 +125,6 @@ const templates: Template[] = [
     id: 'quote-doctor',
     name: 'Doktor Məsləhəti',
     category: 'quote',
-    thumbnail: '👨‍⚕️',
     bgColor: '#F8F3E6',
     layers: [
       { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
@@ -144,7 +139,6 @@ const templates: Template[] = [
     id: 'promo-discount',
     name: 'Endrim Kampaniyası',
     category: 'promo',
-    thumbnail: '🎉',
     bgColor: '#7F6A47',
     layers: [
       { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#7F6A47' } },
@@ -161,7 +155,6 @@ const templates: Template[] = [
     id: 'countdown-event',
     name: 'Geri Sayım',
     category: 'countdown',
-    thumbnail: '⏰',
     bgColor: '#3A3A3A',
     layers: [
       { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#3A3A3A' } },
@@ -177,18 +170,621 @@ const templates: Template[] = [
     id: 'info-technique',
     name: 'Texnika Məlumatı',
     category: 'info',
-    thumbnail: '📚',
     bgColor: '#FFFFFF',
     layers: [
-      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
-      { id: 'header-bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 200 }, style: { background: 'linear-gradient(135deg, #7F6A47 0%, #F8F3E6 100%)' } },
-      { id: 'title', type: 'text', locked: false, content: 'FUE TEXNİKASI', position: { x: 540, y: 100 }, size: { width: 800, height: 70 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } },
-      { id: 'subtitle', type: 'text', locked: true, content: 'Follicular Unit Extraction', position: { x: 540, y: 250 }, size: { width: 700, height: 50 }, style: { fontSize: 24, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', fontStyle: 'italic' } },
-      { id: 'info-img', type: 'image', locked: false, src: '', position: { x: 140, y: 350 }, size: { width: 800, height: 400 }, style: { borderRadius: 12, objectFit: 'cover' } },
-      { id: 'description', type: 'text', locked: false, content: 'Mikromotor vasitəsilə\ntək-tək folikulların çıxarılması', position: { x: 540, y: 850 }, size: { width: 800, height: 120 }, style: { fontSize: 32, fontFamily: 'Inter', color: '#3A3A3A', textAlign: 'center', lineHeight: 1.4 } }
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'header-bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 200 }, style: { background: 'linear-gradient(135deg, #7F6A47 0%, #F8F3E6 100%)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'FUE TEXNİKASI', position: { x: 540, y: 100 }, size: { width: 800, height: 70 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'subtitle', type: 'text', locked: true, visible: true, content: 'Follicular Unit Extraction', position: { x: 540, y: 250 }, size: { width: 700, height: 50 }, style: { fontSize: 24, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', fontStyle: 'italic' } },
+      { id: 'info-img', type: 'image', locked: false, visible: true, src: '', position: { x: 140, y: 350 }, size: { width: 800, height: 400 }, style: { borderRadius: 12, objectFit: 'cover' } },
+      { id: 'description', type: 'text', locked: false, visible: true, content: 'Mikromotor vasitəsilə\ntək-tək folikulların çıxarılması', position: { x: 540, y: 850 }, size: { width: 800, height: 120 }, style: { fontSize: 32, fontFamily: 'Inter', color: '#3A3A3A', textAlign: 'center', lineHeight: 1.4 } }
+    ]
+  },
+
+  // ========== CENTER MASK TEMPLATES (10) ==========
+  {
+    id: 'center-soft-glow',
+    name: 'Soft Center Glow',
+    category: 'center-mask',
+    bgColor: '#1A1A1A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#1A1A1A' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'center-glow', type: 'mask', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 40%, rgba(0,0,0,0.7) 100%)', pointerEvents: 'none' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'PREMIUM NƏTİCƏ', position: { x: 540, y: 500 }, size: { width: 700, height: 80 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#FFFFFF', fontWeight: 'bold', textAlign: 'center', textShadow: '0 4px 20px rgba(0,0,0,0.8)' } }
+    ]
+  },
+  {
+    id: 'oval-center-light',
+    name: 'Oval Center Light',
+    category: 'center-mask',
+    bgColor: '#2A2A2A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#2A2A2A' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'oval-mask', type: 'mask', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'radial-gradient(ellipse 600px 800px at center, rgba(255,255,255,0.85) 0%, rgba(0,0,0,0.8) 70%)', pointerEvents: 'none' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'TRANSFORMASYON', position: { x: 540, y: 450 }, size: { width: 600, height: 100 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'subtitle', type: 'text', locked: false, visible: true, content: '12 Ay Sonra', position: { x: 540, y: 580 }, size: { width: 400, height: 50 }, style: { fontSize: 28, fontFamily: 'Inter', color: '#F8F3E6', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'diamond-center',
+    name: 'Diamond Center Mask',
+    category: 'center-mask',
+    bgColor: '#0D0D0D',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#0D0D0D' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'diamond-mask', type: 'mask', locked: true, visible: true, position: { x: 240, y: 240 }, size: { width: 600, height: 600 }, style: { clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)', background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(0px)', border: '3px solid rgba(127,106,71,0.6)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'LÜKS SAÇ ƏKİMİ', position: { x: 540, y: 920 }, size: { width: 700, height: 70 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'vertical-fade',
+    name: 'Vertical Center Fade',
+    category: 'center-mask',
+    bgColor: '#1C1C1C',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#1C1C1C' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'vertical-fade', type: 'mask', locked: true, visible: true, position: { x: 340, y: 0 }, size: { width: 400, height: 1080 }, style: { background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(255,255,255,0.3) 50%, rgba(0,0,0,0.9) 100%)', pointerEvents: 'none' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'ƏVVƏL & SONRA', position: { x: 540, y: 100 }, size: { width: 600, height: 60 }, style: { fontSize: 44, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'spotlight',
+    name: 'Centered Spotlight',
+    category: 'center-mask',
+    bgColor: '#000000',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#000000' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'spotlight', type: 'mask', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'radial-gradient(ellipse 500px 700px at 50% 40%, rgba(255,255,255,0.95) 0%, rgba(0,0,0,0.95) 65%)', pointerEvents: 'none' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'SPOTLIGHT', position: { x: 540, y: 850 }, size: { width: 500, height: 70 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', letterSpacing: 3 } }
+    ]
+  },
+  {
+    id: 'golden-halo',
+    name: 'Golden Halo Center',
+    category: 'center-mask',
+    bgColor: '#1A1A1A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#1A1A1A' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'halo-ring', type: 'mask', locked: true, visible: true, position: { x: 190, y: 190 }, size: { width: 700, height: 700 }, style: { borderRadius: '50%', border: '8px solid #7F6A47', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 100%)', boxShadow: '0 0 60px rgba(127,106,71,0.8), inset 0 0 80px rgba(127,106,71,0.3)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'GOLDEN RESULT', position: { x: 540, y: 520 }, size: { width: 500, height: 80 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'glass-panel',
+    name: 'Glass Panel Center',
+    category: 'center-mask',
+    bgColor: '#2C2C2C',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#2C2C2C' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'glass-panel', type: 'mask', locked: true, visible: true, position: { x: 240, y: 190 }, size: { width: 600, height: 700 }, style: { background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 16, boxShadow: '0 8px 32px rgba(0,0,0,0.3)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'MODERN DİZAYN', position: { x: 540, y: 500 }, size: { width: 500, height: 70 }, style: { fontSize: 46, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'blur-box',
+    name: 'Center Blur Box',
+    category: 'center-mask',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover', filter: 'blur(8px)' } },
+      { id: 'clear-box', type: 'mask', locked: true, visible: true, position: { x: 190, y: 290 }, size: { width: 700, height: 500 }, style: { background: 'white', borderRadius: 12, boxShadow: '0 10px 60px rgba(0,0,0,0.3)' } },
+      { id: 'box-img', type: 'image', locked: false, visible: true, src: '', position: { x: 190, y: 290 }, size: { width: 700, height: 500 }, style: { objectFit: 'cover', borderRadius: 12 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'FOKUS', position: { x: 540, y: 880 }, size: { width: 400, height: 60 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'frosted-area',
+    name: 'Center Frosted Area',
+    category: 'center-mask',
+    bgColor: '#3A3A3A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#3A3A3A' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'frosted', type: 'mask', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'radial-gradient(circle 450px at center, transparent 0%, rgba(255,255,255,0.6) 100%)', backdropFilter: 'blur(3px)', pointerEvents: 'none' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'FROSTED GLASS', position: { x: 540, y: 520 }, size: { width: 600, height: 70 }, style: { fontSize: 50, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'white-beam',
+    name: 'White Beam Center',
+    category: 'center-mask',
+    bgColor: '#0A0A0A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#0A0A0A' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'beam', type: 'mask', locked: true, visible: true, position: { x: 0, y: 390 }, size: { width: 1080, height: 300 }, style: { background: 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(255,255,255,0.5) 50%, rgba(0,0,0,0.9) 100%)', pointerEvents: 'none' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'HORIZONTAL LIGHT', position: { x: 540, y: 520 }, size: { width: 700, height: 70 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#FFFFFF', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+
+  // ========== OPACITY BACKGROUND TEMPLATES (10) ==========
+  {
+    id: 'opacity-40',
+    name: '40% Opacity Background',
+    category: 'opacity-bg',
+    bgColor: 'rgba(58, 58, 58, 0.4)',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'overlay', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: 'rgba(58, 58, 58, 0.4)' } },
+      { id: 'logo', type: 'logo', locked: true, visible: true, content: 'BHI', position: { x: 490, y: 80 }, size: { width: 100, height: 60 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'BALANCED OPACITY', position: { x: 540, y: 480 }, size: { width: 800, height: 80 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', textShadow: '0 4px 12px rgba(0,0,0,0.6)' } },
+      { id: 'subtitle', type: 'text', locked: false, visible: true, content: 'Premium Hair Transplant', position: { x: 540, y: 600 }, size: { width: 600, height: 50 }, style: { fontSize: 28, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'opacity-20',
+    name: '20% Ultra-Minimal',
+    category: 'opacity-bg',
+    bgColor: 'rgba(255, 255, 255, 0.2)',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'overlay', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: 'rgba(255, 255, 255, 0.2)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'ULTRA MİNİMAL', position: { x: 540, y: 500 }, size: { width: 700, height: 70 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#FFFFFF', fontWeight: 'bold', textAlign: 'center', textShadow: '0 2px 20px rgba(0,0,0,0.8)' } }
+    ]
+  },
+  {
+    id: 'opacity-60',
+    name: '60% Luxury Dark',
+    category: 'opacity-bg',
+    bgColor: 'rgba(26, 26, 26, 0.6)',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'overlay', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: 'rgba(26, 26, 26, 0.6)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'LUXURY DESIGN', position: { x: 540, y: 450 }, size: { width: 800, height: 90 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'subtitle', type: 'text', locked: false, visible: true, content: 'Premium Experience', position: { x: 540, y: 580 }, size: { width: 500, height: 50 }, style: { fontSize: 32, fontFamily: 'Inter', color: '#F8F3E6', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'gradient-top-bottom',
+    name: 'Gradient Opacity Top → Bottom',
+    category: 'opacity-bg',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'gradient-overlay', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 50%, rgba(0,0,0,0.8) 100%)' } },
+      { id: 'top-title', type: 'text', locked: false, visible: true, content: 'ƏVVƏL', position: { x: 540, y: 120 }, size: { width: 400, height: 60 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'bottom-title', type: 'text', locked: false, visible: true, content: 'SONRA', position: { x: 540, y: 920 }, size: { width: 400, height: 60 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'gradient-left-right',
+    name: 'Gradient Opacity Left → Right',
+    category: 'opacity-bg',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'gradient-overlay', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'linear-gradient(to right, rgba(127,106,71,0.7) 0%, transparent 50%, rgba(58,58,58,0.7) 100%)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'TRANSFORMASYON', position: { x: 540, y: 500 }, size: { width: 700, height: 70 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#FFFFFF', fontWeight: 'bold', textAlign: 'center', textShadow: '0 4px 16px rgba(0,0,0,0.7)' } }
+    ]
+  },
+  {
+    id: 'vignette-transparency',
+    name: 'Vignette Transparency',
+    category: 'opacity-bg',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'vignette', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'radial-gradient(circle, transparent 30%, rgba(0,0,0,0.8) 100%)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'VIGNETTE EFFECT', position: { x: 540, y: 520 }, size: { width: 600, height: 70 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'fade-white',
+    name: 'Fade-to-White',
+    category: 'opacity-bg',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'white-fade', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.95) 100%)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'CLEAN & MINIMAL', position: { x: 540, y: 850 }, size: { width: 700, height: 70 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'fade-gold',
+    name: 'Fade-to-Gold',
+    category: 'opacity-bg',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'gold-fade', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'linear-gradient(to bottom, rgba(127,106,71,0.1) 0%, rgba(127,106,71,0.9) 100%)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'GOLDEN PREMIUM', position: { x: 540, y: 880 }, size: { width: 700, height: 80 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'dual-tone',
+    name: 'Dual Tone Transparency',
+    category: 'opacity-bg',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'dual-overlay', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'linear-gradient(135deg, rgba(127,106,71,0.6) 0%, rgba(58,58,58,0.6) 100%)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'DUAL TONE', position: { x: 540, y: 500 }, size: { width: 600, height: 70 }, style: { fontSize: 54, fontFamily: 'Playfair Display', color: '#FFFFFF', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'frosted-edge',
+    name: 'Frosted Edge Transparency',
+    category: 'opacity-bg',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { objectFit: 'cover' } },
+      { id: 'frosted-edge', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'radial-gradient(circle, transparent 40%, rgba(255,255,255,0.7) 100%)', backdropFilter: 'blur(2px)' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'FROSTED EDGE', position: { x: 540, y: 520 }, size: { width: 500, height: 70 }, style: { fontSize: 50, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+
+  // ========== GOLDEN FRAME TEMPLATES (10) ==========
+  {
+    id: 'gold-full-border',
+    name: 'Gold Thin Frame Full Border',
+    category: 'golden-frame',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'base-img', type: 'image', locked: false, visible: true, src: '', position: { x: 60, y: 60 }, size: { width: 960, height: 960 }, style: { objectFit: 'cover' } },
+      { id: 'gold-frame', type: 'frame', locked: true, visible: true, position: { x: 40, y: 40 }, size: { width: 1000, height: 1000 }, style: { border: '3px solid #7F6A47', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'PREMIUM FRAME', position: { x: 540, y: 950 }, size: { width: 600, height: 60 }, style: { fontSize: 42, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'gold-top-bottom',
+    name: 'Top & Bottom Gold Lines',
+    category: 'golden-frame',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'top-line', type: 'frame', locked: true, visible: true, position: { x: 0, y: 40 }, size: { width: 1080, height: 2 }, style: { backgroundColor: '#7F6A47' } },
+      { id: 'bottom-line', type: 'frame', locked: true, visible: true, position: { x: 0, y: 1038 }, size: { width: 1080, height: 2 }, style: { backgroundColor: '#7F6A47' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 200 }, size: { width: 900, height: 500 }, style: { objectFit: 'cover', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'ELEGANT DESIGN', position: { x: 540, y: 800 }, size: { width: 700, height: 70 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'gold-left-accent',
+    name: 'Left Aligned Gold Accent',
+    category: 'golden-frame',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'left-accent', type: 'frame', locked: true, visible: true, position: { x: 40, y: 200 }, size: { width: 6, height: 600 }, style: { backgroundColor: '#7F6A47' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 120, y: 200 }, size: { width: 840, height: 600 }, style: { objectFit: 'cover', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'SAÇ ƏKİMİ', position: { x: 120, y: 880 }, size: { width: 600, height: 70 }, style: { fontSize: 54, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'left' } }
+    ]
+  },
+  {
+    id: 'double-gold-lines',
+    name: 'Double Gold Thin Lines',
+    category: 'golden-frame',
+    bgColor: '#3A3A3A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#3A3A3A' } },
+      { id: 'outer-frame', type: 'frame', locked: true, visible: true, position: { x: 60, y: 60 }, size: { width: 960, height: 960 }, style: { border: '2px solid #7F6A47', borderRadius: 8 } },
+      { id: 'inner-frame', type: 'frame', locked: true, visible: true, position: { x: 80, y: 80 }, size: { width: 920, height: 920 }, style: { border: '1px solid #7F6A47', borderRadius: 6 } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 140, y: 200 }, size: { width: 800, height: 500 }, style: { objectFit: 'cover', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'DOUBLE FRAME', position: { x: 540, y: 800 }, size: { width: 700, height: 70 }, style: { fontSize: 50, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'corner-brackets',
+    name: 'Golden Corner Brackets',
+    category: 'golden-frame',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'top-left', type: 'pattern', locked: true, visible: true, position: { x: 40, y: 40 }, size: { width: 80, height: 80 }, style: { borderTop: '4px solid #7F6A47', borderLeft: '4px solid #7F6A47' } },
+      { id: 'top-right', type: 'pattern', locked: true, visible: true, position: { x: 960, y: 40 }, size: { width: 80, height: 80 }, style: { borderTop: '4px solid #7F6A47', borderRight: '4px solid #7F6A47' } },
+      { id: 'bottom-left', type: 'pattern', locked: true, visible: true, position: { x: 40, y: 960 }, size: { width: 80, height: 80 }, style: { borderBottom: '4px solid #7F6A47', borderLeft: '4px solid #7F6A47' } },
+      { id: 'bottom-right', type: 'pattern', locked: true, visible: true, position: { x: 960, y: 960 }, size: { width: 80, height: 80 }, style: { borderBottom: '4px solid #7F6A47', borderRight: '4px solid #7F6A47' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 190, y: 240 }, size: { width: 700, height: 500 }, style: { objectFit: 'cover', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'CORNER ELEGANCE', position: { x: 540, y: 840 }, size: { width: 700, height: 70 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'minimal-gold-box',
+    name: 'Minimal Gold Box',
+    category: 'golden-frame',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'gold-box', type: 'frame', locked: true, visible: true, position: { x: 240, y: 340 }, size: { width: 600, height: 400 }, style: { border: '2px solid #7F6A47' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 260, y: 360 }, size: { width: 560, height: 360 }, style: { objectFit: 'cover' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'MINIMAL BOX', position: { x: 540, y: 850 }, size: { width: 500, height: 60 }, style: { fontSize: 46, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'gold-underline',
+    name: 'Gold Underline Title',
+    category: 'golden-frame',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 240 }, size: { width: 900, height: 500 }, style: { objectFit: 'cover', borderRadius: 12 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'PREMIUM SAÇ ƏKİMİ', position: { x: 540, y: 860 }, size: { width: 800, height: 70 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'underline', type: 'frame', locked: true, visible: true, position: { x: 390, y: 940 }, size: { width: 300, height: 3 }, style: { backgroundColor: '#7F6A47' } }
+    ]
+  },
+  {
+    id: 'gold-divider',
+    name: 'Gold Divider Title/Subtitle',
+    category: 'golden-frame',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'SAÇ ƏKİMİ', position: { x: 540, y: 200 }, size: { width: 700, height: 80 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'divider', type: 'frame', locked: true, visible: true, position: { x: 440, y: 300 }, size: { width: 200, height: 2 }, style: { backgroundColor: '#7F6A47' } },
+      { id: 'subtitle', type: 'text', locked: false, visible: true, content: 'Premium Texnika', position: { x: 540, y: 340 }, size: { width: 500, height: 50 }, style: { fontSize: 28, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 140, y: 450 }, size: { width: 800, height: 500 }, style: { objectFit: 'cover', borderRadius: 12 } }
+    ]
+  },
+  {
+    id: 'gold-shadow-glow',
+    name: 'Gold Shadow Title Glow',
+    category: 'golden-frame',
+    bgColor: '#1A1A1A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#1A1A1A' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 200 }, size: { width: 900, height: 500 }, style: { objectFit: 'cover', borderRadius: 12 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'GOLDEN GLOW', position: { x: 540, y: 820 }, size: { width: 700, height: 80 }, style: { fontSize: 60, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', textShadow: '0 0 30px rgba(127,106,71,0.8), 0 0 60px rgba(127,106,71,0.5)' } }
+    ]
+  },
+  {
+    id: 'gold-gradient-frame',
+    name: 'Gold Gradient Frame',
+    category: 'golden-frame',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'gradient-frame', type: 'frame', locked: true, visible: true, position: { x: 60, y: 60 }, size: { width: 960, height: 960 }, style: { border: '4px solid transparent', borderRadius: 12, backgroundImage: 'linear-gradient(#F8F3E6, #F8F3E6), linear-gradient(135deg, #7F6A47, #C4A676, #7F6A47)', backgroundOrigin: 'border-box', backgroundClip: 'padding-box, border-box' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 140, y: 240 }, size: { width: 800, height: 500 }, style: { objectFit: 'cover', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'GRADIENT GOLD', position: { x: 540, y: 840 }, size: { width: 700, height: 70 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+
+  // ========== CLINICAL LINES TEMPLATES (10) ==========
+  {
+    id: 'geometric-minimal',
+    name: 'Geometric Lines Minimal',
+    category: 'clinical-lines',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'line-pattern', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 108px, rgba(127,106,71,0.15) 108px, rgba(127,106,71,0.15) 109px), repeating-linear-gradient(90deg, transparent, transparent 108px, rgba(127,106,71,0.15) 108px, rgba(127,106,71,0.15) 109px)', pointerEvents: 'none' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 190, y: 290 }, size: { width: 700, height: 500 }, style: { objectFit: 'cover', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'GEOMETRIC PRECISION', position: { x: 540, y: 880 }, size: { width: 700, height: 60 }, style: { fontSize: 44, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'medical-wave',
+    name: 'Medical Wave Soft Lines',
+    category: 'clinical-lines',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'wave-pattern', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundImage: 'repeating-radial-gradient(circle at 0 0, transparent 0, #F8F3E6 100px), repeating-linear-gradient(rgba(127,106,71,0.1), rgba(127,106,71,0.1))', pointerEvents: 'none' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 140, y: 240 }, size: { width: 800, height: 500 }, style: { objectFit: 'cover', borderRadius: 12 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'MEDICAL CARE', position: { x: 540, y: 850 }, size: { width: 600, height: 70 }, style: { fontSize: 50, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'diagonal-lines',
+    name: 'Clean Diagonal Lines',
+    category: 'clinical-lines',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'diagonal-pattern', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 100px, rgba(127,106,71,0.1) 100px, rgba(127,106,71,0.1) 101px)', pointerEvents: 'none' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 190 }, size: { width: 900, height: 600 }, style: { objectFit: 'cover', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'DIAGONAL DESIGN', position: { x: 540, y: 880 }, size: { width: 700, height: 70 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'vertical-lines',
+    name: 'Soft Vertical Lines',
+    category: 'clinical-lines',
+    bgColor: '#F0EBD9',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F0EBD9' } },
+      { id: 'vertical-pattern', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(127,106,71,0.12) 60px, rgba(127,106,71,0.12) 61px)', pointerEvents: 'none' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 190, y: 240 }, size: { width: 700, height: 500 }, style: { objectFit: 'cover', borderRadius: 12 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'VERTICAL ELEGANCE', position: { x: 540, y: 850 }, size: { width: 700, height: 70 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'triangle-lines',
+    name: 'Triangle Fine-Lines',
+    category: 'clinical-lines',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'triangle-bg', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 540, height: 1080 }, style: { clipPath: 'polygon(0 0, 100% 50%, 0 100%)', backgroundColor: 'rgba(127,106,71,0.05)' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 340, y: 290 }, size: { width: 640, height: 500 }, style: { objectFit: 'cover', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'TRIANGLE DESIGN', position: { x: 660, y: 880 }, size: { width: 600, height: 70 }, style: { fontSize: 46, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'left' } }
+    ]
+  },
+  {
+    id: 'hair-strand-lines',
+    name: 'Parallel Hair-Strand Lines',
+    category: 'clinical-lines',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'hair-pattern', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundImage: 'repeating-linear-gradient(20deg, transparent, transparent 3px, rgba(127,106,71,0.08) 3px, rgba(127,106,71,0.08) 4px, transparent 4px, transparent 20px)', pointerEvents: 'none' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 140, y: 240 }, size: { width: 800, height: 500 }, style: { objectFit: 'cover', borderRadius: 12 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'HAIR TEXTURE', position: { x: 540, y: 850 }, size: { width: 600, height: 70 }, style: { fontSize: 50, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'soft-grid',
+    name: 'Soft Grid Layer',
+    category: 'clinical-lines',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'grid-pattern', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundImage: 'linear-gradient(rgba(127,106,71,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(127,106,71,0.06) 1px, transparent 1px)', backgroundSize: '90px 90px', pointerEvents: 'none' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 190, y: 290 }, size: { width: 700, height: 500 }, style: { objectFit: 'cover', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'SOFT GRID', position: { x: 540, y: 880 }, size: { width: 500, height: 70 }, style: { fontSize: 48, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'nano-dots',
+    name: 'Nano Pattern Dots',
+    category: 'clinical-lines',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'dot-pattern', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundImage: 'radial-gradient(circle, rgba(127,106,71,0.15) 1px, transparent 1px)', backgroundSize: '30px 30px', pointerEvents: 'none' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 140, y: 240 }, size: { width: 800, height: 500 }, style: { objectFit: 'cover', borderRadius: 12 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'NANO PRECISION', position: { x: 540, y: 850 }, size: { width: 700, height: 70 }, style: { fontSize: 50, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'isometric-lines',
+    name: 'Isometric Light Lines',
+    category: 'clinical-lines',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'isometric-pattern', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundImage: 'repeating-linear-gradient(60deg, transparent, transparent 70px, rgba(127,106,71,0.08) 70px, rgba(127,106,71,0.08) 71px), repeating-linear-gradient(-60deg, transparent, transparent 70px, rgba(127,106,71,0.08) 70px, rgba(127,106,71,0.08) 71px)', pointerEvents: 'none' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 190, y: 290 }, size: { width: 700, height: 500 }, style: { objectFit: 'cover', borderRadius: 8 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'ISOMETRIC', position: { x: 540, y: 880 }, size: { width: 500, height: 70 }, style: { fontSize: 50, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'luxury-edge-lines',
+    name: 'Luxury Edge Lines',
+    category: 'clinical-lines',
+    bgColor: '#1A1A1A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#1A1A1A' } },
+      { id: 'edge-lines-top', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 120 }, style: { backgroundImage: 'repeating-linear-gradient(90deg, rgba(127,106,71,0.3), rgba(127,106,71,0.3) 1px, transparent 1px, transparent 10px)' } },
+      { id: 'edge-lines-bottom', type: 'pattern', locked: true, visible: true, position: { x: 0, y: 960 }, size: { width: 1080, height: 120 }, style: { backgroundImage: 'repeating-linear-gradient(90deg, rgba(127,106,71,0.3), rgba(127,106,71,0.3) 1px, transparent 1px, transparent 10px)' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 140, y: 240 }, size: { width: 800, height: 500 }, style: { objectFit: 'cover', borderRadius: 12 } },
+      { id: 'title', type: 'text', locked: false, visible: true, content: 'LUXURY EDGES', position: { x: 540, y: 840 }, size: { width: 700, height: 70 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+
+  // ========== TYPOGRAPHY TEMPLATES (10) ==========
+  {
+    id: 'bold-centered',
+    name: 'Bold Title Centered + Subtitle',
+    category: 'typography',
+    bgColor: '#3A3A3A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#3A3A3A' } },
+      { id: 'main-title', type: 'text', locked: false, visible: true, content: 'SAÇ ƏKİMİ', position: { x: 540, y: 450 }, size: { width: 900, height: 100 }, style: { fontSize: 80, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', letterSpacing: 2 } },
+      { id: 'subtitle', type: 'text', locked: false, visible: true, content: 'Premium Xidmət', position: { x: 540, y: 600 }, size: { width: 600, height: 50 }, style: { fontSize: 32, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', letterSpacing: 4, textTransform: 'uppercase' } }
+    ]
+  },
+  {
+    id: 'left-premium',
+    name: 'Left Aligned Premium Title',
+    category: 'typography',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'main-title', type: 'text', locked: false, visible: true, content: 'PREMIUM\nSAÇ ƏKİMİ', position: { x: 120, y: 400 }, size: { width: 800, height: 200 }, style: { fontSize: 72, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'left', lineHeight: 1.2 } },
+      { id: 'tagline', type: 'text', locked: false, visible: true, content: 'Baku Hair Institute', position: { x: 120, y: 640 }, size: { width: 500, height: 50 }, style: { fontSize: 28, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'left' } }
+    ]
+  },
+  {
+    id: 'right-clear',
+    name: 'Right Aligned Clear Title',
+    category: 'typography',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'accent-bar', type: 'background', locked: true, visible: true, position: { x: 860, y: 0 }, size: { width: 220, height: 1080 }, style: { backgroundColor: '#7F6A47' } },
+      { id: 'main-title', type: 'text', locked: false, visible: true, content: 'TRANSFORMASYON', position: { x: 740, y: 480 }, size: { width: 600, height: 120 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'right', lineHeight: 1.3 } },
+      { id: 'description', type: 'text', locked: false, visible: true, content: '12 ay sonra', position: { x: 740, y: 630 }, size: { width: 400, height: 50 }, style: { fontSize: 28, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'right' } }
+    ]
+  },
+  {
+    id: 'ultra-minimal-white',
+    name: 'Ultra-Minimal White Title',
+    category: 'typography',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'main-title', type: 'text', locked: false, visible: true, content: 'MİNİMAL', position: { x: 540, y: 520 }, size: { width: 700, height: 80 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: '300', textAlign: 'center', letterSpacing: 8 } }
+    ]
+  },
+  {
+    id: 'dark-gold-subtitle',
+    name: 'Dark Title + Gold Subtitle',
+    category: 'typography',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'main-title', type: 'text', locked: false, visible: true, content: 'BHI SAÇ KLİNİKASI', position: { x: 540, y: 420 }, size: { width: 900, height: 100 }, style: { fontSize: 68, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'gold-subtitle', type: 'text', locked: false, visible: true, content: 'PREMIUM HEALTHCARE', position: { x: 540, y: 560 }, size: { width: 700, height: 60 }, style: { fontSize: 36, fontFamily: 'Inter', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', letterSpacing: 6 } }
+    ]
+  },
+  {
+    id: 'ribbon-title',
+    name: 'Title Inside Gold Ribbon',
+    category: 'typography',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'ribbon-bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 440 }, size: { width: 1080, height: 200 }, style: { backgroundColor: '#7F6A47', boxShadow: '0 8px 30px rgba(127,106,71,0.4)' } },
+      { id: 'ribbon-title', type: 'text', locked: false, visible: true, content: 'SAÇ ƏKİMİ', position: { x: 540, y: 520 }, size: { width: 800, height: 90 }, style: { fontSize: 72, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', letterSpacing: 4 } }
+    ]
+  },
+  {
+    id: 'split-title',
+    name: 'Split Title Style',
+    category: 'typography',
+    bgColor: '#3A3A3A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#3A3A3A' } },
+      { id: 'part1', type: 'text', locked: false, visible: true, content: 'PREMIUM', position: { x: 540, y: 380 }, size: { width: 700, height: 80 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', letterSpacing: 8 } },
+      { id: 'divider', type: 'background', locked: true, visible: true, position: { x: 440, y: 480 }, size: { width: 200, height: 2 }, style: { backgroundColor: '#7F6A47' } },
+      { id: 'part2', type: 'text', locked: false, visible: true, content: 'SAÇ', position: { x: 540, y: 520 }, size: { width: 500, height: 70 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'normal', textAlign: 'center', letterSpacing: 12 } },
+      { id: 'part3', type: 'text', locked: false, visible: true, content: 'ƏKİMİ', position: { x: 540, y: 610 }, size: { width: 500, height: 70 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'normal', textAlign: 'center', letterSpacing: 12 } }
+    ]
+  },
+  {
+    id: 'shadow-elegant',
+    name: 'Shadowed Elegant Title',
+    category: 'typography',
+    bgColor: '#1A1A1A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#1A1A1A' } },
+      { id: 'shadow-title', type: 'text', locked: false, visible: true, content: 'ELEGANT', position: { x: 540, y: 500 }, size: { width: 800, height: 100 }, style: { fontSize: 80, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', textShadow: '0 10px 40px rgba(127,106,71,0.7), 0 0 80px rgba(127,106,71,0.4)' } }
+    ]
+  },
+  {
+    id: 'glass-box-typo',
+    name: 'Glass Box Typography',
+    category: 'typography',
+    bgColor: '#3A3A3A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#3A3A3A' } },
+      { id: 'glass-box', type: 'background', locked: true, visible: true, position: { x: 190, y: 390 }, size: { width: 700, height: 300 }, style: { background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 16, boxShadow: '0 8px 32px rgba(0,0,0,0.3)' } },
+      { id: 'glass-title', type: 'text', locked: false, visible: true, content: 'GLASS DESIGN', position: { x: 540, y: 520 }, size: { width: 600, height: 80 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'mega-title',
+    name: 'Mega Title Large Center',
+    category: 'typography',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'mega-title', type: 'text', locked: false, visible: true, content: 'BHI', position: { x: 540, y: 520 }, size: { width: 900, height: 180 }, style: { fontSize: 160, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', letterSpacing: -4 } },
+      { id: 'mini-tagline', type: 'text', locked: false, visible: true, content: 'Baku Hair Institute', position: { x: 540, y: 720 }, size: { width: 600, height: 40 }, style: { fontSize: 24, fontFamily: 'Inter', color: '#3A3A3A', textAlign: 'center', letterSpacing: 6 } }
     ]
   }
 ];
+
 
 export const UnifiedDesigner = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -235,6 +831,17 @@ export const UnifiedDesigner = () => {
     );
   };
 
+  // Toggle layer visibility
+  const toggleLayerVisibility = (layerId: string) => {
+    setLayers(prevLayers =>
+      prevLayers.map(layer =>
+        layer.id === layerId
+          ? { ...layer, visible: !layer.visible }
+          : layer
+      )
+    );
+  };
+
   // Download canvas as PNG
   const handleDownload = async () => {
     if (!canvasRef.current) return;
@@ -262,14 +869,19 @@ export const UnifiedDesigner = () => {
 
   const categories = [
     { id: 'all', name: 'Hamısı', icon: Grid },
-    { id: 'case-study', name: 'Vaka Analizi', icon: '📊' },
-    { id: 'before-after', name: 'Əvvəl & Sonra', icon: '🔄' },
-    { id: 'testimonial', name: 'Rəylər', icon: '⭐' },
-    { id: 'faq', name: 'Suallar', icon: '❓' },
-    { id: 'quote', name: 'Məsləhətlər', icon: '👨‍⚕️' },
-    { id: 'promo', name: 'Kampaniya', icon: '🎉' },
-    { id: 'countdown', name: 'Geri Sayım', icon: '⏰' },
-    { id: 'info', name: 'Məlumat', icon: '📚' }
+    { id: 'case-study', name: 'Vaka Analizi', icon: FileText },
+    { id: 'before-after', name: 'Əvvəl & Sonra', icon: TrendingUp },
+    { id: 'testimonial', name: 'Rəylər', icon: Star },
+    { id: 'faq', name: 'Suallar', icon: MessageCircle },
+    { id: 'quote', name: 'Məsləhətlər', icon: Award },
+    { id: 'promo', name: 'Kampaniya', icon: Zap },
+    { id: 'countdown', name: 'Geri Sayım', icon: Clock },
+    { id: 'info', name: 'Məlumat', icon: BookOpen },
+    { id: 'center-mask', name: 'Mərkəz Mask', icon: Circle },
+    { id: 'opacity-bg', name: 'Şəffaflıq', icon: Square },
+    { id: 'golden-frame', name: 'Qızıl Çərçivə', icon: Frame },
+    { id: 'clinical-lines', name: 'Xətlər', icon: Hash },
+    { id: 'typography', name: 'Tipoqrafiya', icon: AlignCenter }
   ];
 
   const filteredTemplates = filterCategory === 'all' 
@@ -277,7 +889,7 @@ export const UnifiedDesigner = () => {
     : templates.filter(t => t.category === filterCategory);
 
   return (
-    <div className={`${isFullscreen ? 'fixed inset-0 z-[9999]' : 'min-h-screen'} bg-gradient-to-br from-[#F8F3E6] via-white to-[#F0EBD9]`}>
+    <div className={`${isFullscreen ? 'fixed inset-0 z-[9999]' : 'min-h-screen pt-24'} bg-gradient-to-br from-[#F8F3E6] via-white to-[#F0EBD9]`}>
       {/* Fullscreen Header */}
       {isFullscreen && (
         <div className="absolute top-0 left-0 right-0 h-16 bg-[#3A3A3A]/95 backdrop-blur-sm flex items-center justify-between px-6 z-50">
@@ -336,7 +948,7 @@ export const UnifiedDesigner = () => {
                     }`}
                   >
                     <div className="flex flex-col items-center gap-1">
-                      <span className="text-xl">{typeof cat.icon === 'string' ? cat.icon : '📁'}</span>
+                      {React.createElement(cat.icon, { className: "w-5 h-5" })}
                       <span className="text-xs">{cat.name}</span>
                     </div>
                   </button>
@@ -361,7 +973,8 @@ export const UnifiedDesigner = () => {
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-2xl">{template.thumbnail}</span>
+                      {/* Template icon from category */}
+                      {React.createElement(categories.find(c => c.id === template.category)?.icon || Grid, { className: "w-5 h-5 text-[#7F6A47]" })}
                       <div className="flex-1 min-w-0">
                         <div className="font-medium text-sm truncate">{template.name}</div>
                         <div className={`text-xs ${selectedTemplate?.id === template.id ? 'text-[#F8F3E6]/80' : 'text-gray-500'}`}>
@@ -408,7 +1021,10 @@ export const UnifiedDesigner = () => {
                     }}
                   >
                     {layers.map(layer => {
-                      if (layer.type === 'background') {
+                      // Skip hidden layers
+                      if (layer.visible === false) return null;
+
+                      if (layer.type === 'background' || layer.type === 'mask' || layer.type === 'frame' || layer.type === 'pattern') {
                         return (
                           <div
                             key={layer.id}
@@ -421,6 +1037,24 @@ export const UnifiedDesigner = () => {
                               ...layer.style
                             }}
                           />
+                        );
+                      }
+
+                      if (layer.type === 'logo') {
+                        return (
+                          <div
+                            key={layer.id}
+                            className="absolute font-serif font-bold"
+                            style={{
+                              left: `${(layer.position.x / 1080) * 100}%`,
+                              top: `${(layer.position.y / 1080) * 100}%`,
+                              fontSize: `${(layer.style.fontSize / 1080) * 540}px`,
+                              color: layer.style.color,
+                              fontFamily: layer.style.fontFamily
+                            }}
+                          >
+                            {layer.content}
+                          </div>
                         );
                       }
 
@@ -567,12 +1201,27 @@ export const UnifiedDesigner = () => {
                               {layer.type === 'text' ? 'Mətn' : 'Şəkil'}
                             </span>
                           </div>
-                          <button
-                            onClick={() => setSelectedLayerId(selectedLayerId === layer.id ? null : layer.id)}
-                            className="text-xs text-[#7F6A47] hover:underline"
-                          >
-                            {selectedLayerId === layer.id ? 'Bağla' : 'Düzəlt'}
-                          </button>
+                          <div className="flex items-center gap-2">
+                            {/* Visibility Toggle */}
+                            <button
+                              onClick={() => toggleLayerVisibility(layer.id)}
+                              className="p-1.5 hover:bg-gray-100 rounded transition-colors"
+                              title={layer.visible === false ? 'Göstər' : 'Gizlət'}
+                            >
+                              {layer.visible === false ? (
+                                <EyeOff className="w-4 h-4 text-gray-400" />
+                              ) : (
+                                <Eye className="w-4 h-4 text-[#7F6A47]" />
+                              )}
+                            </button>
+                            {/* Edit Toggle */}
+                            <button
+                              onClick={() => setSelectedLayerId(selectedLayerId === layer.id ? null : layer.id)}
+                              className="text-xs text-[#7F6A47] hover:underline"
+                            >
+                              {selectedLayerId === layer.id ? 'Bağla' : 'Düzəlt'}
+                            </button>
+                          </div>
                         </div>
 
                         {selectedLayerId === layer.id && (
