@@ -1,10 +1,11 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { Phone, MapPin, Instagram, Facebook, Menu, Shield, Award, ArrowRight, CalendarCheck, Upload } from 'lucide-react';
+import { Phone, MapPin, Instagram, Facebook, Menu, Shield, Award, ArrowRight, CalendarCheck, Upload, Sparkles } from 'lucide-react';
 import { content } from './constants';
 import { ScrollProgress, CustomCursor, MagneticButton, TiltCard, Preloader, PageTransitionLoader, Dropdown, Accordion, DoctorCard, WhyUsCard, AzePatternBackground } from './components/ui';
 import { MenHairPage, MenBeardPage, LongFuePage, HairlineDesignPage, WomenHairPage, EyebrowPage, AnesthesiaPage, PrpPage, MesotherapyPage, MedicalPage } from './components/Pages';
+import { SocialMediaDesigner } from './components/SocialMediaDesigner';
 
 // --- Custom Hooks ---
 
@@ -420,7 +421,7 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
 export default function App() {
   const [lang, setLang] = useState<'az' | 'ru'>('az');
   const [scrolled, setScrolled] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'men-hair' | 'men-beard' | 'long-fue' | 'hairline-design' | 'women-hair' | 'women-eyebrow' | 'anesthesia' | 'prp' | 'mesotherapy' | 'medical'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'men-hair' | 'men-beard' | 'long-fue' | 'hairline-design' | 'women-hair' | 'women-eyebrow' | 'anesthesia' | 'prp' | 'mesotherapy' | 'medical' | 'social-designer'>('home');
   const [isNavigating, setIsNavigating] = useState(false); // Navigation state for Loader
   const sysConfig = useSecretAccess();
   const t = content[lang];
@@ -531,6 +532,7 @@ export default function App() {
           {currentView === 'prp' && <PrpPage content={t.prp_page} sysConfig={sysConfig} />}
           {currentView === 'mesotherapy' && <MesotherapyPage content={t.meso_page} sysConfig={sysConfig} />}
           {currentView === 'medical' && <MedicalPage content={t.medical_page} sysConfig={sysConfig} />}
+          {currentView === 'social-designer' && <SocialMediaDesigner />}
       </main>
 
       {/* --- CONTACT / FORM (Shared across all pages) --- */}
@@ -626,6 +628,17 @@ export default function App() {
                <Instagram className="hover:text-[#7F6A47] transition cursor-pointer hover:scale-110"/>
                <Facebook className="hover:text-[#7F6A47] transition cursor-pointer hover:scale-110"/>
             </div>
+            
+            {/* Social Media Designer Link */}
+            <button
+              onClick={() => handleNavigation('social-designer')}
+              className="inline-flex items-center gap-2 text-sm text-[#F8F3E6]/60 hover:text-[#7F6A47] transition-colors mb-8 uppercase tracking-wider interactive"
+            >
+              <Sparkles size={16} />
+              Sosial Media Dizayner
+              <Sparkles size={16} />
+            </button>
+            
             <p className="text-[10px] uppercase tracking-widest text-[#F8F3E6]/40">&copy; 2024 Baku Hair Institute. All rights reserved.</p>
          </div>
       </footer>
