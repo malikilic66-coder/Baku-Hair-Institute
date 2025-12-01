@@ -440,7 +440,7 @@ export default function App() {
   };
 
   // Identify pages with LIGHT background heroes (where nav text needs to be DARK initially)
-  const lightHeroPages = ['women-hair', 'women-eyebrow', 'hairline-design', 'mesotherapy', 'medical'];
+  const lightHeroPages = ['women-hair', 'women-eyebrow', 'hairline-design', 'mesotherapy', 'medical', 'eyebrow', 'prp'];
   const isLightHero = lightHeroPages.includes(currentView);
 
   const theme = {

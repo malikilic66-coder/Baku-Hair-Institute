@@ -220,11 +220,11 @@ export const HairlineDesignPage: React.FC<HairlinePageProps> = ({ content, sysCo
   return (
      <div className={`min-h-screen ${sysConfig ? 'bg-black text-green-500' : 'bg-[#F8F3E6] text-[#3A3A3A]'}`}>
         
-        {/* Artistic Hero */}
-        <div className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
+        {/* Dark Artistic Hero */}
+        <div className="relative h-screen min-h-[700px] flex items-center overflow-hidden bg-[#3A3A3A]">
              <div className="absolute inset-0 z-0">
                  {/* Abstract Fibonacci Spiral SVG Background */}
-                 <svg className="absolute top-0 right-0 h-full opacity-10" viewBox="0 0 1000 1000">
+                 <svg className="absolute top-0 right-0 h-full opacity-20" viewBox="0 0 1000 1000">
                      <path fill="none" stroke="#7F6A47" strokeWidth="2" d="M500,500 Q750,500 750,750 T500,1000 T250,750 T500,500" />
                      <circle cx="500" cy="500" r="400" stroke="#7F6A47" strokeWidth="1" fill="none" opacity="0.3"/>
                      <circle cx="500" cy="500" r="250" stroke="#7F6A47" strokeWidth="1" fill="none" opacity="0.5"/>
@@ -238,28 +238,28 @@ export const HairlineDesignPage: React.FC<HairlinePageProps> = ({ content, sysCo
                      <div className="inline-block p-4 border border-[#7F6A47] mb-8">
                          <ScanFace size={40} className="text-[#7F6A47]" />
                      </div>
-                     <h1 className="text-5xl lg:text-8xl font-serif mb-6">{content.title}</h1>
-                     <p className="text-xl font-light opacity-80 leading-relaxed mb-8">{content.desc}</p>
+                     <h1 className="text-5xl lg:text-8xl font-serif mb-6 text-[#F8F3E6]">{content.title}</h1>
+                     <p className="text-xl font-light text-[#F8F3E6]/80 leading-relaxed mb-8">{content.desc}</p>
                      
-                     <div className="bg-[#3A3A3A] text-[#F8F3E6] p-8 mt-8 relative overflow-hidden">
-                         <div className="absolute top-0 right-0 text-[#F8F3E6] opacity-5 text-9xl font-serif font-black leading-none">φ</div>
+                     <div className="bg-[#7F6A47]/10 border border-[#7F6A47] text-[#F8F3E6] p-8 mt-8 relative overflow-hidden">
+                         <div className="absolute top-0 right-0 text-[#F8F3E6] opacity-10 text-9xl font-serif font-black leading-none">φ</div>
                          <h3 className="text-2xl font-serif text-[#7F6A47] mb-2">{content.golden_ratio_title}</h3>
-                         <p className="text-sm opacity-80 leading-relaxed relative z-10">{content.golden_ratio_desc}</p>
+                         <p className="text-sm text-[#F8F3E6]/80 leading-relaxed relative z-10">{content.golden_ratio_desc}</p>
                      </div>
                  </div>
                  
                  <div className="order-1 lg:order-2 relative">
                      <img 
                         src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1000&auto=format&fit=crop" 
-                        className="w-full h-[600px] object-cover grayscale opacity-80"
+                        className="w-full h-[600px] object-cover grayscale opacity-60"
                         alt="Face Portrait"
                      />
-                     <div className="absolute inset-0 border-[20px] border-[#F8F3E6]"></div>
+                     <div className="absolute inset-0 border-[20px] border-[#7F6A47]/20"></div>
                      {/* Overlay Guidelines */}
-                     <div className="absolute top-1/3 left-0 w-full h-[1px] bg-[#7F6A47] opacity-50"></div>
-                     <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#7F6A47] opacity-50"></div>
-                     <div className="absolute top-2/3 left-0 w-full h-[1px] bg-[#7F6A47] opacity-50"></div>
-                     <div className="absolute top-0 left-1/2 h-full w-[1px] bg-[#7F6A47] opacity-50"></div>
+                     <div className="absolute top-1/3 left-0 w-full h-[1px] bg-[#7F6A47] opacity-30"></div>
+                     <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#7F6A47] opacity-30"></div>
+                     <div className="absolute top-2/3 left-0 w-full h-[1px] bg-[#7F6A47] opacity-30"></div>
+                     <div className="absolute top-0 left-1/2 h-full w-[1px] bg-[#7F6A47] opacity-30"></div>
                  </div>
              </div>
         </div>
@@ -287,15 +287,15 @@ export const HairlineDesignPage: React.FC<HairlinePageProps> = ({ content, sysCo
 
 export const WomenHairPage: React.FC<WomenHairPageProps> = ({ content, sysConfig }) => {
     return (
-        <div className={`min-h-screen ${sysConfig ? 'bg-black text-green-500' : 'bg-[#FDFBF7] text-[#3A3A3A]'}`}>
-            {/* Elegant Hero */}
-            <div className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+        <div className={`min-h-screen ${sysConfig ? 'bg-black text-green-500' : 'bg-[#F8F3E6] text-[#3A3A3A]'}`}>
+            {/* Dark Hero with Light Overlay */}
+            <div className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-[#3A3A3A]">
                 <div className="absolute inset-0 z-0">
-                    <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?q=80&w=1000" className="w-full h-full object-cover opacity-80 grayscale-[30%]" alt="Woman Hair"/>
-                    <div className="absolute inset-0 bg-[#F8F3E6]/60 backdrop-blur-[2px]"></div>
+                    <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?q=80&w=1000" className="w-full h-full object-cover opacity-40" alt="Woman Hair"/>
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#3A3A3A]/80 to-[#3A3A3A]/60"></div>
                 </div>
                 <div className="relative z-10 text-center max-w-3xl px-6 animate-fade-in-up">
-                    <h1 className="text-5xl lg:text-7xl font-serif mb-6 text-[#3A3A3A]">{content.title}</h1>
+                    <h1 className="text-5xl lg:text-7xl font-serif mb-6 text-[#F8F3E6]">{content.title}</h1>
                     <p className="text-xl lg:text-2xl font-light italic text-[#7F6A47] mb-8">{content.subtitle}</p>
                     <div className="w-24 h-[1px] bg-[#7F6A47] mx-auto"></div>
                 </div>
@@ -339,24 +339,37 @@ export const WomenHairPage: React.FC<WomenHairPageProps> = ({ content, sysConfig
 export const EyebrowPage: React.FC<EyebrowPageProps> = ({ content, sysConfig }) => {
     return (
         <div className={`min-h-screen ${sysConfig ? 'bg-black text-green-500' : 'bg-[#F8F3E6] text-[#3A3A3A]'}`}>
-            <div className="container mx-auto px-6 py-32 flex flex-col lg:flex-row items-center gap-16">
-                 <div className="lg:w-1/2 animate-slide-in-left">
-                     <div className="flex items-center gap-3 text-[#7F6A47] mb-4">
-                         <Eye size={24}/>
-                         <span className="uppercase tracking-widest text-xs font-bold">Aesthetic Focus</span>
+            {/* Dark Hero Section */}
+            <div className="relative h-[60vh] bg-[#3A3A3A] overflow-hidden flex items-center">
+                <div className="absolute inset-0 opacity-30">
+                    <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover" alt="Eyebrow"/>
+                </div>
+                <div className="container mx-auto px-6 relative z-10">
+                     <div className="max-w-3xl">
+                         <div className="flex items-center gap-3 text-[#7F6A47] mb-4">
+                             <Eye size={24}/>
+                             <span className="uppercase tracking-widest text-xs font-bold">Aesthetic Focus</span>
+                         </div>
+                         <h1 className="text-5xl lg:text-7xl font-serif mb-6 text-[#F8F3E6]">{content.title}</h1>
+                         <p className="text-2xl font-light mb-8 text-[#F8F3E6]/80">{content.subtitle}</p>
                      </div>
-                     <h1 className="text-5xl lg:text-7xl font-serif mb-6">{content.title}</h1>
-                     <p className="text-2xl font-light mb-8 opacity-80">{content.subtitle}</p>
-                     <p className="text-lg leading-relaxed mb-12 opacity-70">{content.desc}</p>
-                     <MagneticButton onClick={() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#3A3A3A] text-[#F8F3E6] px-10 py-4 uppercase tracking-widest text-xs hover:bg-[#7F6A47]">
-                        Konsultasiya
-                     </MagneticButton>
-                 </div>
-                 
-                 <div className="lg:w-1/2 grid grid-cols-2 gap-4">
-                     <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1000&auto=format&fit=crop" className="w-full h-64 object-cover rounded-tr-[50px] shadow-xl" alt="Eyebrow 1"/>
-                     <img src="https://images.unsplash.com/photo-1512413316925-fd52bd015e0a?q=80&w=1000&auto=format&fit=crop" className="w-full h-64 object-cover rounded-bl-[50px] shadow-xl mt-12" alt="Eyebrow 2"/>
-                 </div>
+                </div>
+            </div>
+            
+            <div className="container mx-auto px-6 py-24">
+                <div className="flex flex-col lg:flex-row items-center gap-16">
+                    <div className="lg:w-1/2">
+                        <p className="text-lg leading-relaxed mb-12 opacity-70">{content.desc}</p>
+                        <MagneticButton onClick={() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#3A3A3A] text-[#F8F3E6] px-10 py-4 uppercase tracking-widest text-xs hover:bg-[#7F6A47]">
+                            Konsultasiya
+                        </MagneticButton>
+                    </div>
+                    
+                    <div className="lg:w-1/2 grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1000&auto=format&fit=crop" className="w-full h-64 object-cover rounded-tr-[50px] shadow-xl" alt="Eyebrow 1"/>
+                        <img src="https://images.unsplash.com/photo-1512413316925-fd52bd015e0a?q=80&w=1000&auto=format&fit=crop" className="w-full h-64 object-cover rounded-bl-[50px] shadow-xl mt-12" alt="Eyebrow 2"/>
+                    </div>
+                </div>
             </div>
 
             <div className="bg-[#3A3A3A] text-[#F8F3E6] py-24">
