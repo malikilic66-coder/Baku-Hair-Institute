@@ -8,6 +8,7 @@ import { MenHairPage, MenBeardPage, LongFuePage, HairlineDesignPage, WomenHairPa
 import { SocialMediaDesigner } from './components/SocialMediaDesigner';
 import { CanvasDesigner } from './components/CanvasDesigner';
 import { BeforeAfterDesigner } from './components/BeforeAfterDesigner';
+import { UnifiedDesigner } from './components/UnifiedDesigner';
 
 // --- Custom Hooks ---
 
@@ -423,7 +424,7 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
 export default function App() {
   const [lang, setLang] = useState<'az' | 'ru'>('az');
   const [scrolled, setScrolled] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'men-hair' | 'men-beard' | 'long-fue' | 'hairline-design' | 'women-hair' | 'women-eyebrow' | 'anesthesia' | 'prp' | 'mesotherapy' | 'medical' | 'social-designer' | 'canvas-designer' | 'before-after'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'men-hair' | 'men-beard' | 'long-fue' | 'hairline-design' | 'women-hair' | 'women-eyebrow' | 'anesthesia' | 'prp' | 'mesotherapy' | 'medical' | 'social-designer' | 'canvas-designer' | 'before-after' | 'unified-designer'>('home');
   const [isNavigating, setIsNavigating] = useState(false); // Navigation state for Loader
   const sysConfig = useSecretAccess();
   const t = content[lang];
@@ -537,6 +538,7 @@ export default function App() {
           {currentView === 'social-designer' && <SocialMediaDesigner />}
           {currentView === 'canvas-designer' && <CanvasDesigner />}
           {currentView === 'before-after' && <BeforeAfterDesigner />}
+          {currentView === 'unified-designer' && <UnifiedDesigner />}
       </main>
 
       {/* --- CONTACT / FORM (Shared across all pages) --- */}
@@ -633,8 +635,17 @@ export default function App() {
                <Facebook className="hover:text-[#7F6A47] transition cursor-pointer hover:scale-110"/>
             </div>
             
-            {/* Social Media Designer Link */}
+            {/* Social Media Designer Links */}
             <div className="flex flex-col gap-3 mb-8">
+              <button
+                onClick={() => handleNavigation('unified-designer')}
+                className="inline-flex items-center gap-2 text-base text-[#7F6A47] hover:text-[#F8F3E6] transition-colors uppercase tracking-wider interactive font-bold"
+              >
+                <Sparkles size={18} />
+                🚀 YENİ: Unified Workstation (Hibrit Dizayn Platforması)
+                <Sparkles size={18} />
+              </button>
+
               <button
                 onClick={() => handleNavigation('social-designer')}
                 className="inline-flex items-center gap-2 text-sm text-[#F8F3E6]/60 hover:text-[#7F6A47] transition-colors uppercase tracking-wider interactive"
