@@ -10,10 +10,26 @@ export const content: ContentMap = {
       other: "Digər Prosedurlar",
       about: "Haqqımızda",
       contact: "Əlaqə",
-      men_items: ["Saç Əkimi", "Sakal Əkimi"],
-      women_items: ["Saç Əkimi", "Kaş Əkimi"],
-      other_items: ["PRP", "Mezoterapiya", "Medikal Tedavi"],
-      about_items: ["İsmimiz", "Vizyonumuz", "Misyonumuz", "Klinik", "Doktorlar"],
+      men_items: [
+        { label: "Saç Əkimi", view: "men-hair" },
+        { label: "Sakal Əkimi", view: "men-beard" }
+      ],
+      women_items: [
+        { label: "Saç Əkimi", view: "women-hair" },
+        { label: "Kaş Əkimi", view: "women-eyebrow" }
+      ],
+      other_items: [
+        { label: "PRP", view: "prp" },
+        { label: "Mezoterapiya", view: "mesotherapy" },
+        { label: "Medikal Tedavi", view: "medical" }
+      ],
+      about_items: [
+        { label: "İsmimiz", href: "#about" },
+        { label: "Vizyonumuz", href: "#vision" },
+        { label: "Misyonumuz", href: "#mission" },
+        { label: "Klinik", href: "#clinic" },
+        { label: "Doktorlar", href: "#doctors" }
+      ],
       contact_items: ["Konsültasyon Formu", "Xəritə", "Ünvan"]
     },
     hero: {

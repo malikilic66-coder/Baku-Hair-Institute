@@ -83,15 +83,15 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
                  {t.hero.desc}
                </p>
                
-               <div className="flex flex-col gap-4 sm:gap-6 justify-center px-4">
+               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
                   <MagneticButton 
                     onClick={() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })} 
-                    className={`px-6 sm:px-12 py-4 sm:py-5 bg-[#7F6A47] text-[#F8F3E6] font-bold uppercase tracking-widest text-xs sm:text-sm shadow-2xl hover:bg-[#F8F3E6] hover:text-[#3A3A3A] transition-all ${sysConfig ? 'bg-green-600 shadow-green-500/50 hover:bg-black hover:text-green-500 border border-green-500' : ''}`}
+                    className={`px-8 sm:px-12 py-4 sm:py-5 bg-[#7F6A47] text-[#F8F3E6] font-bold uppercase tracking-widest text-xs sm:text-sm shadow-2xl hover:bg-[#F8F3E6] hover:text-[#3A3A3A] transition-all ${sysConfig ? 'bg-green-600 shadow-green-500/50 hover:bg-black hover:text-green-500 border border-green-500' : ''}`}
                   >
                     {t.hero.btn_consult}
                   </MagneticButton>
                   <MagneticButton 
-                    className={`px-6 sm:px-12 py-4 sm:py-5 border-2 border-[#F8F3E6] text-[#F8F3E6] font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all flex items-center justify-center gap-3`}
+                    className={`px-8 sm:px-12 py-4 sm:py-5 border-2 border-[#F8F3E6] text-[#F8F3E6] font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all flex items-center justify-center gap-3`}
                   >
                      <Phone size={18} className="sm:w-5 sm:h-5" />
                     {t.hero.btn_whatsapp}
