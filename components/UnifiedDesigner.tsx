@@ -1369,32 +1369,40 @@ export const UnifiedDesigner = () => {
     try {
       const html2canvas = (await import('html2canvas')).default;
       
-      // Calculate proper scale to get exact 1080×1080 or 1080×1920
+      // Target dimensions (actual output size)
       const targetWidth = 1080;
       const targetHeight = format === '1:1' ? 1080 : 1920;
+      
+      // Current canvas display dimensions
       const currentWidth = canvasDims.displayWidth;
       const currentHeight = canvasDims.displayHeight;
       
-      // Scale factor to convert display size to actual size
-      const scaleFactor = targetWidth / currentWidth;
-      
-      const canvas = await html2canvas(canvasRef.current, {
-        scale: scaleFactor,
+      // Capture canvas at display size with 1x scale first
+      const capturedCanvas = await html2canvas(canvasRef.current, {
+        scale: 1,
         backgroundColor: null,
         logging: false,
         useCORS: true,
         allowTaint: true,
         width: currentWidth,
-        height: currentHeight,
-        windowWidth: currentWidth,
-        windowHeight: currentHeight,
-        imageTimeout: 0,
-        removeContainer: true
+        height: currentHeight
       });
 
+      // Create a new canvas with target dimensions
+      const finalCanvas = document.createElement('canvas');
+      finalCanvas.width = targetWidth;
+      finalCanvas.height = targetHeight;
+      
+      const ctx = finalCanvas.getContext('2d');
+      if (!ctx) throw new Error('Canvas context error');
+      
+      // Draw captured image onto final canvas (this maintains aspect ratio)
+      ctx.drawImage(capturedCanvas, 0, 0, targetWidth, targetHeight);
+
+      // Download
       const link = document.createElement('a');
       link.download = `bhi-${selectedTemplate?.id || 'design'}-${format}-${Date.now()}.png`;
-      link.href = canvas.toDataURL('image/png', 1.0);
+      link.href = finalCanvas.toDataURL('image/png', 1.0);
       link.click();
     } catch (error) {
       console.error('Download error:', error);
