@@ -1376,21 +1376,24 @@ export const UnifiedDesigner = () => {
       const currentHeight = canvasDims.displayHeight;
       
       // Scale factor to convert display size to actual size
-      const scaleX = targetWidth / currentWidth;
-      const scaleY = targetHeight / currentHeight;
+      const scaleFactor = targetWidth / currentWidth;
       
       const canvas = await html2canvas(canvasRef.current, {
-        scale: scaleX, // Use calculated scale for exact dimensions
+        scale: scaleFactor,
         backgroundColor: null,
         logging: false,
         useCORS: true,
         allowTaint: true,
         width: currentWidth,
-        height: currentHeight
+        height: currentHeight,
+        windowWidth: currentWidth,
+        windowHeight: currentHeight,
+        imageTimeout: 0,
+        removeContainer: true
       });
 
       const link = document.createElement('a');
-      link.download = `bhi-${selectedTemplate?.id || 'design'}-${Date.now()}.png`;
+      link.download = `bhi-${selectedTemplate?.id || 'design'}-${format}-${Date.now()}.png`;
       link.href = canvas.toDataURL('image/png', 1.0);
       link.click();
     } catch (error) {
@@ -1682,10 +1685,14 @@ export const UnifiedDesigner = () => {
                               <img
                                 src={layer.src}
                                 alt=""
+                                crossOrigin="anonymous"
                                 className="w-full h-full"
                                 style={{
                                   objectFit: layer.style.objectFit || 'cover',
-                                  objectPosition: 'center'
+                                  objectPosition: layer.style.objectPosition || 'center',
+                                  width: '100%',
+                                  height: '100%',
+                                  display: 'block'
                                 }}
                               />
                             ) : (
