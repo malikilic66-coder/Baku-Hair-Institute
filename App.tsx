@@ -539,7 +539,7 @@ export default function App() {
       )}
 
       {/* --- NAVBAR --- */}
-      <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 ${theme.navBg}`}>
+      <nav className={`fixed top-0 w-full z-[140] transition-all duration-500 ${theme.navBg}`}>
         <div className="container mx-auto px-6 h-full">
           <div className="relative flex items-center justify-between h-full">
             
@@ -570,23 +570,23 @@ export default function App() {
             </div>
 
             {/* Mobile Toggle */}
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`lg:hidden interactive ${theme.navText} z-[101] relative`} aria-label="Menyunu aç">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`lg:hidden interactive ${theme.navText} z-[141] relative`} aria-label="Menyunu aç">
               {mobileMenuOpen ? <span className="text-2xl">✕</span> : <Menu/>}
             </button>
           </div>
 
-          {/* Mobile Menu Slide-in Drawer */}
-          <>
-            {/* Backdrop Overlay */}
-            <div 
-              className={`lg:hidden fixed inset-0 top-[88px] bg-black/60 backdrop-blur-sm z-[90] transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-              onClick={() => setMobileMenuOpen(false)}
-            />
+               {/* Mobile Menu Slide-in Drawer */}
+               <>
+                  {/* Backdrop Overlay */}
+                  <div 
+                     className={`lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                     onClick={() => setMobileMenuOpen(false)}
+                  />
             
-            {/* Drawer from Right */}
-            <div className={`lg:hidden fixed top-[88px] right-0 bottom-0 w-[85%] max-w-sm bg-[#2A2A2A] shadow-2xl z-[95] overflow-y-auto transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                  {/* Drawer from Right */}
+                  <div className={`lg:hidden fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-[#2A2A2A] shadow-2xl z-[160] overflow-y-auto transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
               {/* Header */}
-              <div className="bg-[#2A2A2A] border-b border-[#F8F3E6]/10 px-6 py-6 flex items-center justify-between">
+                     <div className="bg-[#2A2A2A] border-b border-[#F8F3E6]/10 px-6 py-6 flex items-center justify-between">
                 <h2 className="text-[#F8F3E6] text-xl font-serif font-bold">Menu</h2>
                 <button 
                   onClick={() => setMobileMenuOpen(false)} 
