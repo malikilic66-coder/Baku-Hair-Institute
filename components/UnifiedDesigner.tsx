@@ -1603,6 +1603,16 @@ export const UnifiedDesigner = () => {
     updateLayerStyle(layer.id, { bgScale: next });
   };
 
+  // Text wheel font-size adjust
+  const handleTextWheel = (e: React.WheelEvent<HTMLDivElement>, layer: EditableLayer) => {
+    if (layer.locked) return;
+    e.preventDefault();
+    const current = typeof layer.style?.fontSize === 'number' ? layer.style.fontSize : 48;
+    const delta = e.deltaY > 0 ? -2 : 2;
+    const next = clamp(current + delta, 12, 220);
+    updateLayerStyle(layer.id, { fontSize: next });
+  };
+
   // Text drag handlers (move)
   const beginTextDrag = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>, layer: EditableLayer) => {
     if (layer.locked) return;
@@ -2039,6 +2049,7 @@ export const UnifiedDesigner = () => {
                             onClick={() => !layer.locked && setSelectedLayerId(layer.id)}
                             onMouseDown={(e) => !layer.locked && beginTextDrag(e, layer)}
                             onTouchStart={(e) => !layer.locked && beginTextDrag(e, layer)}
+                            onWheel={(e) => !layer.locked && handleTextWheel(e, layer)}
                             style={{
                               left: `${(layer.position.x / 1080) * 100}%`,
                               top: `${(layer.position.y / baseHeight) * 100}%`,
@@ -2053,7 +2064,8 @@ export const UnifiedDesigner = () => {
                               lineHeight: layer.style.lineHeight,
                               textShadow: layer.style.textShadow,
                               letterSpacing: layer.style.letterSpacing,
-                              whiteSpace: 'pre-line'
+                              whiteSpace: 'pre-line',
+                              userSelect: 'none'
                             }}
                           >
                             {layer.content}
