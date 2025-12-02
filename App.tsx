@@ -61,7 +61,7 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
                   height="1200"
                />
           {/* Gradient Overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40"></div>
         </div>
 
         {/* Centered Content */}
@@ -69,17 +69,17 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
           <div className="text-center max-w-5xl animate-fade-in-up">
                <div className="flex items-center justify-center gap-4 mb-6">
                  <div className={`h-[1px] w-20 ${sysConfig ? 'bg-green-500' : 'bg-[#7F6A47]'}`}></div>
-                 <span className={`text-sm font-bold uppercase tracking-[0.4em] ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>
+                 <span className={`text-sm font-bold uppercase tracking-[0.4em] ${sysConfig ? 'text-green-500' : 'text-[#F8F3E6]'} px-4 py-2 bg-[#7F6A47]/20 backdrop-blur-sm rounded shadow-2xl`} style={{textShadow: '0 2px 10px rgba(0,0,0,0.8), 0 0 20px rgba(127,106,71,0.6)'}}>
                    {t.hero.doctor_exp || t.hero.exp}
                  </span>
                  <div className={`h-[1px] w-20 ${sysConfig ? 'bg-green-500' : 'bg-[#7F6A47]'}`}></div>
                </div>
                
-               <h1 className={`text-6xl lg:text-9xl font-serif text-[#F8F3E6] mb-6 leading-tight drop-shadow-2xl`}>
-                 {t.hero.title} <span className={`italic ${sysConfig ? 'text-green-500 glitch' : 'text-[#7F6A47]'}`}>{t.hero.subtitle}</span>
+               <h1 className={`text-6xl lg:text-9xl font-serif text-[#F8F3E6] mb-6 leading-tight`} style={{textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.8)'}}>
+                 {t.hero.title} <span className={`italic ${sysConfig ? 'text-green-500 glitch' : 'text-[#F8F3E6]'}`} style={{textShadow: '0 4px 20px rgba(127,106,71,0.8), 0 2px 10px rgba(0,0,0,0.9)'}}>{t.hero.subtitle}</span>
                </h1>
                
-               <p className="text-[#F8F3E6] text-xl lg:text-2xl font-light max-w-3xl mx-auto mb-12 leading-relaxed">
+               <p className="text-[#F8F3E6] text-xl lg:text-2xl font-light max-w-3xl mx-auto mb-12 leading-relaxed" style={{textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 1px 6px rgba(0,0,0,0.7)'}}>
                  {t.hero.desc}
                </p>
                
