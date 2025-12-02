@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Phone, MapPin, Instagram, Facebook, Menu, Shield, Award, ArrowRight, CalendarCheck, Upload, Sparkles } from 'lucide-react';
+import { Phone, MapPin, Instagram, Facebook, Menu, Shield, Award, ArrowRight, CalendarCheck, Upload, Sparkles, Wand2 } from 'lucide-react';
 import { content } from './constants';
 import { ScrollProgress, CustomCursor, MagneticButton, TiltCard, Preloader, PageTransitionLoader, Dropdown, Accordion, DoctorCard, WhyUsCard, AzePatternBackground } from './components/ui';
+import HairAnalysisWidget from './components/HairAnalysisWidget';
 const Pages = {
    MenHairPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.MenHairPage }))),
    MenBeardPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.MenBeardPage }))),
@@ -452,6 +453,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false); // Navigation state for Loader
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [analysisWidgetOpen, setAnalysisWidgetOpen] = useState(false);
   const sysConfig = useSecretAccess();
   const t = content[lang];
    const navigate = useNavigate();
@@ -666,6 +668,39 @@ export default function App() {
                Menu
             </button>
          </div>
+
+         {/* Saç Analizi Sihirbazı FAB (Sol Alt - Sadece Desktop) */}
+         <div className="hidden lg:block fixed bottom-8 left-8 z-[155]">
+            <button 
+               onClick={() => setAnalysisWidgetOpen(true)}
+               className="group flex items-center gap-3 px-6 py-4 rounded-full bg-gradient-to-r from-[#7F6A47] to-[#6b583a] text-[#F8F3E6] shadow-2xl font-bold uppercase tracking-wider hover:shadow-[#7F6A47]/40 transition-all hover:scale-105"
+            >
+               <Wand2 size={20} className="group-hover:rotate-12 transition-transform" />
+               <span className="text-sm">
+                  {lang === 'az' ? 'Saç Analizi' : 'Анализ Волос'}
+               </span>
+            </button>
+         </div>
+
+         {/* Saç Analizi Widget Popup */}
+         {analysisWidgetOpen && (
+            <>
+               {/* Backdrop */}
+               <div 
+                  className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] transition-opacity duration-300"
+                  onClick={() => setAnalysisWidgetOpen(false)}
+               />
+               {/* Widget Centered */}
+               <div className="fixed inset-0 z-[201] flex items-center justify-center p-4 pointer-events-none">
+                  <div className="pointer-events-auto animate-fade-in-up">
+                     <HairAnalysisWidget 
+                        lang={lang} 
+                        onClose={() => setAnalysisWidgetOpen(false)} 
+                     />
+                  </div>
+               </div>
+            </>
+         )}
 
          {/* --- DYNAMIC CONTENT (Routes) --- */}
          <main className="transition-opacity duration-500 ease-in-out">
