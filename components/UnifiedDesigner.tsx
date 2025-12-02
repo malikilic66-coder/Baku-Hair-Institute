@@ -981,6 +981,17 @@ export const UnifiedDesigner = () => {
     setLayers(JSON.parse(JSON.stringify(template.layers))); // Deep clone
   };
 
+  // Handle format change - clear selection if template format doesn't match
+  const handleFormatChange = (newFormat: '1:1' | '9:16') => {
+    setFormat(newFormat);
+    // If current template doesn't match new format, clear selection
+    if (selectedTemplate && selectedTemplate.format !== newFormat) {
+      setSelectedTemplate(null);
+      setLayers([]);
+      setSelectedLayerId(null);
+    }
+  };
+
   // Get canvas dimensions based on format
   const getCanvasDimensions = () => {
     if (format === '1:1') {
@@ -1150,8 +1161,17 @@ export const UnifiedDesigner = () => {
               <h3 className="text-lg font-serif text-[#3A3A3A] mb-3 font-bold">
                 Şablonlar ({filteredTemplates.length})
               </h3>
-              <div className="space-y-2 max-h-[600px] overflow-y-auto">
-                {filteredTemplates.map(template => (
+              {filteredTemplates.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  <p className="text-sm">
+                    {format === '9:16' 
+                      ? '9:16 formatında şablon yoxdur. 1:1 formatına keçin.'
+                      : 'Bu kateqoriyada şablon tapılmadı.'
+                    }
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-2 max-h-[600px] overflow-y-auto">{filteredTemplates.map(template => (
                   <button
                     key={template.id}
                     onClick={() => loadTemplate(template)}
@@ -1174,6 +1194,7 @@ export const UnifiedDesigner = () => {
                   </button>
                 ))}
               </div>
+              )}
             </div>
           </div>
 
@@ -1189,7 +1210,7 @@ export const UnifiedDesigner = () => {
                   {/* Format Selector */}
                   <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-lg">
                     <button
-                      onClick={() => setFormat('1:1')}
+                      onClick={() => handleFormatChange('1:1')}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
                         format === '1:1'
                           ? 'bg-[#7F6A47] text-white shadow-sm'
@@ -1200,7 +1221,7 @@ export const UnifiedDesigner = () => {
                       <span>1:1</span>
                     </button>
                     <button
-                      onClick={() => setFormat('9:16')}
+                      onClick={() => handleFormatChange('9:16')}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
                         format === '9:16'
                           ? 'bg-[#7F6A47] text-white shadow-sm'
@@ -1350,7 +1371,17 @@ export const UnifiedDesigner = () => {
                 ) : (
                   <div className="text-center text-gray-500 py-20">
                     <Grid className="w-20 h-20 mx-auto mb-4 opacity-30" />
-                    <p className="text-lg">Başlamaq üçün sol tərəfdən şablon seçin</p>
+                    <p className="text-lg font-medium mb-2">
+                      {format === '1:1' ? 'Kare Format (1080×1080)' : 'Dikey Format (1080×1920)'}
+                    </p>
+                    <p className="text-sm">
+                      Sol tərəfdən {format === '9:16' ? 'story' : 'post'} şablonu seçin
+                    </p>
+                    {filteredTemplates.length === 0 && (
+                      <p className="text-xs text-[#7F6A47] mt-4">
+                        ⚠️ Bu formatda şablon yoxdur. Format dəyişdirin.
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
