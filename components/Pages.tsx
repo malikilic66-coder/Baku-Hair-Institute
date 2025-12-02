@@ -62,11 +62,18 @@ export const MenHairPage: React.FC<MenHairPageProps> = ({ content, sysConfig }) 
     <div className={`min-h-screen ${sysConfig ? 'bg-black text-green-500' : 'bg-[#F8F3E6] text-[#3A3A3A]'}`}>
       {/* Mini Hero */}
       <div className="relative h-[60vh] bg-[#3A3A3A] overflow-hidden flex items-center justify-center">
-         <img 
-            src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop" 
-            className="absolute inset-0 w-full h-full object-cover opacity-40"
-            alt="Hair Transplant"
-         />
+            <img 
+                src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1200&auto=format&fit=crop&fm=webp" 
+                srcSet="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=600&auto=format&fit=crop&fm=webp 600w, https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop&fm=webp 1000w, https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1600&auto=format&fit=crop&fm=webp 1600w" 
+                sizes="(max-width: 768px) 100vw, 100vw"
+                width="1600"
+                height="900"
+                loading="lazy"
+                decoding="async"
+                fetchPriority="low"
+                className="absolute inset-0 w-full h-full object-cover opacity-40"
+                alt="Hair Transplant"
+            />
          <div className="relative z-10 text-center px-4 animate-fade-in-up">
             <h1 className="text-5xl md:text-7xl font-serif text-[#F8F3E6] mb-4">{content.title}</h1>
             <p className="text-[#F8F3E6]/80 text-lg md:text-xl font-light max-w-2xl mx-auto">{content.subtitle}</p>
@@ -134,7 +141,13 @@ export const MenBeardPage: React.FC<MenBeardPageProps> = ({ content, sysConfig }
             </div>
             <div className="w-full md:w-1/2 relative overflow-hidden">
                 <img 
-                    src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=1000&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=1200&auto=format&fit=crop&fm=webp" 
+                    srcSet="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=600&auto=format&fit=crop&fm=webp 600w, https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=1000&auto=format&fit=crop&fm=webp 1000w, https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=1600&auto=format&fit=crop&fm=webp 1600w"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                     alt="Beard Transplant"
                 />
@@ -249,11 +262,17 @@ export const HairlineDesignPage: React.FC<HairlinePageProps> = ({ content, sysCo
                  </div>
                  
                  <div className="order-1 lg:order-2 relative">
-                     <img 
-                        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1000&auto=format&fit=crop" 
-                        className="w-full h-[600px] object-cover grayscale opacity-60"
-                        alt="Face Portrait"
-                     />
+                            <img 
+                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop&fm=webp" 
+                                srcSet="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop&fm=webp 600w, https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1000&auto=format&fit=crop&fm=webp 1000w, https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop&fm=webp 1600w"
+                                sizes="(max-width: 1024px) 100vw, 50vw"
+                                width="1200"
+                                height="600"
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full h-[600px] object-cover grayscale opacity-60"
+                                alt="Face Portrait"
+                            />
                      <div className="absolute inset-0 border-[20px] border-[#7F6A47]/20"></div>
                      {/* Overlay Guidelines */}
                      <div className="absolute top-1/3 left-0 w-full h-[1px] bg-[#7F6A47] opacity-30"></div>
@@ -291,7 +310,7 @@ export const WomenHairPage: React.FC<WomenHairPageProps> = ({ content, sysConfig
             {/* Dark Hero with Light Overlay */}
             <div className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-[#3A3A3A]">
                 <div className="absolute inset-0 z-0">
-                    <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?q=80&w=1000" className="w-full h-full object-cover opacity-40" alt="Woman Hair"/>
+                    <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?q=80&w=1200&auto=format&fit=crop&fm=webp" srcSet="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?q=80&w=600&auto=format&fit=crop&fm=webp 600w, https://images.unsplash.com/photo-1596516109370-29001ec8ec36?q=80&w=1000&auto=format&fit=crop&fm=webp 1000w, https://images.unsplash.com/photo-1596516109370-29001ec8ec36?q=80&w=1600&auto=format&fit=crop&fm=webp 1600w" sizes="(max-width: 768px) 100vw, 100vw" width="1600" height="900" loading="lazy" decoding="async" className="w-full h-full object-cover opacity-40" alt="Woman Hair"/>
                     <div className="absolute inset-0 bg-gradient-to-b from-[#3A3A3A]/80 to-[#3A3A3A]/60"></div>
                 </div>
                 <div className="relative z-10 text-center max-w-3xl px-6 animate-fade-in-up">
@@ -342,7 +361,7 @@ export const EyebrowPage: React.FC<EyebrowPageProps> = ({ content, sysConfig }) 
             {/* Dark Hero Section */}
             <div className="relative h-[60vh] bg-[#3A3A3A] overflow-hidden flex items-center">
                 <div className="absolute inset-0 opacity-30">
-                    <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover" alt="Eyebrow"/>
+                    <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1200&auto=format&fit=crop&fm=webp" srcSet="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=600&auto=format&fit=crop&fm=webp 600w, https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1000&auto=format&fit=crop&fm=webp 1000w, https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1600&auto=format&fit=crop&fm=webp 1600w" sizes="(max-width: 768px) 100vw, 100vw" width="1600" height="900" loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Eyebrow"/>
                 </div>
                 <div className="container mx-auto px-6 relative z-10">
                      <div className="max-w-3xl">
@@ -366,8 +385,8 @@ export const EyebrowPage: React.FC<EyebrowPageProps> = ({ content, sysConfig }) 
                     </div>
                     
                     <div className="lg:w-1/2 grid grid-cols-2 gap-4">
-                        <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1000&auto=format&fit=crop" className="w-full h-64 object-cover rounded-tr-[50px] shadow-xl" alt="Eyebrow 1"/>
-                        <img src="https://images.unsplash.com/photo-1512413316925-fd52bd015e0a?q=80&w=1000&auto=format&fit=crop" className="w-full h-64 object-cover rounded-bl-[50px] shadow-xl mt-12" alt="Eyebrow 2"/>
+                        <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=800&auto=format&fit=crop&fm=webp" srcSet="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=400&auto=format&fit=crop&fm=webp 400w, https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=800&auto=format&fit=crop&fm=webp 800w" sizes="(max-width: 768px) 100vw, 50vw" width="800" height="256" loading="lazy" decoding="async" className="w-full h-64 object-cover rounded-tr-[50px] shadow-xl" alt="Eyebrow 1"/>
+                        <img src="https://images.unsplash.com/photo-1512413316925-fd52bd015e0a?q=80&w=800&auto=format&fit=crop&fm=webp" srcSet="https://images.unsplash.com/photo-1512413316925-fd52bd015e0a?q=80&w=400&auto=format&fit=crop&fm=webp 400w, https://images.unsplash.com/photo-1512413316925-fd52bd015e0a?q=80&w=800&auto=format&fit=crop&fm=webp 800w" sizes="(max-width: 768px) 100vw, 50vw" width="800" height="256" loading="lazy" decoding="async" className="w-full h-64 object-cover rounded-bl-[50px] shadow-xl mt-12" alt="Eyebrow 2"/>
                     </div>
                 </div>
             </div>
@@ -432,7 +451,7 @@ export const PrpPage: React.FC<PrpPageProps> = ({ content, sysConfig }) => {
             {/* Hero */}
             <div className="relative h-[60vh] bg-[#3A3A3A] text-[#F8F3E6] flex items-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent z-10"></div>
-                <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1000&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale sepia" alt="Blood Cells"/>
+                <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop&fm=webp" srcSet="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=600&auto=format&fit=crop&fm=webp 600w, https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1000&auto=format&fit=crop&fm=webp 1000w, https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1600&auto=format&fit=crop&fm=webp 1600w" sizes="(max-width: 768px) 100vw, 100vw" width="1600" height="900" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale sepia" alt="Blood Cells"/>
                 <div className="container mx-auto px-6 relative z-20">
                      <span className="text-[#7F6A47] font-bold uppercase tracking-widest text-xs mb-4 block">Regenerative Medicine</span>
                      <h1 className="text-5xl lg:text-7xl font-serif mb-6">{content.title}</h1>

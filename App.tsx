@@ -52,7 +52,7 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
         {/* Full Width Banner Image */}
         <div className="absolute inset-0 z-0">
                 <img 
-                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2000&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2000&auto=format&fit=crop&fm=webp" 
                   className={`w-full h-full object-cover ${sysConfig ? 'grayscale invert opacity-30' : ''}`} 
                   alt="Baku Hair Institute"
                   decoding="async"
@@ -253,7 +253,7 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
                      <div className="absolute -inset-4 border-2 border-[#7F6A47] hidden lg:block transition-all duration-500 group-hover:inset-0"></div>
                      <div className="relative z-10 w-full h-[500px] overflow-hidden shadow-2xl">
                         <img 
-                           src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1000" 
+                           src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1000&fm=webp" 
                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700" 
                            alt="Happy Couple"
                         />
@@ -399,11 +399,11 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
                         <div key={idx} className={`overflow-hidden shadow-xl border border-[#7F6A47]/20 hover:shadow-2xl transition-all ${sysConfig ? 'border-green-900/30' : ''}`}>
                            <div className="grid grid-cols-2 h-64">
                               <div className="relative">
-                                 <img src={item.before} className="w-full h-full object-cover grayscale" alt="Before" />
+                                 <img src={`${item.before}&fm=webp`} className="w-full h-full object-cover grayscale" alt="Before" />
                                  <div className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 uppercase">Öncə</div>
                               </div>
                               <div className="relative">
-                                 <img src={item.after} className="w-full h-full object-cover" alt="After" />
+                                 <img src={`${item.after}&fm=webp`} className="w-full h-full object-cover" alt="After" />
                                  <div className="absolute top-2 right-2 bg-[#7F6A47] text-white text-xs px-2 py-1 uppercase">Sonra</div>
                               </div>
                            </div>
@@ -676,7 +676,7 @@ export default function App() {
       {/* --- FOOTER --- */}
       <footer className="bg-[#3A3A3A] text-[#F8F3E6] py-16 border-t border-[#F8F3E6]/10">
          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-6xl font-serif font-bold mb-10 tracking-widest text-[#7F6A47]">BHI</h2>
+            <h2 className="text-6xl font-serif font-bold mb-10 tracking-widest text-[#F8F3E6]">BHI</h2>
             <div className="flex justify-center gap-12 opacity-60 mb-10">
                <Instagram className="hover:text-[#7F6A47] transition cursor-pointer hover:scale-110"/>
                <Facebook className="hover:text-[#7F6A47] transition cursor-pointer hover:scale-110"/>
@@ -686,7 +686,7 @@ export default function App() {
             <div className="flex flex-col gap-3 mb-8">
               <button
                 onClick={() => handleNavigation('unified-designer')}
-                className="inline-flex items-center gap-2 text-base text-[#7F6A47] hover:text-[#F8F3E6] transition-colors uppercase tracking-wider interactive font-bold"
+                className="inline-flex items-center gap-2 text-base text-[#F8F3E6] hover:text-[#7F6A47] transition-colors uppercase tracking-wider interactive font-bold"
               >
                 <Sparkles size={18} />
                 🚀 YENİ: Unified Workstation (Hibrit Dizayn Platforması)
