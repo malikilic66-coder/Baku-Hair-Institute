@@ -587,7 +587,7 @@ export default function App() {
                onClick={() => setMobileMenuOpen(false)}
             />
             {/* Bottom Sheet Panel */}
-            <div className={`lg:hidden fixed left-0 right-0 bottom-0 z-[160] transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-y-0' : 'translate-y-full'}`}>
+            <div className={`lg:hidden fixed left-0 right-0 bottom-24 z-[160] transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-y-0' : 'translate-y-full'}`}>
                <div className="mx-auto w-full max-w-md rounded-t-xl bg-[#1a1a1a]/98 shadow-2xl border border-[#F8F3E6]/10">
                   {/* Grabber */}
                   <div className="flex justify-center py-3">
