@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Phone, MapPin, Instagram, Facebook, Menu, Shield, Award, ArrowRight, CalendarCheck, Upload, Sparkles } from 'lucide-react';
 import { content } from './constants';
 import { ScrollProgress, CustomCursor, MagneticButton, TiltCard, Preloader, PageTransitionLoader, Dropdown, Accordion, DoctorCard, WhyUsCard, AzePatternBackground } from './components/ui';
@@ -424,10 +425,11 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
 export default function App() {
   const [lang, setLang] = useState<'az' | 'ru'>('az');
   const [scrolled, setScrolled] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'men-hair' | 'men-beard' | 'long-fue' | 'hairline-design' | 'women-hair' | 'women-eyebrow' | 'anesthesia' | 'prp' | 'mesotherapy' | 'medical' | 'social-designer' | 'canvas-designer' | 'before-after' | 'unified-designer'>('home');
   const [isNavigating, setIsNavigating] = useState(false); // Navigation state for Loader
   const sysConfig = useSecretAccess();
   const t = content[lang];
+   const navigate = useNavigate();
+   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -435,27 +437,43 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // --- Handle Navigation with Transition Loader ---
-  const handleNavigation = (view: typeof currentView) => {
-    if (view === currentView) return;
-    
-    setIsNavigating(true); // Trigger entry animation
+   // --- Handle Navigation with Transition Loader ---
+   const handleNavigation = (view:
+      | 'home'
+      | 'men-hair'
+      | 'men-beard'
+      | 'long-fue'
+      | 'hairline-design'
+      | 'women-hair'
+      | 'women-eyebrow'
+      | 'anesthesia'
+      | 'prp'
+      | 'mesotherapy'
+      | 'medical'
+      | 'social-designer'
+      | 'canvas-designer'
+      | 'before-after'
+      | 'unified-designer') => {
+      const targetPath = view === 'home' ? '/' : `/${view}`;
+      if (location.pathname === targetPath) return;
 
-    // Wait for the loader to cover the screen (approx 700ms based on CSS duration)
-    setTimeout(() => {
-        setCurrentView(view);
-        window.scrollTo(0, 0);
-        
-        // Small buffer to ensure rendering is ready before revealing
-        setTimeout(() => {
-            setIsNavigating(false); // Trigger exit animation
-        }, 100);
-    }, 800);
-  };
+      setIsNavigating(true);
+      setTimeout(() => {
+         navigate(targetPath);
+         setTimeout(() => setIsNavigating(false), 100);
+      }, 800);
+   };
+
+   // Scroll to top on route change
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, [location.pathname]);
 
   // Identify pages with LIGHT background heroes (where nav text needs to be DARK initially)
-  const lightHeroPages = ['women-hair', 'women-eyebrow', 'hairline-design', 'mesotherapy', 'medical', 'eyebrow', 'prp'];
-  const isLightHero = lightHeroPages.includes(currentView);
+   // If needed, can derive current view from path
+   // const currentView = (location.pathname.replace(/^\//, '') || 'home');
+   // const lightHeroPages = ['women-hair', 'women-eyebrow', 'hairline-design', 'mesotherapy', 'medical', 'eyebrow', 'prp'];
+   // const isLightHero = lightHeroPages.includes(currentView);
 
   const theme = {
     bg: sysConfig ? 'bg-black' : 'bg-[#F8F3E6]', // Ivory Background
@@ -522,24 +540,28 @@ export default function App() {
         </div>
       </nav>
 
-      {/* --- DYNAMIC CONTENT --- */}
-      <main className="transition-opacity duration-500 ease-in-out">
-          {currentView === 'home' && <HomeView t={t} theme={theme} sysConfig={sysConfig} onNavigate={handleNavigation} />}
-          {currentView === 'men-hair' && <MenHairPage content={t.men_hair_page} sysConfig={sysConfig} />}
-          {currentView === 'men-beard' && <MenBeardPage content={t.men_beard_page} sysConfig={sysConfig} />}
-          {currentView === 'long-fue' && <LongFuePage content={t.long_fue_page} sysConfig={sysConfig} />}
-          {currentView === 'hairline-design' && <HairlineDesignPage content={t.hairline_page} sysConfig={sysConfig} />}
-          {currentView === 'women-hair' && <WomenHairPage content={t.women_hair_page} sysConfig={sysConfig} />}
-          {currentView === 'women-eyebrow' && <EyebrowPage content={t.eyebrow_page} sysConfig={sysConfig} />}
-          {currentView === 'anesthesia' && <AnesthesiaPage content={t.anesthesia_page} sysConfig={sysConfig} />}
-          {currentView === 'prp' && <PrpPage content={t.prp_page} sysConfig={sysConfig} />}
-          {currentView === 'mesotherapy' && <MesotherapyPage content={t.meso_page} sysConfig={sysConfig} />}
-          {currentView === 'medical' && <MedicalPage content={t.medical_page} sysConfig={sysConfig} />}
-          {currentView === 'social-designer' && <SocialMediaDesigner />}
-          {currentView === 'canvas-designer' && <CanvasDesigner />}
-          {currentView === 'before-after' && <BeforeAfterDesigner />}
-          {currentView === 'unified-designer' && <UnifiedDesigner />}
-      </main>
+         {/* --- DYNAMIC CONTENT (Routes) --- */}
+         <main className="transition-opacity duration-500 ease-in-out">
+            <Routes>
+               <Route path="/" element={<HomeView t={t} theme={theme} sysConfig={sysConfig} onNavigate={handleNavigation} />} />
+               <Route path="/men-hair" element={<MenHairPage content={t.men_hair_page} sysConfig={sysConfig} />} />
+               <Route path="/men-beard" element={<MenBeardPage content={t.men_beard_page} sysConfig={sysConfig} />} />
+               <Route path="/long-fue" element={<LongFuePage content={t.long_fue_page} sysConfig={sysConfig} />} />
+               <Route path="/hairline-design" element={<HairlineDesignPage content={t.hairline_page} sysConfig={sysConfig} />} />
+               <Route path="/women-hair" element={<WomenHairPage content={t.women_hair_page} sysConfig={sysConfig} />} />
+               <Route path="/women-eyebrow" element={<EyebrowPage content={t.eyebrow_page} sysConfig={sysConfig} />} />
+               <Route path="/anesthesia" element={<AnesthesiaPage content={t.anesthesia_page} sysConfig={sysConfig} />} />
+               <Route path="/prp" element={<PrpPage content={t.prp_page} sysConfig={sysConfig} />} />
+               <Route path="/mesotherapy" element={<MesotherapyPage content={t.meso_page} sysConfig={sysConfig} />} />
+               <Route path="/medical" element={<MedicalPage content={t.medical_page} sysConfig={sysConfig} />} />
+               <Route path="/social-designer" element={<SocialMediaDesigner />} />
+               <Route path="/canvas-designer" element={<CanvasDesigner />} />
+               <Route path="/before-after" element={<BeforeAfterDesigner />} />
+               <Route path="/unified-designer" element={<UnifiedDesigner />} />
+               {/* Fallback: redirect to home content */}
+               <Route path="*" element={<HomeView t={t} theme={theme} sysConfig={sysConfig} onNavigate={handleNavigation} />} />
+            </Routes>
+         </main>
 
       {/* --- CONTACT / FORM (Shared across all pages) --- */}
       <section id="form" className={`py-32 ${sysConfig ? 'bg-black' : 'bg-[#3A3A3A]'} text-[#F8F3E6]`}>

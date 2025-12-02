@@ -12,8 +12,9 @@
     "fabric": "^6.5.2",
     "html2canvas": "^1.4.1",
     "lucide-react": "^0.555.0",
+    "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react": "^19.2.0"
+    "react-router-dom": "^6.30.2"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
