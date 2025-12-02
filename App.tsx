@@ -75,25 +75,25 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
                  <div className={`h-[1px] w-20 ${sysConfig ? 'bg-green-500' : 'bg-[#7F6A47]'}`}></div>
                </div>
                
-               <h1 className={`text-6xl lg:text-9xl font-serif text-[#F8F3E6] mb-6 leading-tight`} style={{textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.8)'}}>
+               <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-9xl font-serif text-[#F8F3E6] mb-4 sm:mb-6 leading-tight`} style={{textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.8)'}}>
                  {t.hero.title} <span className={`italic ${sysConfig ? 'text-green-500 glitch' : 'text-[#F8F3E6]'}`} style={{textShadow: '0 4px 20px rgba(127,106,71,0.8), 0 2px 10px rgba(0,0,0,0.9)'}}>{t.hero.subtitle}</span>
                </h1>
                
-               <p className="text-[#F8F3E6] text-xl lg:text-2xl font-light max-w-3xl mx-auto mb-12 leading-relaxed" style={{textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 1px 6px rgba(0,0,0,0.7)'}}>
+               <p className="text-[#F8F3E6] text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4" style={{textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 1px 6px rgba(0,0,0,0.7)'}}>
                  {t.hero.desc}
                </p>
                
-               <div className="flex flex-col sm:flex-row gap-6 justify-center">
+               <div className="flex flex-col gap-4 sm:gap-6 justify-center px-4">
                   <MagneticButton 
                     onClick={() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })} 
-                    className={`px-12 py-5 bg-[#7F6A47] text-[#F8F3E6] font-bold uppercase tracking-widest text-sm shadow-2xl hover:bg-[#F8F3E6] hover:text-[#3A3A3A] transition-all ${sysConfig ? 'bg-green-600 shadow-green-500/50 hover:bg-black hover:text-green-500 border border-green-500' : ''}`}
+                    className={`px-6 sm:px-12 py-4 sm:py-5 bg-[#7F6A47] text-[#F8F3E6] font-bold uppercase tracking-widest text-xs sm:text-sm shadow-2xl hover:bg-[#F8F3E6] hover:text-[#3A3A3A] transition-all ${sysConfig ? 'bg-green-600 shadow-green-500/50 hover:bg-black hover:text-green-500 border border-green-500' : ''}`}
                   >
                     {t.hero.btn_consult}
                   </MagneticButton>
                   <MagneticButton 
-                    className={`px-12 py-5 border-2 border-[#F8F3E6] text-[#F8F3E6] font-bold uppercase tracking-widest text-sm hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all flex items-center justify-center gap-3`}
+                    className={`px-6 sm:px-12 py-4 sm:py-5 border-2 border-[#F8F3E6] text-[#F8F3E6] font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all flex items-center justify-center gap-3`}
                   >
-                     <Phone size={20} />
+                     <Phone size={18} className="sm:w-5 sm:h-5" />
                     {t.hero.btn_whatsapp}
                   </MagneticButton>
                </div>
@@ -451,6 +451,7 @@ export default function App() {
   const [lang, setLang] = useState<'az' | 'ru'>('az');
   const [scrolled, setScrolled] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false); // Navigation state for Loader
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const sysConfig = useSecretAccess();
   const t = content[lang];
    const navigate = useNavigate();
@@ -461,6 +462,15 @@ export default function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
 
    // --- Handle Navigation with Transition Loader ---
    const handleNavigation = (view:
@@ -534,7 +544,7 @@ export default function App() {
           <div className="relative flex items-center justify-between h-full">
             
             {/* LEFT: LOGO */}
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="flex flex-col items-center justify-center group interactive z-20">
+            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="flex flex-col items-center justify-center group interactive z-20 outline-none focus:outline-none">
               <span className={`font-serif font-black tracking-tighter leading-none transition-all duration-500 ${scrolled ? 'text-3xl' : 'text-4xl lg:text-5xl'} ${theme.navLogo} ${sysConfig ? 'animate-pulse text-green-500' : 'group-hover:text-[#7F6A47]'}`}>BHI</span>
               <span className={`font-bold uppercase tracking-[0.2em] whitespace-nowrap transition-all duration-500 ease-out group-hover:tracking-[0.3em] ${scrolled ? 'text-[8px] opacity-70' : 'text-[10px] mt-1'} ${scrolled ? 'text-[#3A3A3A]' : 'text-white/90'}`}>Baku Hair Institute</span>
             </a>
@@ -560,8 +570,71 @@ export default function App() {
             </div>
 
             {/* Mobile Toggle */}
-            <button className={`lg:hidden interactive ${theme.navText}`} aria-label="Menyunu aç"><Menu/></button>
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`lg:hidden interactive ${theme.navText} z-50`} aria-label="Menyunu aç">
+              {mobileMenuOpen ? <span className="text-2xl">✕</span> : <Menu/>}
+            </button>
           </div>
+
+          {/* Mobile Menu Overlay */}
+          {mobileMenuOpen && (
+            <div className="lg:hidden fixed inset-0 top-[80px] bg-[#3A3A3A]/98 backdrop-blur-lg z-40 overflow-y-auto">
+              <div className="container mx-auto px-6 py-8 space-y-6">
+                {/* Men Section */}
+                <div className="border-b border-[#F8F3E6]/10 pb-6">
+                  <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.men}</h3>
+                  <div className="space-y-3 pl-4">
+                    {t.nav.men_items.map((item: any, idx: number) => (
+                      <button key={idx} onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} className="block text-[#F8F3E6]/70 hover:text-[#7F6A47] transition-colors w-full text-left py-2">
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                {/* Women Section */}
+                <div className="border-b border-[#F8F3E6]/10 pb-6">
+                  <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.women}</h3>
+                  <div className="space-y-3 pl-4">
+                    {t.nav.women_items.map((item: any, idx: number) => (
+                      <button key={idx} onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} className="block text-[#F8F3E6]/70 hover:text-[#7F6A47] transition-colors w-full text-left py-2">
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                {/* Other Section */}
+                <div className="border-b border-[#F8F3E6]/10 pb-6">
+                  <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.other}</h3>
+                  <div className="space-y-3 pl-4">
+                    {t.nav.other_items.map((item: any, idx: number) => (
+                      <button key={idx} onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} className="block text-[#F8F3E6]/70 hover:text-[#7F6A47] transition-colors w-full text-left py-2">
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                {/* About Section */}
+                <div className="border-b border-[#F8F3E6]/10 pb-6">
+                  <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.about}</h3>
+                  <div className="space-y-3 pl-4">
+                    {t.nav.about_items.map((item: any, idx: number) => (
+                      <a key={idx} href={item.href} className="block text-[#F8F3E6]/70 hover:text-[#7F6A47] transition-colors w-full text-left py-2">
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+                {/* Contact */}
+                <button onClick={() => { document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} className="block w-full text-left text-[#F8F3E6] font-bold py-3 border-b border-[#F8F3E6]/10">
+                  {t.nav.contact}
+                </button>
+                {/* Language */}
+                <div className="flex gap-4 pt-4">
+                  <button onClick={() => { setLang('az'); setMobileMenuOpen(false); }} className={`px-6 py-2 border ${lang === 'az' ? 'border-[#7F6A47] text-[#7F6A47]' : 'border-[#F8F3E6]/30 text-[#F8F3E6]/70'}`}>AZ</button>
+                  <button onClick={() => { setLang('ru'); setMobileMenuOpen(false); }} className={`px-6 py-2 border ${lang === 'ru' ? 'border-[#7F6A47] text-[#7F6A47]' : 'border-[#F8F3E6]/30 text-[#F8F3E6]/70'}`}>RU</button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
