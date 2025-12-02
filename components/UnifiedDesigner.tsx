@@ -1369,12 +1369,24 @@ export const UnifiedDesigner = () => {
     try {
       const html2canvas = (await import('html2canvas')).default;
       
+      // Calculate proper scale to get exact 1080×1080 or 1080×1920
+      const targetWidth = 1080;
+      const targetHeight = format === '1:1' ? 1080 : 1920;
+      const currentWidth = canvasDims.displayWidth;
+      const currentHeight = canvasDims.displayHeight;
+      
+      // Scale factor to convert display size to actual size
+      const scaleX = targetWidth / currentWidth;
+      const scaleY = targetHeight / currentHeight;
+      
       const canvas = await html2canvas(canvasRef.current, {
-        scale: 2,
+        scale: scaleX, // Use calculated scale for exact dimensions
         backgroundColor: null,
         logging: false,
         useCORS: true,
-        allowTaint: true
+        allowTaint: true,
+        width: currentWidth,
+        height: currentHeight
       });
 
       const link = document.createElement('a');
