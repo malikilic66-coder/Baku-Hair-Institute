@@ -527,16 +527,19 @@ export default function App() {
       <ScrollProgress specialMode={sysConfig} />
       <CustomCursor specialMode={sysConfig} />
       
-      {/* Noise Texture & CRT Effect for Stealth */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[90] mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
-      
-      {sysConfig && (
-        <>
-          <div className="fixed inset-0 pointer-events-none z-[50] opacity-10 bg-[url('https://upload.wikimedia.org/wikipedia/commons/1/17/Matrix_code.gif')] bg-cover mix-blend-screen"></div>
-          {/* CRT Scanline Effect */}
-          <div className="fixed inset-0 pointer-events-none z-[51] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] pointer-events-none"></div>
-        </>
-      )}
+         {/* Noise Texture & CRT Effect for Stealth (hidden when mobile menu open) */}
+         {!mobileMenuOpen && (
+            <>
+               <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[90] mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+               {sysConfig && (
+                  <>
+                     <div className="fixed inset-0 pointer-events-none z-[50] opacity-10 bg-[url('https://upload.wikimedia.org/wikipedia/commons/1/17/Matrix_code.gif')] bg-cover mix-blend-screen"></div>
+                     {/* CRT Scanline Effect */}
+                     <div className="fixed inset-0 pointer-events-none z-[51] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] pointer-events-none"></div>
+                  </>
+               )}
+            </>
+         )}
 
       {/* --- NAVBAR --- */}
       <nav className={`fixed top-0 w-full z-[140] transition-all duration-500 ${theme.navBg}`}>
