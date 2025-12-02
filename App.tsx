@@ -596,7 +596,7 @@ export default function App() {
                   </div>
                   
                   <div className="mt-12 w-full h-64 grayscale invert filter contrast-125 border border-[#F8F3E6]/10">
-                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.428674853665!2d49.85172481539744!3d40.37719097936968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d079efb5163%3A0xc20aa51a5f0f5e01!2sBaku%2C%20Azerbaijan!5e0!3m2!1sen!2saz" className="w-full h-full border-0" loading="lazy"></iframe>
+                     <iframe title="Baku Hair Institute konum haritası" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.428674853665!2d49.85172481539744!3d40.37719097936968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d079efb5163%3A0xc20aa51a5f0f5e01!2sBaku%2C%20Azerbaijan!5e0!3m2!1sen!2saz" className="w-full h-full border-0" loading="lazy"></iframe>
                   </div>
                </div>
 
@@ -619,7 +619,8 @@ export default function App() {
 
                      {/* Phone with country code selector */}
                      <div className="group relative flex gap-4">
-                        <select className={`w-32 border-b-2 border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] text-[#F8F3E6] cursor-pointer ${sysConfig ? 'focus:border-green-500' : ''}`}>
+                        <label htmlFor="countryCode" className="visually-hidden">Ön kod</label>
+                        <select id="countryCode" aria-label="Ülke telefon kodu" className={`w-32 border-b-2 border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] text-[#F8F3E6] cursor-pointer ${sysConfig ? 'focus:border-green-500' : ''}`}>
                            <option value="+994" className="bg-[#3A3A3A]">🇦🇿 +994</option>
                            <option value="+90" className="bg-[#3A3A3A]">🇹🇷 +90</option>
                            <option value="+7" className="bg-[#3A3A3A]">🇷🇺 +7</option>
