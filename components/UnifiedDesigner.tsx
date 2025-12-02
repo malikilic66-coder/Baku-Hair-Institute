@@ -179,6 +179,326 @@ const templates: Template[] = [
     ]
   },
 
+  // ========== MORE 9:16 STORY TEMPLATES ==========
+  
+  // QUOTE TEMPLATES (9:16 Story)
+  {
+    id: 'quote-doctor-story',
+    name: 'Doktor Məsləhəti Story',
+    category: 'quote',
+    format: '9:16',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'top-accent', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 6 }, style: { backgroundColor: '#7F6A47' } },
+      { id: 'doctor-img', type: 'image', locked: false, src: '', position: { x: 90, y: 200 }, size: { width: 900, height: 700 }, style: { borderRadius: 20, objectFit: 'cover', border: '4px solid #7F6A47' } },
+      { id: 'quote-bg', type: 'background', locked: true, position: { x: 90, y: 980 }, size: { width: 900, height: 600 }, style: { backgroundColor: 'rgba(127,106,71,0.1)', borderRadius: 16 } },
+      { id: 'quote-text', type: 'text', locked: false, content: '"Saç sağlamlığı\n\nümumi sağlamlığın\ngöstəricisidir.\n\nSağlam saç üçün\npeşəkar yanaşma\nzəruridir."', position: { x: 540, y: 1200 }, size: { width: 800, height: 500 }, style: { fontSize: 42, fontFamily: 'Playfair Display', color: '#3A3A3A', fontStyle: 'italic', lineHeight: 1.5, textAlign: 'center' } },
+      { id: 'doctor-name', type: 'text', locked: false, content: 'Dr. Əli Həsənov', position: { x: 540, y: 1680 }, size: { width: 600, height: 60 }, style: { fontSize: 32, fontFamily: 'Inter', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'verified', type: 'text', locked: true, content: '✓ Sertifikatlı Mütəxəssis', position: { x: 540, y: 1760 }, size: { width: 500, height: 50 }, style: { fontSize: 24, fontFamily: 'Inter', color: '#3A3A3A', textAlign: 'center' } }
+    ]
+  },
+
+  // COUNTDOWN TEMPLATES (9:16 Story)
+  {
+    id: 'countdown-event-story',
+    name: 'Geri Sayım Story',
+    category: 'countdown',
+    format: '9:16',
+    bgColor: '#3A3A3A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { background: 'linear-gradient(180deg, #3A3A3A 0%, #1A1A1A 100%)' } },
+      { id: 'logo', type: 'logo', locked: true, content: 'BHI', position: { x: 540, y: 150 }, size: { width: 120, height: 70 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', transform: 'translateX(-50%)' } },
+      { id: 'event-title', type: 'text', locked: false, content: 'BAKÜ\'YƏ\nGƏLİRİK!', position: { x: 540, y: 450 }, size: { width: 900, height: 180 }, style: { fontSize: 72, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2, letterSpacing: 2 } },
+      { id: 'countdown-circle', type: 'background', locked: true, position: { x: 340, y: 750 }, size: { width: 400, height: 400 }, style: { borderRadius: '50%', border: '8px solid #7F6A47', backgroundColor: 'rgba(127,106,71,0.1)' } },
+      { id: 'countdown-num', type: 'text', locked: false, content: '7', position: { x: 540, y: 900 }, size: { width: 300, height: 250 }, style: { fontSize: 220, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'countdown-label', type: 'text', locked: true, content: 'GÜN QALDI', position: { x: 540, y: 1250 }, size: { width: 500, height: 80 }, style: { fontSize: 52, fontFamily: 'Inter', color: '#F8F3E6', textAlign: 'center', fontWeight: 'bold', letterSpacing: 4 } },
+      { id: 'date-info', type: 'text', locked: false, content: '15 Dekabr 2024\nBakü Saç Klinikası', position: { x: 540, y: 1500 }, size: { width: 700, height: 150 }, style: { fontSize: 36, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', lineHeight: 1.4 } }
+    ]
+  },
+
+  // INFO TEMPLATES (9:16 Story)
+  {
+    id: 'info-technique-story',
+    name: 'Texnika Məlumatı Story',
+    category: 'info',
+    format: '9:16',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'header-bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 250 }, style: { background: 'linear-gradient(135deg, #7F6A47 0%, #F8F3E6 100%)' } },
+      { id: 'title', type: 'text', locked: false, content: 'FUE TEXNİKASI', position: { x: 540, y: 125 }, size: { width: 900, height: 100 }, style: { fontSize: 68, fontFamily: 'Playfair Display', color: '#FFFFFF', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'subtitle', type: 'text', locked: true, content: 'Follicular Unit Extraction', position: { x: 540, y: 320 }, size: { width: 800, height: 60 }, style: { fontSize: 28, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', fontStyle: 'italic', letterSpacing: 2 } },
+      { id: 'info-img', type: 'image', locked: false, src: '', position: { x: 90, y: 450 }, size: { width: 900, height: 650 }, style: { borderRadius: 16, objectFit: 'cover', border: '3px solid #7F6A47' } },
+      { id: 'description', type: 'text', locked: false, content: '✓ Mikromotor vasitəsilə\n   tək-tək folikulların çıxarılması\n\n✓ İz buraxmayan metod\n\n✓ Sürətli sağalma prosesi\n\n✓ Təbii görünüş', position: { x: 540, y: 1280 }, size: { width: 900, height: 400 }, style: { fontSize: 36, fontFamily: 'Inter', color: '#3A3A3A', textAlign: 'left', lineHeight: 1.6 } }
+    ]
+  },
+
+  // CENTER MASK TEMPLATES (9:16 Story)
+  {
+    id: 'center-soft-glow-story',
+    name: 'Soft Center Glow Story',
+    category: 'center-mask',
+    format: '9:16',
+    bgColor: '#1A1A1A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#1A1A1A' } },
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { objectFit: 'cover' } },
+      { id: 'center-glow', type: 'mask', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { background: 'radial-gradient(ellipse 600px 900px at center, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.3) 40%, rgba(0,0,0,0.8) 100%)', pointerEvents: 'none' } },
+      { id: 'title', type: 'text', locked: false, content: 'PREMIUM\nNƏTİCƏ', position: { x: 540, y: 900 }, size: { width: 800, height: 150 }, style: { fontSize: 72, fontFamily: 'Playfair Display', color: '#FFFFFF', fontWeight: 'bold', textAlign: 'center', textShadow: '0 4px 30px rgba(0,0,0,0.9)', lineHeight: 1.2 } }
+    ]
+  },
+  {
+    id: 'spotlight-story',
+    name: 'Centered Spotlight Story',
+    category: 'center-mask',
+    format: '9:16',
+    bgColor: '#000000',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#000000' } },
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { objectFit: 'cover' } },
+      { id: 'spotlight', type: 'mask', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { background: 'radial-gradient(ellipse 500px 1000px at 50% 45%, rgba(255,255,255,0.95) 0%, rgba(0,0,0,0.95) 60%)', pointerEvents: 'none' } },
+      { id: 'title', type: 'text', locked: false, content: 'SPOTLIGHT', position: { x: 540, y: 1650 }, size: { width: 600, height: 100 }, style: { fontSize: 68, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', letterSpacing: 6 } }
+    ]
+  },
+  {
+    id: 'golden-halo-story',
+    name: 'Golden Halo Story',
+    category: 'center-mask',
+    format: '9:16',
+    bgColor: '#1A1A1A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#1A1A1A' } },
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { objectFit: 'cover' } },
+      { id: 'halo-ring', type: 'mask', locked: true, position: { x: 190, y: 510 }, size: { width: 700, height: 900 }, style: { borderRadius: '50%', border: '10px solid #7F6A47', background: 'radial-gradient(ellipse, rgba(255,255,255,0.15) 0%, transparent 100%)', boxShadow: '0 0 80px rgba(127,106,71,0.9), inset 0 0 100px rgba(127,106,71,0.3)' } },
+      { id: 'title', type: 'text', locked: false, content: 'GOLDEN\nRESULT', position: { x: 540, y: 920 }, size: { width: 600, height: 150 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2 } }
+    ]
+  },
+  {
+    id: 'glass-panel-story',
+    name: 'Glass Panel Story',
+    category: 'center-mask',
+    format: '9:16',
+    bgColor: '#2C2C2C',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#2C2C2C' } },
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { objectFit: 'cover' } },
+      { id: 'glass-panel', type: 'mask', locked: true, position: { x: 140, y: 560 }, size: { width: 800, height: 800 }, style: { background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(12px)', border: '2px solid rgba(255,255,255,0.2)', borderRadius: 24, boxShadow: '0 10px 40px rgba(0,0,0,0.4)' } },
+      { id: 'title', type: 'text', locked: false, content: 'MODERN\nDİZAYN', position: { x: 540, y: 920 }, size: { width: 700, height: 150 }, style: { fontSize: 58, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2 } }
+    ]
+  },
+  {
+    id: 'frosted-area-story',
+    name: 'Center Frosted Story',
+    category: 'center-mask',
+    format: '9:16',
+    bgColor: '#3A3A3A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#3A3A3A' } },
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { objectFit: 'cover' } },
+      { id: 'frosted', type: 'mask', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { background: 'radial-gradient(ellipse 550px 900px at center, transparent 0%, rgba(255,255,255,0.6) 100%)', backdropFilter: 'blur(4px)', pointerEvents: 'none' } },
+      { id: 'title', type: 'text', locked: false, content: 'FROSTED\nGLASS', position: { x: 540, y: 920 }, size: { width: 700, height: 150 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2 } }
+    ]
+  },
+
+  // OPACITY BG TEMPLATES (9:16 Story)
+  {
+    id: 'opacity-40-story',
+    name: '40% Opacity Story',
+    category: 'opacity-bg',
+    format: '9:16',
+    bgColor: 'rgba(58, 58, 58, 0.4)',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { objectFit: 'cover' } },
+      { id: 'overlay', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: 'rgba(58, 58, 58, 0.4)' } },
+      { id: 'logo', type: 'logo', locked: true, content: 'BHI', position: { x: 540, y: 150 }, size: { width: 120, height: 70 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', transform: 'translateX(-50%)' } },
+      { id: 'title', type: 'text', locked: false, content: 'BALANCED\nOPACITY', position: { x: 540, y: 880 }, size: { width: 900, height: 160 }, style: { fontSize: 72, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', textShadow: '0 6px 20px rgba(0,0,0,0.7)', lineHeight: 1.2 } },
+      { id: 'subtitle', type: 'text', locked: false, content: 'Premium Hair Transplant', position: { x: 540, y: 1100 }, size: { width: 700, height: 70 }, style: { fontSize: 36, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', letterSpacing: 2 } }
+    ]
+  },
+  {
+    id: 'gradient-top-bottom-story',
+    name: 'Gradient Top-Bottom Story',
+    category: 'opacity-bg',
+    format: '9:16',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { objectFit: 'cover' } },
+      { id: 'gradient-overlay', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { background: 'linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 35%, transparent 65%, rgba(0,0,0,0.85) 100%)' } },
+      { id: 'top-title', type: 'text', locked: false, content: 'ƏVVƏL', position: { x: 540, y: 200 }, size: { width: 500, height: 80 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center' } },
+      { id: 'bottom-title', type: 'text', locked: false, content: 'SONRA', position: { x: 540, y: 1720 }, size: { width: 500, height: 80 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center' } }
+    ]
+  },
+  {
+    id: 'vignette-transparency-story',
+    name: 'Vignette Story',
+    category: 'opacity-bg',
+    format: '9:16',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { objectFit: 'cover' } },
+      { id: 'vignette', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { background: 'radial-gradient(ellipse 50% 40% at center, transparent 20%, rgba(0,0,0,0.85) 100%)' } },
+      { id: 'title', type: 'text', locked: false, content: 'VIGNETTE\nEFFECT', position: { x: 540, y: 920 }, size: { width: 700, height: 140 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2 } }
+    ]
+  },
+  {
+    id: 'fade-white-story',
+    name: 'Fade-to-White Story',
+    category: 'opacity-bg',
+    format: '9:16',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { objectFit: 'cover' } },
+      { id: 'white-fade', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.97) 100%)' } },
+      { id: 'title', type: 'text', locked: false, content: 'CLEAN &\nMINIMAL', position: { x: 540, y: 1550 }, size: { width: 800, height: 150 }, style: { fontSize: 68, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2 } }
+    ]
+  },
+  {
+    id: 'fade-gold-story',
+    name: 'Fade-to-Gold Story',
+    category: 'opacity-bg',
+    format: '9:16',
+    bgColor: 'transparent',
+    layers: [
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { objectFit: 'cover' } },
+      { id: 'gold-fade', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { background: 'linear-gradient(to bottom, rgba(127,106,71,0.1) 0%, rgba(127,106,71,0.95) 100%)' } },
+      { id: 'title', type: 'text', locked: false, content: 'GOLDEN\nPREMIUM', position: { x: 540, y: 1600 }, size: { width: 800, height: 150 }, style: { fontSize: 72, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2 } }
+    ]
+  },
+
+  // GOLDEN FRAME TEMPLATES (9:16 Story)
+  {
+    id: 'gold-full-border-story',
+    name: 'Gold Full Border Story',
+    category: 'golden-frame',
+    format: '9:16',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'base-img', type: 'image', locked: false, src: '', position: { x: 60, y: 300 }, size: { width: 960, height: 1320 }, style: { objectFit: 'cover', borderRadius: 12 } },
+      { id: 'gold-frame', type: 'frame', locked: true, position: { x: 40, y: 280 }, size: { width: 1000, height: 1360 }, style: { border: '4px solid #7F6A47', borderRadius: 16 } },
+      { id: 'title', type: 'text', locked: false, content: 'PREMIUM\nFRAME', position: { x: 540, y: 1750 }, size: { width: 700, height: 120 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2 } }
+    ]
+  },
+  {
+    id: 'gold-top-bottom-story',
+    name: 'Top & Bottom Gold Story',
+    category: 'golden-frame',
+    format: '9:16',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'top-line', type: 'frame', locked: true, position: { x: 0, y: 60 }, size: { width: 1080, height: 3 }, style: { backgroundColor: '#7F6A47' } },
+      { id: 'bottom-line', type: 'frame', locked: true, position: { x: 0, y: 1857 }, size: { width: 1080, height: 3 }, style: { backgroundColor: '#7F6A47' } },
+      { id: 'main-img', type: 'image', locked: false, src: '', position: { x: 90, y: 350 }, size: { width: 900, height: 900 }, style: { objectFit: 'cover', borderRadius: 12, border: '2px solid #7F6A47' } },
+      { id: 'title', type: 'text', locked: false, content: 'ELEGANT\nDESIGN', position: { x: 540, y: 1450 }, size: { width: 800, height: 150 }, style: { fontSize: 68, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2 } }
+    ]
+  },
+  {
+    id: 'corner-brackets-story',
+    name: 'Golden Corner Brackets Story',
+    category: 'golden-frame',
+    format: '9:16',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'top-left', type: 'pattern', locked: true, position: { x: 60, y: 200 }, size: { width: 100, height: 100 }, style: { borderTop: '5px solid #7F6A47', borderLeft: '5px solid #7F6A47' } },
+      { id: 'top-right', type: 'pattern', locked: true, position: { x: 920, y: 200 }, size: { width: 100, height: 100 }, style: { borderTop: '5px solid #7F6A47', borderRight: '5px solid #7F6A47' } },
+      { id: 'bottom-left', type: 'pattern', locked: true, position: { x: 60, y: 1620 }, size: { width: 100, height: 100 }, style: { borderBottom: '5px solid #7F6A47', borderLeft: '5px solid #7F6A47' } },
+      { id: 'bottom-right', type: 'pattern', locked: true, position: { x: 920, y: 1620 }, size: { width: 100, height: 100 }, style: { borderBottom: '5px solid #7F6A47', borderRight: '5px solid #7F6A47' } },
+      { id: 'main-img', type: 'image', locked: false, src: '', position: { x: 140, y: 450 }, size: { width: 800, height: 900 }, style: { objectFit: 'cover', borderRadius: 12 } },
+      { id: 'title', type: 'text', locked: false, content: 'CORNER\nELEGANCE', position: { x: 540, y: 1500 }, size: { width: 800, height: 140 }, style: { fontSize: 62, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2 } }
+    ]
+  },
+  {
+    id: 'gold-underline-story',
+    name: 'Gold Underline Story',
+    category: 'golden-frame',
+    format: '9:16',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'main-img', type: 'image', locked: false, src: '', position: { x: 90, y: 350 }, size: { width: 900, height: 850 }, style: { objectFit: 'cover', borderRadius: 16 } },
+      { id: 'title', type: 'text', locked: false, content: 'PREMIUM\nSAÇ ƏKİMİ', position: { x: 540, y: 1400 }, size: { width: 900, height: 140 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center', lineHeight: 1.2 } },
+      { id: 'underline', type: 'frame', locked: true, position: { x: 390, y: 1560 }, size: { width: 300, height: 4 }, style: { backgroundColor: '#7F6A47' } }
+    ]
+  },
+  {
+    id: 'gold-shadow-glow-story',
+    name: 'Gold Shadow Story',
+    category: 'golden-frame',
+    format: '9:16',
+    bgColor: '#1A1A1A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#1A1A1A' } },
+      { id: 'main-img', type: 'image', locked: false, src: '', position: { x: 90, y: 300 }, size: { width: 900, height: 900 }, style: { objectFit: 'cover', borderRadius: 16 } },
+      { id: 'title', type: 'text', locked: false, content: 'GOLDEN\nGLOW', position: { x: 540, y: 1450 }, size: { width: 800, height: 150 }, style: { fontSize: 76, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', textShadow: '0 0 40px rgba(127,106,71,0.9), 0 0 80px rgba(127,106,71,0.6)', lineHeight: 1.2 } }
+    ]
+  },
+
+  // TYPOGRAPHY TEMPLATES (9:16 Story)
+  {
+    id: 'bold-centered-story',
+    name: 'Bold Title Story',
+    category: 'typography',
+    format: '9:16',
+    bgColor: '#3A3A3A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#3A3A3A' } },
+      { id: 'main-title', type: 'text', locked: false, content: 'SAÇ\nƏKİMİ', position: { x: 540, y: 820 }, size: { width: 950, height: 240 }, style: { fontSize: 110, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', letterSpacing: 4, lineHeight: 1.1 } },
+      { id: 'subtitle', type: 'text', locked: false, content: 'PREMIUM XİDMƏT', position: { x: 540, y: 1120 }, size: { width: 700, height: 80 }, style: { fontSize: 42, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', letterSpacing: 6, textTransform: 'uppercase' } }
+    ]
+  },
+  {
+    id: 'ribbon-title-story',
+    name: 'Title Ribbon Story',
+    category: 'typography',
+    format: '9:16',
+    bgColor: '#FFFFFF',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'ribbon-bg', type: 'background', locked: true, position: { x: 0, y: 800 }, size: { width: 1080, height: 320 }, style: { backgroundColor: '#7F6A47', boxShadow: '0 10px 40px rgba(127,106,71,0.5)' } },
+      { id: 'ribbon-title', type: 'text', locked: false, content: 'SAÇ ƏKİMİ', position: { x: 540, y: 920 }, size: { width: 900, height: 140 }, style: { fontSize: 92, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', letterSpacing: 6 } }
+    ]
+  },
+  {
+    id: 'split-title-story',
+    name: 'Split Title Story',
+    category: 'typography',
+    format: '9:16',
+    bgColor: '#3A3A3A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#3A3A3A' } },
+      { id: 'part1', type: 'text', locked: false, content: 'PREMIUM', position: { x: 540, y: 700 }, size: { width: 800, height: 120 }, style: { fontSize: 80, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', letterSpacing: 10 } },
+      { id: 'divider', type: 'background', locked: true, position: { x: 390, y: 860 }, size: { width: 300, height: 3 }, style: { backgroundColor: '#7F6A47' } },
+      { id: 'part2', type: 'text', locked: false, content: 'SAÇ', position: { x: 540, y: 940 }, size: { width: 600, height: 100 }, style: { fontSize: 72, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'normal', textAlign: 'center', letterSpacing: 16 } },
+      { id: 'part3', type: 'text', locked: false, content: 'ƏKİMİ', position: { x: 540, y: 1080 }, size: { width: 600, height: 100 }, style: { fontSize: 72, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'normal', textAlign: 'center', letterSpacing: 16 } }
+    ]
+  },
+  {
+    id: 'shadow-elegant-story',
+    name: 'Shadowed Elegant Story',
+    category: 'typography',
+    format: '9:16',
+    bgColor: '#1A1A1A',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#1A1A1A' } },
+      { id: 'shadow-title', type: 'text', locked: false, content: 'ELEGANT', position: { x: 540, y: 920 }, size: { width: 900, height: 140 }, style: { fontSize: 96, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', textShadow: '0 12px 50px rgba(127,106,71,0.8), 0 0 100px rgba(127,106,71,0.5)' } }
+    ]
+  },
+  {
+    id: 'mega-title-story',
+    name: 'Mega Title Story',
+    category: 'typography',
+    format: '9:16',
+    bgColor: '#F8F3E6',
+    layers: [
+      { id: 'bg', type: 'background', locked: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#F8F3E6' } },
+      { id: 'mega-title', type: 'text', locked: false, content: 'BHI', position: { x: 540, y: 880 }, size: { width: 1000, height: 280 }, style: { fontSize: 220, fontFamily: 'Playfair Display', color: '#7F6A47', fontWeight: 'bold', textAlign: 'center', letterSpacing: -6 } },
+      { id: 'mini-tagline', type: 'text', locked: false, content: 'Baku Hair Institute', position: { x: 540, y: 1180 }, size: { width: 700, height: 60 }, style: { fontSize: 32, fontFamily: 'Inter', color: '#3A3A3A', textAlign: 'center', letterSpacing: 8 } }
+    ]
+  },
+
   // ========== ORIGINAL 1:1 TEMPLATES CONTINUE ==========
   // FAQ TEMPLATES (1:1)
   {
