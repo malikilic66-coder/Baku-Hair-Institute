@@ -1290,6 +1290,7 @@ const templates: Template[] = [
     bgColor: '#F8F3E6',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F8F3E6', backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(127, 106, 71, 0.05) 10px, rgba(127, 106, 71, 0.05) 20px)' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 220 }, size: { width: 900, height: 500 }, style: { objectFit: 'cover', borderRadius: 16, border: '4px solid #7F6A47' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'Premium Saç Əkimi', position: { x: 540, y: 520 }, size: { width: 900, height: 100 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } },
       { id: 'accent', type: 'text', locked: false, visible: true, content: 'BAKU HAIR INSTITUTE', position: { x: 540, y: 640 }, size: { width: 900, height: 50 }, style: { fontSize: 26, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', letterSpacing: 6 } }
     ]
@@ -1302,6 +1303,7 @@ const templates: Template[] = [
     bgColor: '#3A3A3A',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#3A3A3A', backgroundImage: 'radial-gradient(circle, rgba(127,106,71,0.12) 1px, transparent 1px)', backgroundSize: '20px 20px' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 220 }, size: { width: 900, height: 500 }, style: { objectFit: 'cover', borderRadius: 16, border: '4px solid #7F6A47' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'PREMIUM XİDMƏT', position: { x: 540, y: 520 }, size: { width: 900, height: 100 }, style: { fontSize: 68, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', textShadow: '0 8px 30px rgba(0,0,0,0.6)' } },
       { id: 'accent', type: 'text', locked: false, visible: true, content: 'BHI', position: { x: 540, y: 640 }, size: { width: 600, height: 60 }, style: { fontSize: 42, fontFamily: 'Playfair Display', color: '#7F6A47', textAlign: 'center', letterSpacing: 8 } }
     ]
@@ -1314,6 +1316,7 @@ const templates: Template[] = [
     bgColor: '#FFFFFF',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 220 }, size: { width: 900, height: 500 }, style: { objectFit: 'cover', borderRadius: 16, border: '3px solid #E5E5E5' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'Təbii Nəticələr', position: { x: 540, y: 520 }, size: { width: 900, height: 90 }, style: { fontSize: 56, fontFamily: 'Playfair Display', color: '#3A3A3A', textAlign: 'center', fontWeight: 600 } },
       { id: 'underline', type: 'background', locked: true, visible: true, position: { x: 390, y: 600 }, size: { width: 300, height: 3 }, style: { backgroundColor: '#7F6A47' } }
     ]
@@ -1326,6 +1329,7 @@ const templates: Template[] = [
     bgColor: '#F8F3E6',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { background: 'linear-gradient(135deg, #7F6A47 0%, #F8F3E6 100%)' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 220 }, size: { width: 900, height: 500 }, style: { objectFit: 'cover', borderRadius: 16, border: '4px solid rgba(255,255,255,0.8)' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'Gold Gradient', position: { x: 540, y: 520 }, size: { width: 900, height: 90 }, style: { fontSize: 60, fontFamily: 'Playfair Display', color: '#3A3A3A', textAlign: 'center', fontWeight: 'bold' } },
       { id: 'tag', type: 'text', locked: false, visible: true, content: 'BAKU HAIR INSTITUTE', position: { x: 540, y: 630 }, size: { width: 800, height: 50 }, style: { fontSize: 24, fontFamily: 'Inter', color: '#FFFFFF', textAlign: 'center', letterSpacing: 6 } }
     ]
@@ -1338,6 +1342,7 @@ const templates: Template[] = [
     bgColor: '#1A1A1A',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#1A1A1A', backgroundImage: 'linear-gradient(rgba(127,106,71,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(127,106,71,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 220 }, size: { width: 900, height: 500 }, style: { objectFit: 'cover', borderRadius: 16, border: '4px solid #7F6A47' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'PREMIUM DARK', position: { x: 540, y: 520 }, size: { width: 900, height: 100 }, style: { fontSize: 64, fontFamily: 'Playfair Display', color: '#F8F3E6', textAlign: 'center', fontWeight: 'bold' } },
       { id: 'sub', type: 'text', locked: false, visible: true, content: 'BHI • Baku', position: { x: 540, y: 630 }, size: { width: 600, height: 50 }, style: { fontSize: 24, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', letterSpacing: 4 } }
     ]
@@ -1350,6 +1355,7 @@ const templates: Template[] = [
     bgColor: '#F0EBD9',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1080 }, style: { backgroundColor: '#F0EBD9', backgroundImage: 'repeating-radial-gradient(circle at 0 0, transparent 0, rgba(127,106,71,0.05) 10px, transparent 20px)' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 220 }, size: { width: 900, height: 500 }, style: { objectFit: 'cover', borderRadius: 16, border: '3px solid #DECFAE' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'Soft Beige', position: { x: 540, y: 520 }, size: { width: 900, height: 90 }, style: { fontSize: 60, fontFamily: 'Playfair Display', color: '#3A3A3A', textAlign: 'center', fontWeight: 700 } },
       { id: 'note', type: 'text', locked: false, visible: true, content: 'Təbii Nəticələr', position: { x: 540, y: 630 }, size: { width: 700, height: 50 }, style: { fontSize: 26, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center' } }
     ]
@@ -1364,6 +1370,7 @@ const templates: Template[] = [
     bgColor: '#F8F3E6',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#F8F3E6', backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(127, 106, 71, 0.05) 10px, rgba(127, 106, 71, 0.05) 20px)' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 280 }, size: { width: 900, height: 700 }, style: { objectFit: 'cover', borderRadius: 20, border: '4px solid #7F6A47' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'Premium Saç Əkimi', position: { x: 540, y: 940 }, size: { width: 900, height: 120 }, style: { fontSize: 76, fontFamily: 'Playfair Display', color: '#3A3A3A', fontWeight: 'bold', textAlign: 'center' } },
       { id: 'accent', type: 'text', locked: false, visible: true, content: 'BAKU HAIR INSTITUTE', position: { x: 540, y: 1080 }, size: { width: 900, height: 60 }, style: { fontSize: 30, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', letterSpacing: 8 } }
     ]
@@ -1376,6 +1383,7 @@ const templates: Template[] = [
     bgColor: '#3A3A3A',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#3A3A3A', backgroundImage: 'radial-gradient(circle, rgba(127,106,71,0.12) 1px, transparent 1px)', backgroundSize: '20px 20px' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 280 }, size: { width: 900, height: 700 }, style: { objectFit: 'cover', borderRadius: 20, border: '4px solid #7F6A47' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'PREMIUM XİDMƏT', position: { x: 540, y: 940 }, size: { width: 900, height: 120 }, style: { fontSize: 84, fontFamily: 'Playfair Display', color: '#F8F3E6', fontWeight: 'bold', textAlign: 'center', textShadow: '0 8px 30px rgba(0,0,0,0.6)' } },
       { id: 'accent', type: 'text', locked: false, visible: true, content: 'BHI', position: { x: 540, y: 1090 }, size: { width: 600, height: 70 }, style: { fontSize: 52, fontFamily: 'Playfair Display', color: '#7F6A47', textAlign: 'center', letterSpacing: 10 } }
     ]
@@ -1388,6 +1396,7 @@ const templates: Template[] = [
     bgColor: '#FFFFFF',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#FFFFFF' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 280 }, size: { width: 900, height: 700 }, style: { objectFit: 'cover', borderRadius: 20, border: '3px solid #E5E5E5' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'Təbii Nəticələr', position: { x: 540, y: 940 }, size: { width: 900, height: 110 }, style: { fontSize: 78, fontFamily: 'Playfair Display', color: '#3A3A3A', textAlign: 'center', fontWeight: 600 } },
       { id: 'underline', type: 'background', locked: true, visible: true, position: { x: 390, y: 1040 }, size: { width: 300, height: 3 }, style: { backgroundColor: '#7F6A47' } }
     ]
@@ -1400,6 +1409,7 @@ const templates: Template[] = [
     bgColor: '#F8F3E6',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { background: 'linear-gradient(135deg, #7F6A47 0%, #F8F3E6 100%)' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 280 }, size: { width: 900, height: 700 }, style: { objectFit: 'cover', borderRadius: 20, border: '4px solid rgba(255,255,255,0.85)' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'Gold Gradient', position: { x: 540, y: 940 }, size: { width: 900, height: 110 }, style: { fontSize: 82, fontFamily: 'Playfair Display', color: '#3A3A3A', textAlign: 'center', fontWeight: 'bold' } },
       { id: 'tag', type: 'text', locked: false, visible: true, content: 'BAKU HAIR INSTITUTE', position: { x: 540, y: 1070 }, size: { width: 800, height: 60 }, style: { fontSize: 30, fontFamily: 'Inter', color: '#FFFFFF', textAlign: 'center', letterSpacing: 10 } }
     ]
@@ -1412,6 +1422,7 @@ const templates: Template[] = [
     bgColor: '#1A1A1A',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#1A1A1A', backgroundImage: 'linear-gradient(rgba(127,106,71,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(127,106,71,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 280 }, size: { width: 900, height: 700 }, style: { objectFit: 'cover', borderRadius: 20, border: '4px solid #7F6A47' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'PREMIUM DARK', position: { x: 540, y: 940 }, size: { width: 900, height: 120 }, style: { fontSize: 84, fontFamily: 'Playfair Display', color: '#F8F3E6', textAlign: 'center', fontWeight: 'bold' } },
       { id: 'sub', type: 'text', locked: false, visible: true, content: 'BHI • Baku', position: { x: 540, y: 1080 }, size: { width: 600, height: 60 }, style: { fontSize: 30, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center', letterSpacing: 6 } }
     ]
@@ -1424,6 +1435,7 @@ const templates: Template[] = [
     bgColor: '#F0EBD9',
     layers: [
       { id: 'bg', type: 'background', locked: true, visible: true, position: { x: 0, y: 0 }, size: { width: 1080, height: 1920 }, style: { backgroundColor: '#F0EBD9', backgroundImage: 'repeating-radial-gradient(circle at 0 0, transparent 0, rgba(127,106,71,0.05) 10px, transparent 20px)' } },
+      { id: 'main-img', type: 'image', locked: false, visible: true, src: '', position: { x: 90, y: 280 }, size: { width: 900, height: 700 }, style: { objectFit: 'cover', borderRadius: 20, border: '3px solid #DECFAE' } },
       { id: 'title', type: 'text', locked: false, visible: true, content: 'Soft Beige', position: { x: 540, y: 940 }, size: { width: 900, height: 110 }, style: { fontSize: 82, fontFamily: 'Playfair Display', color: '#3A3A3A', textAlign: 'center', fontWeight: 700 } },
       { id: 'note', type: 'text', locked: false, visible: true, content: 'Təbii Nəticələr', position: { x: 540, y: 1080 }, size: { width: 700, height: 60 }, style: { fontSize: 32, fontFamily: 'Inter', color: '#7F6A47', textAlign: 'center' } }
     ]
