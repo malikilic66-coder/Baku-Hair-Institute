@@ -56,69 +56,142 @@ interface MedicalPageProps {
 }
 
 export const MenHairPage: React.FC<MenHairPageProps> = ({ content, sysConfig }) => {
-  const techniques = [content.techniques.fue, content.techniques.dhi, content.techniques.long];
-  
-  return (
-    <div className={`min-h-screen ${sysConfig ? 'bg-black text-green-500' : 'bg-[#F8F3E6] text-[#3A3A3A]'}`}>
-      {/* Mini Hero */}
-      <div className="relative h-[60vh] bg-[#3A3A3A] overflow-hidden flex items-center justify-center">
-            <img 
-                src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1200&auto=format&fit=crop&fm=webp" 
-                srcSet="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=600&auto=format&fit=crop&fm=webp 600w, https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop&fm=webp 1000w, https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1600&auto=format&fit=crop&fm=webp 1600w" 
-                sizes="(max-width: 768px) 100vw, 100vw"
-                width="1600"
-                height="900"
-                loading="lazy"
-                decoding="async"
-                fetchPriority="low"
-                className="absolute inset-0 w-full h-full object-cover opacity-40"
-                alt="Hair Transplant"
-            />
-         <div className="relative z-10 text-center px-4 animate-fade-in-up">
-            <h1 className="text-5xl md:text-7xl font-serif text-[#F8F3E6] mb-4">{content.title}</h1>
-            <p className="text-[#F8F3E6]/80 text-lg md:text-xl font-light max-w-2xl mx-auto">{content.subtitle}</p>
-         </div>
-      </div>
+    return (
+        <div className={`min-h-screen ${sysConfig ? 'bg-black text-green-500' : 'bg-[#F8F3E6] text-[#3A3A3A]'}`}>
+            {/* Hero başlık */}
+            <div className="relative h-[50vh] bg-[#3A3A3A] overflow-hidden flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1200&auto=format&fit=crop&fm=webp" width="1600" height="900" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-40" alt="Hair Transplant"/>
+                <div className="relative z-10 text-center px-4">
+                    <h1 className="text-5xl md:text-7xl font-serif text-[#F8F3E6] mb-4">Bəylər • Saç Əkimi</h1>
+                    <p className="text-[#F8F3E6]/80 text-lg md:text-xl font-light max-w-2xl mx-auto">Premium saç əkimi rehberi</p>
+                </div>
+            </div>
 
-      <div className="container mx-auto px-6 py-20">
-         <p className="text-lg md:text-2xl font-serif leading-relaxed text-center max-w-4xl mx-auto mb-20">{content.desc}</p>
+            <div className="container mx-auto px-6 py-20">
+                {/* Saç ekimi nedir */}
+                <section id="nedir" className="mb-16">
+                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Saç əkimi nədir?</h2>
+                    <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
+                        <p>Baş dərisində həddindən artıq saç tökülməsi keçəlliyə yol açır. Keçəlliyin ən yayğın səbəbi irsi saç tökülməsidir. Hər kəsin saçları tökülə bilər, lakin bu, kişilərdə daha çox rast gəlinir. Saç tökülməsi çox ciddi hal alıbsa və keçəl bölgələr nəzərə çarpan dərəcədə genişlənibsə, o zaman problemin çarəsi saç əkimidir.</p>
+                        <h3 className="text-xl font-bold text-[#7F6A47]">Saç əkimi üçün uyğun namizədlər</h3>
+                        <p>Yaşı mümkün olduğu qədər böyük olan, həm transplantasiya, həm də gələcək ehtiyaclar üçün kifayət qədər güclü donora sahib olan və nəticələr barədə real gözləntiləri olan şəxslər saç əkimi üçün ideal namizədlərdir. Təbii ki, pasiyentin səhhətinin əməliyyata tam uyğun olması da vacibdir.</p>
+                        <p>Qeyd edək ki, kişilər saç əkimindən əvvəl saç tökülməsinin stabil olduğuna və aktiv tökülmə fazasında olmadığına əmin olmalıdır. Hormonal promlemlər, anemiya, qalxanabənzər vəz xəstəlikləri və ya vitamin çatışmazlığı kimi bilinən problemlər var isə, saç əkimindən əvvəl mütləq yoxlanmalı və müalicə olunmalıdır ki, əkilən saç köklərinin sağ qalma ehtimalı yüksək olsun.</p>
+                        <h3 className="text-xl font-bold text-[#7F6A47]">Saç əkiminin 3 əsas mərhələsi</h3>
+                        <ul className="list-disc pl-6 space-y-2">
+                            <li>Birinci mərhələdə saç follikulları tək-tək başın arxa hissəsindən çıxarılır.</li>
+                            <li>İkinci mərhələdə xüsusi iynələr vasitəsilə kanallar açılır.</li>
+                            <li>Üçüncü və son mərhələdə isə saç follikulları keçəlləşmiş sahələrə transplantasiya olunur.</li>
+                        </ul>
+                    </div>
+                </section>
 
-         {/* Techniques Grid */}
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
-             {techniques.map((tech, idx) => (
-                 <TiltCard key={idx} className={`p-8 border ${sysConfig ? 'border-green-500 bg-black' : 'border-[#7F6A47]/20 bg-white'} shadow-xl`}>
-                     <div className="text-4xl font-serif text-[#7F6A47] mb-6">0{idx+1}</div>
-                     <h3 className="text-2xl font-serif mb-4">{tech.title}</h3>
-                     <p className="opacity-70 leading-relaxed">{tech.desc}</p>
-                 </TiltCard>
-             ))}
-         </div>
+                {/* Metodlar: FUE ve LONG FUE */}
+                <section id="metodlar" className="mb-16">
+                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Ən çox istifadə edilən metodlar</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="bg-white p-8 border border-[#7F6A47]/20 shadow-lg">
+                            <h3 className="text-2xl font-serif mb-3 text-[#7F6A47]">FUE Metodu</h3>
+                            <p className="opacity-80 mb-4">Son 10 ildə FUE metodu ilə həyata keçirilən saç əkimi prosedurlarının sayı ciddi şəkildə çoxalmışdır. FUE metodu ilə əməliyyat zamanı başın arxa hissəsindən xüsusi cihaz vasitəsilə çıxarılan saç kökləri sonrakı mərhələdə xüsusi pinsetlərdən istifadə edilərək başın keçəl nahiyələrinə əkilir.</p>
+                            <h4 className="font-bold mb-3">Üstün cəhətləri</h4>
+                            <ul className="list-disc pl-6 space-y-2 text-[#3A3A3A]/80">
+                                <li>Dəridə yara izləri buraxmır</li>
+                                <li>Pasiyentlər izlərdən narahat olmadan saçlarını qısa kəsdirə bilər</li>
+                                <li>Əməliyyatdan sonra dəri tez sağalır və xəstə normal rutin həyatına dönə bilir</li>
+                                <li>FUT metoduna görə ağrılar ciddi şəkildə azdır</li>
+                                <li>Bədənin digər nahiyələrindən tük almaq üçün istifadə edilə bilər</li>
+                            </ul>
+                        </div>
+                        <div className="bg-white p-8 border border-[#7F6A47]/20 shadow-lg">
+                            <h3 className="text-2xl font-serif mb-3 text-[#7F6A47]">LONG FUE Metodu</h3>
+                            <p className="opacity-80 mb-4">LONG FUE — FUE metodunun fərqli bir növüdür. Ənənəvi FUE metodundan əsas fərqi odur ki, prosedur zamanı saçlar kəsilmir və qırxılmır.</p>
+                            <h4 className="font-bold mb-3">Üstün cəhətləri</h4>
+                            <ul className="list-disc pl-6 space-y-2 text-[#3A3A3A]/80">
+                                <li>Saçları kəsməyə və qırxmağa ehtiyac yoxdur</li>
+                                <li>Yara izləri qalmır</li>
+                                <li>Donor sahəsi daha az travma olur</li>
+                                <li>Dəri daha sürətli sağalır</li>
+                                <li>Estetik baxımdan prosedur olduğunuz nəzərə çarpmır</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
 
-         {/* Timeline Section */}
-         <section className="relative py-20 bg-[#3A3A3A] text-[#F8F3E6] rounded-sm overflow-hidden">
-             {!sysConfig && <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>}
-             <div className="container mx-auto px-6 relative z-10">
-                 <h2 className="text-4xl font-serif text-center mb-16">{content.timeline_title}</h2>
-                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-                     {/* Horizontal Line (Desktop) */}
-                     <div className="hidden md:block absolute top-6 left-0 w-full h-[1px] bg-[#7F6A47]/50 z-0"></div>
-                     
-                     {content.timeline.map((step, idx) => (
-                         <div key={idx} className="relative z-10 flex flex-col items-center text-center">
-                             <div className="w-12 h-12 rounded-full bg-[#7F6A47] flex items-center justify-center text-[#F8F3E6] font-bold mb-6 shadow-[0_0_20px_rgba(127,106,71,0.5)]">
-                                 {idx + 1}
-                             </div>
-                             <h4 className="text-xl font-bold mb-2 text-[#7F6A47]">{step.time}</h4>
-                             <h5 className="text-lg font-serif mb-3">{step.title}</h5>
-                             <p className="text-sm opacity-60 leading-relaxed max-w-xs">{step.desc}</p>
-                         </div>
-                     ))}
-                 </div>
-             </div>
-         </section>
-      </div>
-    </div>
-  );
+                {/* Komanda */}
+                <section id="komanda" className="mb-16">
+                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Saç əkimi komandamız</h2>
+                    <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
+                        <p>Uzun illərdir Türkiyə həkimləri həyata keçirdikləri yüz minlərlə saç əkimi prosedurlarının sayına görə dünya ölkələri arasında lider səviyyədədir. Bu ardıcıl prosedurlar sayəsində mütəxəssislərimiz əvəzolunmaz təcrübə qazanmışdır.</p>
+                        <p>Mütəxəssislər tibbi sertifikatlara sahibdirlər, protokollara uyğun şəkildə tam gigiyenik şəraitdə prosedurları icra edirlər. Yerli dermatoloqlarımız prosedurlar zamanı dəstək verir və ümumi gedişata nəzarət edir.</p>
+                        <p>Türkiyədən gələn mütəxəssislərin və yerli dermatoloqların bu ortaq işi xəstələr üçün keyfiyyətli əməliyyat və əməliyyatdan sonra diqqətli baxım üçün mükəmməl şərait yaradır.</p>
+                    </div>
+                </section>
+
+                {/* Ağrı */}
+                <section id="agri" className="mb-16">
+                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Saç əkimi ağrılıdırmı?</h2>
+                    <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
+                        <h3 className="text-xl font-bold text-[#7F6A47]">Prosedur zamanı</h3>
+                        <p>Yerlı anesteziya ilə dərinin keyləşdirilməsi sayəsində prosedur zamanı ağrı və diskomfort hiss edilmir. Başlanğıc iynə uygulamaları qısa sürən diskomfort yarada bilər.</p>
+                        <h3 className="text-xl font-bold text-[#7F6A47]">Prosedurdan sonra</h3>
+                        <p>Anesteziyanın təsiri azalınca diskomfort artabilir; ağrıkəsicilər və istifadə qaydaları öncədən izah edilir və sonrakı mərhələlərdə rahatlıq sağlar.</p>
+                    </div>
+                </section>
+
+                {/* Rehabilitasiya */}
+                <section id="rehab" className="mb-16">
+                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Reabilitasiya dövrü</h2>
+                    <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
+                        <p>Prosedurdan sonra xüsusi şampun və losyonların doğru istifadəsi izah olunur; 1–2 gün sonra sarğılar adətən çıxarıla bilər.</p>
+                        <p>İlk 2 həftə qreftlər kök atdığı üçün çox diqqətli yanaşmaq lazımdır; ilk ay ağır fiziki işlər azaldılmalıdır. Transplantasiya olunan sahəyə toxunmaq qadağandır.</p>
+                        <p>Bəzi həftələr içində transplantasiya olunan saçlar tökülüb yenidən çıxmağa başlayır; ~4 ayda yeni saçlar görünür, 10–16 ayda yekun nəticələr əldə edilir.</p>
+                    </div>
+                </section>
+
+                {/* Ömürlük nəticə */}
+                <section id="omurluk" className="mb-16">
+                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Ömürlük nəticə</h2>
+                    <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
+                        <p>Donor sahədən götürülən və genetik saç tökülməsinə dayanıqlı follikullar yeni bölgədə də güclü qalır; nəticələr uzun ömürlüdür.</p>
+                        <p className="opacity-80">Nəticəyə təsir edən faktorlar: saçın dalğalı/sıx olması, saç-deri rəng kontrastı, yaş ve devam eden doğal dökülme vb. Təcrübəli mütəxəssis qreftləri doğru yerləşdirərək sağ qalma və təbii görünüşü təmin edir.</p>
+                    </div>
+                </section>
+
+                {/* Xidmətlər paketi */}
+                <section id="paket" className="mb-16">
+                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Xidmətlərimizə nələr daxildir?</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-8 border border-[#7F6A47]/20 shadow-lg">
+                        <ul className="list-disc pl-6 space-y-2 text-[#3A3A3A]/80">
+                            <li>Prosedur öncəsi konsultasiyalar</li>
+                            <li>Prosedur öncəsi dermatoloq müayinəsi</li>
+                            <li>Prosedurun özü</li>
+                            <li>Prosedur sonrası dərmanlar və dəriyə qulluq məhsulları</li>
+                        </ul>
+                        <ul className="list-disc pl-6 space-y-2 text-[#3A3A3A]/80">
+                            <li>Prosedurdan sonra klinikada müayinələr</li>
+                            <li>Şəxsi koordinator</li>
+                            <li>Prosedurdan sonra 1 il ərzində dəstək</li>
+                            <li>Fərdiləşdirilə bilən paket seçenekleri</li>
+                        </ul>
+                    </div>
+                </section>
+
+                {/* Qiymətlər */}
+                <section id="qiymet" className="mb-4">
+                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Saç əkimi qiymətləri</h2>
+                    <div className="space-y-4 text-lg leading-relaxed text-[#3A3A3A]/80">
+                        <p>Qərb ölkələrində: 4,000–17,000 USD • Türkiyədə: 2,500–6,000 USD • Azərbaycanda: 1,000–4,000 AZN</p>
+                        <p>Qiymətlər mütəxəssislərin təcrübəsi, avadanlıq keyfiyyəti və xidmətlərin kapsamına görə dəyişir. Sığorta ilə karşılanmaz.</p>
+                    </div>
+                </section>
+
+                <div className="mt-10 flex justify-center">
+                    <MagneticButton onClick={() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })} className={`px-10 py-4 uppercase tracking-widest text-xs ${sysConfig ? 'bg-green-600 text-black' : 'bg-[#7F6A47] text-[#F8F3E6]'} hover:bg-[#F8F3E6] hover:text-[#3A3A3A]`}>
+                        Konsultasiya Al
+                    </MagneticButton>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export const MenBeardPage: React.FC<MenBeardPageProps> = ({ content, sysConfig }) => {
