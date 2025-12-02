@@ -1377,9 +1377,13 @@ export const UnifiedDesigner = () => {
       const currentWidth = canvasDims.displayWidth;
       const currentHeight = canvasDims.displayHeight;
       
-      // Capture canvas at display size with 1x scale first
+      // Calculate scale to maintain aspect ratio
+      const scaleX = targetWidth / currentWidth;
+      const scaleY = targetHeight / currentHeight;
+      
+      // Capture at higher resolution directly
       const capturedCanvas = await html2canvas(canvasRef.current, {
-        scale: 1,
+        scale: Math.max(scaleX, scaleY), // Use higher scale to ensure quality
         backgroundColor: null,
         logging: false,
         useCORS: true,
@@ -1388,7 +1392,7 @@ export const UnifiedDesigner = () => {
         height: currentHeight
       });
 
-      // Create a new canvas with target dimensions
+      // Create final canvas with exact target dimensions
       const finalCanvas = document.createElement('canvas');
       finalCanvas.width = targetWidth;
       finalCanvas.height = targetHeight;
@@ -1396,8 +1400,32 @@ export const UnifiedDesigner = () => {
       const ctx = finalCanvas.getContext('2d');
       if (!ctx) throw new Error('Canvas context error');
       
-      // Draw captured image onto final canvas (this maintains aspect ratio)
-      ctx.drawImage(capturedCanvas, 0, 0, targetWidth, targetHeight);
+      // Calculate dimensions to maintain aspect ratio
+      const capturedAspect = capturedCanvas.width / capturedCanvas.height;
+      const targetAspect = targetWidth / targetHeight;
+      
+      let drawWidth = targetWidth;
+      let drawHeight = targetHeight;
+      let offsetX = 0;
+      let offsetY = 0;
+      
+      // Center the image if aspect ratios don't match perfectly
+      if (Math.abs(capturedAspect - targetAspect) > 0.01) {
+        if (capturedAspect > targetAspect) {
+          drawHeight = targetWidth / capturedAspect;
+          offsetY = (targetHeight - drawHeight) / 2;
+        } else {
+          drawWidth = targetHeight * capturedAspect;
+          offsetX = (targetWidth - drawWidth) / 2;
+        }
+      }
+      
+      // Fill with background color
+      ctx.fillStyle = selectedTemplate?.bgColor || '#FFFFFF';
+      ctx.fillRect(0, 0, targetWidth, targetHeight);
+      
+      // Draw captured image maintaining aspect ratio
+      ctx.drawImage(capturedCanvas, offsetX, offsetY, drawWidth, drawHeight);
 
       // Download
       const link = document.createElement('a');
