@@ -276,7 +276,7 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
                   
                   {/* 3 Advantages */}
                   {t.long_fue.features_title && (
-                     <h4 className="text-2xl font-serif text-[#7F6A47] mb-6">{t.long_fue.features_title}</h4>
+                     <h3 className="text-2xl font-serif text-[#7F6A47] mb-6">{t.long_fue.features_title}</h3>
                   )}
                   
                   {Array.isArray(t.long_fue.features) && t.long_fue.features.length > 0 && (
@@ -316,7 +316,7 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
                         {/* Bio Section */}
                         <div className="lg:w-1/2 space-y-6">
                            <div className={`inline-block px-4 py-2 border border-[#7F6A47] ${sysConfig ? 'border-green-500' : ''}`}>
-                              <span className={`text-xs uppercase tracking-widest font-bold ${sysConfig ? 'text-green-500' : 'text-[#7F6A47]'}`}>
+                              <span className={`text-xs uppercase tracking-widest font-bold ${sysConfig ? 'text-green-500' : 'text-[#F8F3E6]'}`}>
                                 {doc.specialty}
                               </span>
                            </div>
