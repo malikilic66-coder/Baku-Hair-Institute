@@ -1,15 +1,26 @@
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Phone, MapPin, Instagram, Facebook, Menu, Shield, Award, ArrowRight, CalendarCheck, Upload, Sparkles } from 'lucide-react';
 import { content } from './constants';
 import { ScrollProgress, CustomCursor, MagneticButton, TiltCard, Preloader, PageTransitionLoader, Dropdown, Accordion, DoctorCard, WhyUsCard, AzePatternBackground } from './components/ui';
-import { MenHairPage, MenBeardPage, LongFuePage, HairlineDesignPage, WomenHairPage, EyebrowPage, AnesthesiaPage, PrpPage, MesotherapyPage, MedicalPage } from './components/Pages';
-import { SocialMediaDesigner } from './components/SocialMediaDesigner';
-import { CanvasDesigner } from './components/CanvasDesigner';
-import { BeforeAfterDesigner } from './components/BeforeAfterDesigner';
-import { UnifiedDesigner } from './components/UnifiedDesigner';
+const Pages = {
+   MenHairPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.MenHairPage }))),
+   MenBeardPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.MenBeardPage }))),
+   LongFuePage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.LongFuePage }))),
+   HairlineDesignPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.HairlineDesignPage }))),
+   WomenHairPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.WomenHairPage }))),
+   EyebrowPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.EyebrowPage }))),
+   AnesthesiaPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.AnesthesiaPage }))),
+   PrpPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.PrpPage }))),
+   MesotherapyPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.MesotherapyPage }))),
+   MedicalPage: React.lazy(() => import('./components/Pages').then(m => ({ default: m.MedicalPage }))),
+};
+const SocialMediaDesigner = React.lazy(() => import('./components/SocialMediaDesigner').then(m => ({ default: m.SocialMediaDesigner })));
+const CanvasDesigner = React.lazy(() => import('./components/CanvasDesigner').then(m => ({ default: m.CanvasDesigner })));
+const BeforeAfterDesigner = React.lazy(() => import('./components/BeforeAfterDesigner').then(m => ({ default: m.BeforeAfterDesigner })));
+const UnifiedDesigner = React.lazy(() => import('./components/UnifiedDesigner').then(m => ({ default: m.UnifiedDesigner })));
 
 // --- Custom Hooks ---
 
@@ -40,11 +51,15 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
       <header className="relative w-full h-screen min-h-[700px] overflow-hidden">
         {/* Full Width Banner Image */}
         <div className="absolute inset-0 z-0">
-           <img 
-            src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2000&auto=format&fit=crop" 
-            className={`w-full h-full object-cover ${sysConfig ? 'grayscale invert opacity-30' : ''}`} 
-            alt="Baku Hair Institute"
-          />
+                <img 
+                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2000&auto=format&fit=crop" 
+                  className={`w-full h-full object-cover ${sysConfig ? 'grayscale invert opacity-30' : ''}`} 
+                  alt="Baku Hair Institute"
+                  decoding="async"
+                  fetchpriority="high"
+                  width="2000"
+                  height="1200"
+               />
           {/* Gradient Overlay for text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
         </div>
@@ -542,25 +557,26 @@ export default function App() {
 
          {/* --- DYNAMIC CONTENT (Routes) --- */}
          <main className="transition-opacity duration-500 ease-in-out">
-            <Routes>
-               <Route path="/" element={<HomeView t={t} theme={theme} sysConfig={sysConfig} onNavigate={handleNavigation} />} />
-               <Route path="/men-hair" element={<MenHairPage content={t.men_hair_page} sysConfig={sysConfig} />} />
-               <Route path="/men-beard" element={<MenBeardPage content={t.men_beard_page} sysConfig={sysConfig} />} />
-               <Route path="/long-fue" element={<LongFuePage content={t.long_fue_page} sysConfig={sysConfig} />} />
-               <Route path="/hairline-design" element={<HairlineDesignPage content={t.hairline_page} sysConfig={sysConfig} />} />
-               <Route path="/women-hair" element={<WomenHairPage content={t.women_hair_page} sysConfig={sysConfig} />} />
-               <Route path="/women-eyebrow" element={<EyebrowPage content={t.eyebrow_page} sysConfig={sysConfig} />} />
-               <Route path="/anesthesia" element={<AnesthesiaPage content={t.anesthesia_page} sysConfig={sysConfig} />} />
-               <Route path="/prp" element={<PrpPage content={t.prp_page} sysConfig={sysConfig} />} />
-               <Route path="/mesotherapy" element={<MesotherapyPage content={t.meso_page} sysConfig={sysConfig} />} />
-               <Route path="/medical" element={<MedicalPage content={t.medical_page} sysConfig={sysConfig} />} />
-               <Route path="/social-designer" element={<SocialMediaDesigner />} />
-               <Route path="/canvas-designer" element={<CanvasDesigner />} />
-               <Route path="/before-after" element={<BeforeAfterDesigner />} />
-               <Route path="/unified-designer" element={<UnifiedDesigner />} />
-               {/* Fallback: redirect to home content */}
-               <Route path="*" element={<HomeView t={t} theme={theme} sysConfig={sysConfig} onNavigate={handleNavigation} />} />
-            </Routes>
+            <Suspense fallback={<div className="py-32 text-center">Yükleniyor...</div>}>
+               <Routes>
+                  <Route path="/" element={<HomeView t={t} theme={theme} sysConfig={sysConfig} onNavigate={handleNavigation} />} />
+                  <Route path="/men-hair" element={<Pages.MenHairPage content={t.men_hair_page} sysConfig={sysConfig} />} />
+                  <Route path="/men-beard" element={<Pages.MenBeardPage content={t.men_beard_page} sysConfig={sysConfig} />} />
+                  <Route path="/long-fue" element={<Pages.LongFuePage content={t.long_fue_page} sysConfig={sysConfig} />} />
+                  <Route path="/hairline-design" element={<Pages.HairlineDesignPage content={t.hairline_page} sysConfig={sysConfig} />} />
+                  <Route path="/women-hair" element={<Pages.WomenHairPage content={t.women_hair_page} sysConfig={sysConfig} />} />
+                  <Route path="/women-eyebrow" element={<Pages.EyebrowPage content={t.eyebrow_page} sysConfig={sysConfig} />} />
+                  <Route path="/anesthesia" element={<Pages.AnesthesiaPage content={t.anesthesia_page} sysConfig={sysConfig} />} />
+                  <Route path="/prp" element={<Pages.PrpPage content={t.prp_page} sysConfig={sysConfig} />} />
+                  <Route path="/mesotherapy" element={<Pages.MesotherapyPage content={t.meso_page} sysConfig={sysConfig} />} />
+                  <Route path="/medical" element={<Pages.MedicalPage content={t.medical_page} sysConfig={sysConfig} />} />
+                  <Route path="/social-designer" element={<SocialMediaDesigner />} />
+                  <Route path="/canvas-designer" element={<CanvasDesigner />} />
+                  <Route path="/before-after" element={<BeforeAfterDesigner />} />
+                  <Route path="/unified-designer" element={<UnifiedDesigner />} />
+                  <Route path="*" element={<HomeView t={t} theme={theme} sysConfig={sysConfig} onNavigate={handleNavigation} />} />
+               </Routes>
+            </Suspense>
          </main>
 
       {/* --- CONTACT / FORM (Shared across all pages) --- */}
