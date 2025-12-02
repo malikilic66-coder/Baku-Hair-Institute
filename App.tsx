@@ -575,66 +575,121 @@ export default function App() {
             </button>
           </div>
 
-          {/* Mobile Menu Overlay */}
-          {mobileMenuOpen && (
-            <div className="lg:hidden fixed inset-0 top-0 bg-[#3A3A3A]/98 backdrop-blur-lg z-[60] overflow-y-auto pt-20">
-              <div className="container mx-auto px-6 py-8 space-y-6">
+          {/* Mobile Menu Slide-in Drawer */}
+          <>
+            {/* Backdrop Overlay */}
+            <div 
+              className={`lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            
+            {/* Drawer from Right */}
+            <div className={`lg:hidden fixed top-0 right-0 h-full w-[85%] max-w-sm bg-[#2A2A2A] shadow-2xl z-[65] overflow-y-auto transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+              {/* Header */}
+              <div className="sticky top-0 bg-[#2A2A2A] border-b border-[#F8F3E6]/10 px-6 py-6 flex items-center justify-between z-10">
+                <h2 className="text-[#F8F3E6] text-xl font-serif font-bold">Menu</h2>
+                <button 
+                  onClick={() => setMobileMenuOpen(false)} 
+                  className="text-[#F8F3E6] hover:text-[#7F6A47] transition-colors p-2"
+                  aria-label="Menüyü kapat"
+                >
+                  <span className="text-2xl">✕</span>
+                </button>
+              </div>
+
+              {/* Menu Content */}
+              <div className="px-6 py-8 space-y-6">
                 {/* Men Section */}
                 <div className="border-b border-[#F8F3E6]/10 pb-6">
-                  <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.men}</h3>
+                  <h3 className="text-[#7F6A47] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.men}</h3>
                   <div className="space-y-3 pl-4">
                     {t.nav.men_items.map((item: any, idx: number) => (
-                      <button key={idx} onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} className="block text-[#F8F3E6]/70 hover:text-[#7F6A47] transition-colors w-full text-left py-2">
+                      <button 
+                        key={idx} 
+                        onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} 
+                        className="block text-[#F8F3E6]/80 hover:text-[#F8F3E6] hover:translate-x-2 transition-all w-full text-left py-2 text-base"
+                      >
                         {item.label}
                       </button>
                     ))}
                   </div>
                 </div>
+
                 {/* Women Section */}
                 <div className="border-b border-[#F8F3E6]/10 pb-6">
-                  <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.women}</h3>
+                  <h3 className="text-[#7F6A47] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.women}</h3>
                   <div className="space-y-3 pl-4">
                     {t.nav.women_items.map((item: any, idx: number) => (
-                      <button key={idx} onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} className="block text-[#F8F3E6]/70 hover:text-[#7F6A47] transition-colors w-full text-left py-2">
+                      <button 
+                        key={idx} 
+                        onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} 
+                        className="block text-[#F8F3E6]/80 hover:text-[#F8F3E6] hover:translate-x-2 transition-all w-full text-left py-2 text-base"
+                      >
                         {item.label}
                       </button>
                     ))}
                   </div>
                 </div>
+
                 {/* Other Section */}
                 <div className="border-b border-[#F8F3E6]/10 pb-6">
-                  <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.other}</h3>
+                  <h3 className="text-[#7F6A47] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.other}</h3>
                   <div className="space-y-3 pl-4">
                     {t.nav.other_items.map((item: any, idx: number) => (
-                      <button key={idx} onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} className="block text-[#F8F3E6]/70 hover:text-[#7F6A47] transition-colors w-full text-left py-2">
+                      <button 
+                        key={idx} 
+                        onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} 
+                        className="block text-[#F8F3E6]/80 hover:text-[#F8F3E6] hover:translate-x-2 transition-all w-full text-left py-2 text-base"
+                      >
                         {item.label}
                       </button>
                     ))}
                   </div>
                 </div>
+
                 {/* About Section */}
                 <div className="border-b border-[#F8F3E6]/10 pb-6">
-                  <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.about}</h3>
+                  <h3 className="text-[#7F6A47] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.about}</h3>
                   <div className="space-y-3 pl-4">
                     {t.nav.about_items.map((item: any, idx: number) => (
-                      <a key={idx} href={item.href} className="block text-[#F8F3E6]/70 hover:text-[#7F6A47] transition-colors w-full text-left py-2">
+                      <a 
+                        key={idx} 
+                        href={item.href} 
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block text-[#F8F3E6]/80 hover:text-[#F8F3E6] hover:translate-x-2 transition-all w-full text-left py-2 text-base"
+                      >
                         {item.label}
                       </a>
                     ))}
                   </div>
                 </div>
+
                 {/* Contact */}
-                <button onClick={() => { document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} className="block w-full text-left text-[#F8F3E6] font-bold py-3 border-b border-[#F8F3E6]/10">
+                <button 
+                  onClick={() => { document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} 
+                  className="block w-full text-left text-[#F8F3E6] font-bold py-4 border-b border-[#F8F3E6]/10 hover:text-[#7F6A47] transition-colors text-base"
+                >
                   {t.nav.contact}
                 </button>
+
                 {/* Language */}
                 <div className="flex gap-4 pt-4">
-                  <button onClick={() => { setLang('az'); setMobileMenuOpen(false); }} className={`px-6 py-2 border ${lang === 'az' ? 'border-[#7F6A47] text-[#7F6A47]' : 'border-[#F8F3E6]/30 text-[#F8F3E6]/70'}`}>AZ</button>
-                  <button onClick={() => { setLang('ru'); setMobileMenuOpen(false); }} className={`px-6 py-2 border ${lang === 'ru' ? 'border-[#7F6A47] text-[#7F6A47]' : 'border-[#F8F3E6]/30 text-[#F8F3E6]/70'}`}>RU</button>
+                  <button 
+                    onClick={() => { setLang('az'); }} 
+                    className={`flex-1 px-6 py-3 border-2 transition-all font-bold ${lang === 'az' ? 'border-[#7F6A47] bg-[#7F6A47] text-[#F8F3E6]' : 'border-[#F8F3E6]/30 text-[#F8F3E6]/70 hover:border-[#7F6A47]/50'}`}
+                  >
+                    AZ
+                  </button>
+                  <button 
+                    onClick={() => { setLang('ru'); }} 
+                    className={`flex-1 px-6 py-3 border-2 transition-all font-bold ${lang === 'ru' ? 'border-[#7F6A47] bg-[#7F6A47] text-[#F8F3E6]' : 'border-[#F8F3E6]/30 text-[#F8F3E6]/70 hover:border-[#7F6A47]/50'}`}
+                  >
+                    RU
+                  </button>
                 </div>
               </div>
             </div>
-          )}
+          </>
         </div>
       </nav>
 
