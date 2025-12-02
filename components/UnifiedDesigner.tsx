@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Maximize2, Minimize2, Download, Type, Upload,
   Layers, Eye, EyeOff,
@@ -1294,6 +1294,9 @@ export const UnifiedDesigner = () => {
   
   const canvasRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const dragStateRef = useRef<{ active: boolean; layerId: string | null; startX: number; startY: number; startPosX: number; startPosY: number; width: number; height: number } | null>(null);
+
+  const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 
   // Load template
   const loadTemplate = (template: Template) => {
@@ -1360,6 +1363,62 @@ export const UnifiedDesigner = () => {
           : layer
       )
     );
+  };
+
+  // Image drag handlers (pan)
+  const beginImageDrag = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>, layer: EditableLayer) => {
+    if (layer.locked) return;
+    if (selectedLayerId !== layer.id) setSelectedLayerId(layer.id);
+    const point = 'touches' in e ? e.touches[0] : (e as React.MouseEvent).nativeEvent as MouseEvent;
+    const target = e.currentTarget as HTMLDivElement;
+    const rect = target.getBoundingClientRect();
+    dragStateRef.current = {
+      active: true,
+      layerId: layer.id,
+      startX: point.clientX,
+      startY: point.clientY,
+      startPosX: typeof layer.style?.bgPosX === 'number' ? layer.style.bgPosX : 50,
+      startPosY: typeof layer.style?.bgPosY === 'number' ? layer.style.bgPosY : 50,
+      width: rect.width,
+      height: rect.height
+    };
+    window.addEventListener('mousemove', handleImageDragMove as any);
+    window.addEventListener('mouseup', endImageDrag as any);
+    window.addEventListener('touchmove', handleImageDragMove as any, { passive: false });
+    window.addEventListener('touchend', endImageDrag as any);
+  };
+
+  const handleImageDragMove = (e: MouseEvent | TouchEvent) => {
+    const st = dragStateRef.current;
+    if (!st || !st.active || !st.layerId) return;
+    const point = e instanceof TouchEvent ? e.touches[0] : e as MouseEvent;
+    if (!point) return;
+    if (e instanceof TouchEvent) e.preventDefault();
+    const dxPct = ((point.clientX - st.startX) / st.width) * 100;
+    const dyPct = ((point.clientY - st.startY) / st.height) * 100;
+    updateLayerStyle(st.layerId, {
+      bgPosX: clamp(st.startPosX + dxPct, 0, 100),
+      bgPosY: clamp(st.startPosY + dyPct, 0, 100)
+    });
+  };
+
+  const endImageDrag = () => {
+    if (!dragStateRef.current) return;
+    dragStateRef.current.active = false;
+    window.removeEventListener('mousemove', handleImageDragMove as any);
+    window.removeEventListener('mouseup', endImageDrag as any);
+    window.removeEventListener('touchmove', handleImageDragMove as any);
+    window.removeEventListener('touchend', endImageDrag as any);
+  };
+
+  // Image wheel zoom handler
+  const handleImageWheel = (e: React.WheelEvent<HTMLDivElement>, layer: EditableLayer) => {
+    if (layer.locked) return;
+    e.preventDefault();
+    const current = typeof layer.style?.bgScale === 'number' ? layer.style.bgScale : 100;
+    const delta = e.deltaY > 0 ? -5 : 5;
+    const next = clamp(current + delta, 100, 300);
+    updateLayerStyle(layer.id, { bgScale: next });
   };
 
   // Toggle layer visibility
@@ -1728,8 +1787,11 @@ export const UnifiedDesigner = () => {
                         return (
                           <div
                             key={layer.id}
-                            className="absolute overflow-hidden cursor-pointer"
+                            className={`absolute overflow-hidden ${selectedLayerId === layer.id ? 'cursor-move' : 'cursor-pointer'}`}
                             onClick={() => !layer.locked && setSelectedLayerId(layer.id)}
+                            onMouseDown={(e) => beginImageDrag(e, layer)}
+                            onTouchStart={(e) => beginImageDrag(e, layer)}
+                            onWheel={(e) => handleImageWheel(e, layer)}
                             style={{
                               left: `${(layer.position.x / 1080) * 100}%`,
                               top: `${(layer.position.y / baseHeight) * 100}%`,
@@ -1742,18 +1804,19 @@ export const UnifiedDesigner = () => {
                             }}
                           >
                             {layer.src ? (
-                              <div
-                                className="w-full h-full"
-                                style={{
-                                  backgroundImage: `url(${layer.src})`,
-                                  backgroundRepeat: 'no-repeat',
-                                  backgroundPosition: `${layer.style.bgPosX ?? 50}% ${layer.style.bgPosY ?? 50}%`,
-                                  backgroundSize:
-                                    typeof layer.style.bgScale === 'number'
-                                      ? `${layer.style.bgScale}% auto`
-                                      : (layer.style.objectFit === 'contain' ? 'contain' : 'cover')
-                                }}
-                              />
+                              <div className="w-full h-full relative">
+                                <div
+                                  className="absolute inset-0"
+                                  style={{
+                                    backgroundImage: `url(${layer.src})`,
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: `${layer.style.bgPosX ?? 50}% ${layer.style.bgPosY ?? 50}%`,
+                                    backgroundSize: 'cover',
+                                    transform: `scale(${(typeof layer.style.bgScale === 'number' ? layer.style.bgScale : 100) / 100})`,
+                                    transformOrigin: 'center'
+                                  }}
+                                />
+                              </div>
                             ) : (
                               <div className="w-full h-full flex items-center justify-center text-gray-400">
                                 <Upload className="w-12 h-12" />
@@ -1901,7 +1964,7 @@ export const UnifiedDesigner = () => {
                                       <label className="block text-xs font-medium text-[#3A3A3A] mb-1">Zoom (%)</label>
                                       <input
                                         type="range"
-                                        min={50}
+                                        min={100}
                                         max={300}
                                         step={1}
                                         value={typeof layer.style?.bgScale === 'number' ? layer.style.bgScale : 100}
