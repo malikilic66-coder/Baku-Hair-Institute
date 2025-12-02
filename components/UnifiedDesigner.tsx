@@ -1351,6 +1351,17 @@ export const UnifiedDesigner = () => {
     );
   };
 
+  // Update layer style (partial merge)
+  const updateLayerStyle = (layerId: string, partial: Record<string, any>) => {
+    setLayers(prevLayers =>
+      prevLayers.map(layer =>
+        layer.id === layerId
+          ? { ...layer, style: { ...(layer.style || {}), ...partial } }
+          : layer
+      )
+    );
+  };
+
   // Toggle layer visibility
   const toggleLayerVisibility = (layerId: string) => {
     setLayers(prevLayers =>
@@ -1731,17 +1742,16 @@ export const UnifiedDesigner = () => {
                             }}
                           >
                             {layer.src ? (
-                              <img
-                                src={layer.src}
-                                alt=""
-                                crossOrigin="anonymous"
+                              <div
                                 className="w-full h-full"
                                 style={{
-                                  objectFit: layer.style.objectFit || 'cover',
-                                  objectPosition: layer.style.objectPosition || 'center',
-                                  width: '100%',
-                                  height: '100%',
-                                  display: 'block'
+                                  backgroundImage: `url(${layer.src})`,
+                                  backgroundRepeat: 'no-repeat',
+                                  backgroundPosition: `${layer.style.bgPosX ?? 50}% ${layer.style.bgPosY ?? 50}%`,
+                                  backgroundSize:
+                                    typeof layer.style.bgScale === 'number'
+                                      ? `${layer.style.bgScale}% auto`
+                                      : (layer.style.objectFit === 'contain' ? 'contain' : 'cover')
                                 }}
                               />
                             ) : (
@@ -1882,6 +1892,60 @@ export const UnifiedDesigner = () => {
                                   <div className="mt-2 text-xs text-green-600 flex items-center gap-1">
                                     <span>✓</span>
                                     <span>Şəkil yükləndi</span>
+                                  </div>
+                                )}
+
+                                {layer.src && (
+                                  <div className="mt-4 space-y-4">
+                                    <div>
+                                      <label className="block text-xs font-medium text-[#3A3A3A] mb-1">Zoom (%)</label>
+                                      <input
+                                        type="range"
+                                        min={50}
+                                        max={300}
+                                        step={1}
+                                        value={typeof layer.style?.bgScale === 'number' ? layer.style.bgScale : 100}
+                                        onChange={(e) => updateLayerStyle(layer.id, { bgScale: Number(e.target.value) })}
+                                        className="w-full"
+                                      />
+                                      <div className="text-right text-xs text-gray-500">{typeof layer.style?.bgScale === 'number' ? layer.style.bgScale : 100}%</div>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4">
+                                      <div>
+                                        <label className="block text-xs font-medium text-[#3A3A3A] mb-1">Yatay Konum (%)</label>
+                                        <input
+                                          type="range"
+                                          min={0}
+                                          max={100}
+                                          step={1}
+                                          value={typeof layer.style?.bgPosX === 'number' ? layer.style.bgPosX : 50}
+                                          onChange={(e) => updateLayerStyle(layer.id, { bgPosX: Number(e.target.value) })}
+                                          className="w-full"
+                                        />
+                                      </div>
+                                      <div>
+                                        <label className="block text-xs font-medium text-[#3A3A3A] mb-1">Dikey Konum (%)</label>
+                                        <input
+                                          type="range"
+                                          min={0}
+                                          max={100}
+                                          step={1}
+                                          value={typeof layer.style?.bgPosY === 'number' ? layer.style.bgPosY : 50}
+                                          onChange={(e) => updateLayerStyle(layer.id, { bgPosY: Number(e.target.value) })}
+                                          className="w-full"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                      <button
+                                        type="button"
+                                        onClick={() => updateLayerStyle(layer.id, { bgScale: 100, bgPosX: 50, bgPosY: 50 })}
+                                        className="px-3 py-1.5 text-xs rounded-md bg-gray-100 hover:bg-gray-200 text-[#3A3A3A]"
+                                      >
+                                        Sıfırla
+                                      </button>
+                                      <div className="text-[10px] text-gray-500">Arxa plan: cover + pan/zoom</div>
+                                    </div>
                                   </div>
                                 )}
                               </div>
