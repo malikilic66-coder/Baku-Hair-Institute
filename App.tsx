@@ -591,21 +591,21 @@ export default function App() {
                      <div className="flex items-start gap-6 group">
                         <div className="p-4 bg-[#F8F3E6]/5 rounded-full transition-colors group-hover:bg-[#7F6A47]/20"><MapPin size={24} className={theme.gold}/></div>
                         <div>
-                           <p className="text-xs uppercase tracking-widest text-[#F8F3E6]/50 mb-1">Ünvan</p>
+                           <p className="text-xs uppercase tracking-widest text-[#F8F3E6] mb-1">Ünvan</p>
                            <p className="text-lg">Bakı ş., Nizami küç. 11</p>
                         </div>
                      </div>
                      <div className="flex items-start gap-6 group">
                         <div className="p-4 bg-[#F8F3E6]/5 rounded-full transition-colors group-hover:bg-[#7F6A47]/20"><Phone size={24} className={theme.gold}/></div>
                         <div>
-                           <p className="text-xs uppercase tracking-widest text-[#F8F3E6]/50 mb-1">Telefon</p>
+                           <p className="text-xs uppercase tracking-widest text-[#F8F3E6] mb-1">Telefon</p>
                            <p className="text-lg">+994 50 123 45 67</p>
                         </div>
                      </div>
                      <div className="flex items-start gap-6 group">
                         <div className="p-4 bg-[#F8F3E6]/5 rounded-full transition-colors group-hover:bg-[#7F6A47]/20"><CalendarCheck size={24} className={theme.gold}/></div>
                         <div>
-                           <p className="text-xs uppercase tracking-widest text-[#F8F3E6]/50 mb-1">İş Saatları</p>
+                           <p className="text-xs uppercase tracking-widest text-[#F8F3E6] mb-1">İş Saatları</p>
                            <p className="text-lg">B.e - Ş. 09:00 - 19:00</p>
                         </div>
                      </div>
@@ -623,14 +623,18 @@ export default function App() {
                      
                      {/* Name */}
                      <div className="group relative">
+                        <label htmlFor="fullName" className="visually-hidden">{t.form.name}</label>
                         <input 
+                           id="fullName"
+                           name="fullName"
                            type="text" 
+                           aria-label={t.form.name}
                            className={`peer w-full border-b-2 border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] ${sysConfig ? 'text-green-500 focus:border-green-500' : 'text-[#F8F3E6]'}`} 
                            placeholder=" " 
                         />
-                        <label className={`absolute left-0 top-4 text-[#F8F3E6]/50 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#7F6A47] ${sysConfig ? 'peer-focus:text-green-500' : ''}`}>
+                        <span className={`absolute left-0 top-4 text-[#F8F3E6]/70 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#F8F3E6]`}>
                            {t.form.name}
-                        </label>
+                        </span>
                      </div>
 
                      {/* Phone with country code selector */}
@@ -643,14 +647,18 @@ export default function App() {
                            <option value="+1" className="bg-[#3A3A3A]">🇺🇸 +1</option>
                         </select>
                         <div className="flex-1 relative">
+                           <label htmlFor="phoneNumber" className="visually-hidden">{t.form.phone}</label>
                            <input 
+                              id="phoneNumber"
+                              name="phoneNumber"
                               type="tel" 
+                              aria-label={t.form.phone}
                               className={`peer w-full border-b-2 border-[#F8F3E6]/20 py-4 bg-transparent outline-none transition-colors focus:border-[#7F6A47] ${sysConfig ? 'text-green-500 focus:border-green-500' : 'text-[#F8F3E6]'}`} 
                               placeholder=" " 
                            />
-                           <label className={`absolute left-0 top-4 text-[#F8F3E6]/50 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#7F6A47] ${sysConfig ? 'peer-focus:text-green-500' : ''}`}>
+                           <span className={`absolute left-0 top-4 text-[#F8F3E6]/70 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#F8F3E6]`}>
                               {t.form.phone}
-                           </label>
+                           </span>
                         </div>
                      </div>
 
@@ -713,7 +721,7 @@ export default function App() {
               </button>
             </div>
             
-            <p className="text-[10px] uppercase tracking-widest text-[#F8F3E6]/40">&copy; 2024 Baku Hair Institute. All rights reserved.</p>
+            <p className="text-[10px] uppercase tracking-widest text-[#F8F3E6]/70">&copy; 2024 Baku Hair Institute. All rights reserved.</p>
          </div>
       </footer>
 

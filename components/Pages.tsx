@@ -206,7 +206,7 @@ export const LongFuePage: React.FC<LongFuePageProps> = ({ content, sysConfig }) 
                       <div className="w-16 h-16 mx-auto mb-6 bg-[#7F6A47] text-[#F8F3E6] flex items-center justify-center rounded-full text-2xl font-serif">
                           {idx + 1}
                       </div>
-                      <h4 className="text-xl font-bold mb-3">{item.title}</h4>
+                      <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                       <p className="opacity-70">{item.desc}</p>
                   </div>
               ))}
