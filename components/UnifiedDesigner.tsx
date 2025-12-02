@@ -5,7 +5,7 @@ import {
   ZoomIn, ZoomOut, Grid, Sparkles,
   Image as ImageIcon, FileText, Star, MessageCircle,
   Award, TrendingUp, Clock, BookOpen, Frame,
-  Circle, Square, Zap, Hash, AlignCenter
+  Circle, Square, Zap, Hash, AlignCenter, Smartphone, Monitor
 } from 'lucide-react';
 
 interface EditableLayer {
@@ -793,6 +793,7 @@ export const UnifiedDesigner = () => {
   const [selectedLayerId, setSelectedLayerId] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
   const [filterCategory, setFilterCategory] = useState<string>('all');
+  const [format, setFormat] = useState<'1:1' | '9:16'>('1:1');
   
   const canvasRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -802,6 +803,17 @@ export const UnifiedDesigner = () => {
     setSelectedTemplate(template);
     setLayers(JSON.parse(JSON.stringify(template.layers))); // Deep clone
   };
+
+  // Get canvas dimensions based on format
+  const getCanvasDimensions = () => {
+    if (format === '1:1') {
+      return { width: 1080, height: 1080, displayWidth: 540, displayHeight: 540 };
+    } else {
+      return { width: 1080, height: 1920, displayWidth: 405, displayHeight: 720 };
+    }
+  };
+
+  const canvasDims = getCanvasDimensions();
 
   // Handle image upload with instant preview
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, layerId: string) => {
@@ -996,15 +1008,43 @@ export const UnifiedDesigner = () => {
                   {selectedTemplate ? selectedTemplate.name : 'Şablon Seçin'}
                 </h3>
                 
-                {selectedTemplate && (
-                  <button
-                    onClick={handleDownload}
-                    className="flex items-center gap-2 px-4 py-2 bg-[#7F6A47] hover:bg-[#6B5A3D] text-white rounded-lg transition-all"
-                  >
-                    <Download className="w-4 h-4" />
-                    <span className="text-sm font-medium">PNG Yüklə</span>
-                  </button>
-                )}
+                <div className="flex items-center gap-3">
+                  {/* Format Selector */}
+                  <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-lg">
+                    <button
+                      onClick={() => setFormat('1:1')}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                        format === '1:1'
+                          ? 'bg-[#7F6A47] text-white shadow-sm'
+                          : 'text-[#3A3A3A] hover:bg-gray-200'
+                      }`}
+                    >
+                      <Monitor className="w-4 h-4" />
+                      <span>1:1</span>
+                    </button>
+                    <button
+                      onClick={() => setFormat('9:16')}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                        format === '9:16'
+                          ? 'bg-[#7F6A47] text-white shadow-sm'
+                          : 'text-[#3A3A3A] hover:bg-gray-200'
+                      }`}
+                    >
+                      <Smartphone className="w-4 h-4" />
+                      <span>9:16</span>
+                    </button>
+                  </div>
+
+                  {selectedTemplate && (
+                    <button
+                      onClick={handleDownload}
+                      className="flex items-center gap-2 px-4 py-2 bg-[#7F6A47] hover:bg-[#6B5A3D] text-white rounded-lg transition-all shadow-sm"
+                    >
+                      <Download className="w-4 h-4" />
+                      <span className="text-sm font-medium">PNG Yüklə</span>
+                    </button>
+                  )}
+                </div>
               </div>
 
               {/* Canvas */}
@@ -1014,15 +1054,20 @@ export const UnifiedDesigner = () => {
                     ref={canvasRef}
                     className="relative shadow-2xl"
                     style={{
-                      width: '540px',
-                      height: '540px',
+                      width: `${canvasDims.displayWidth}px`,
+                      height: `${canvasDims.displayHeight}px`,
                       backgroundColor: selectedTemplate.bgColor,
-                      transform: `scale(${zoom})`
+                      transform: `scale(${zoom})`,
+                      transformOrigin: 'center',
+                      transition: 'width 0.3s ease, height 0.3s ease'
                     }}
                   >
                     {layers.map(layer => {
                       // Skip hidden layers
                       if (layer.visible === false) return null;
+
+                      // Calculate position/size based on current format
+                      const baseHeight = format === '1:1' ? 1080 : 1920;
 
                       if (layer.type === 'background' || layer.type === 'mask' || layer.type === 'frame' || layer.type === 'pattern') {
                         return (
@@ -1031,9 +1076,9 @@ export const UnifiedDesigner = () => {
                             className="absolute"
                             style={{
                               left: `${(layer.position.x / 1080) * 100}%`,
-                              top: `${(layer.position.y / 1080) * 100}%`,
+                              top: `${(layer.position.y / baseHeight) * 100}%`,
                               width: `${(layer.size.width / 1080) * 100}%`,
-                              height: `${(layer.size.height / 1080) * 100}%`,
+                              height: `${(layer.size.height / baseHeight) * 100}%`,
                               ...layer.style
                             }}
                           />
@@ -1047,26 +1092,8 @@ export const UnifiedDesigner = () => {
                             className="absolute font-serif font-bold"
                             style={{
                               left: `${(layer.position.x / 1080) * 100}%`,
-                              top: `${(layer.position.y / 1080) * 100}%`,
-                              fontSize: `${(layer.style.fontSize / 1080) * 540}px`,
-                              color: layer.style.color,
-                              fontFamily: layer.style.fontFamily
-                            }}
-                          >
-                            {layer.content}
-                          </div>
-                        );
-                      }
-
-                      if (layer.type === 'logo') {
-                        return (
-                          <div
-                            key={layer.id}
-                            className="absolute font-serif font-bold"
-                            style={{
-                              left: `${(layer.position.x / 1080) * 100}%`,
-                              top: `${(layer.position.y / 1080) * 100}%`,
-                              fontSize: `${(layer.style.fontSize / 1080) * 540}px`,
+                              top: `${(layer.position.y / baseHeight) * 100}%`,
+                              fontSize: `${(layer.style.fontSize / 1080) * canvasDims.displayWidth}px`,
                               color: layer.style.color,
                               fontFamily: layer.style.fontFamily
                             }}
@@ -1084,16 +1111,18 @@ export const UnifiedDesigner = () => {
                             onClick={() => !layer.locked && setSelectedLayerId(layer.id)}
                             style={{
                               left: `${(layer.position.x / 1080) * 100}%`,
-                              top: `${(layer.position.y / 1080) * 100}%`,
+                              top: `${(layer.position.y / baseHeight) * 100}%`,
                               width: `${(layer.size.width / 1080) * 100}%`,
                               transform: 'translateX(-50%)',
-                              fontSize: `${(layer.style.fontSize / 1080) * 540}px`,
+                              fontSize: `${(layer.style.fontSize / 1080) * canvasDims.displayWidth}px`,
                               color: layer.style.color,
                               fontFamily: layer.style.fontFamily,
                               fontWeight: layer.style.fontWeight,
                               textAlign: layer.style.textAlign,
                               fontStyle: layer.style.fontStyle,
                               lineHeight: layer.style.lineHeight,
+                              textShadow: layer.style.textShadow,
+                              letterSpacing: layer.style.letterSpacing,
                               whiteSpace: 'pre-line'
                             }}
                           >
@@ -1110,12 +1139,13 @@ export const UnifiedDesigner = () => {
                             onClick={() => !layer.locked && setSelectedLayerId(layer.id)}
                             style={{
                               left: `${(layer.position.x / 1080) * 100}%`,
-                              top: `${(layer.position.y / 1080) * 100}%`,
+                              top: `${(layer.position.y / baseHeight) * 100}%`,
                               width: `${(layer.size.width / 1080) * 100}%`,
-                              height: `${(layer.size.height / 1080) * 100}%`,
+                              height: `${(layer.size.height / baseHeight) * 100}%`,
                               borderRadius: layer.style.borderRadius,
                               border: layer.style.border,
-                              backgroundColor: '#E5E5E5'
+                              backgroundColor: '#E5E5E5',
+                              filter: layer.style.filter
                             }}
                           >
                             {layer.src ? (
@@ -1148,24 +1178,29 @@ export const UnifiedDesigner = () => {
                 )}
               </div>
 
-              {/* Zoom Controls */}
+              {/* Zoom Controls & Format Info */}
               {selectedTemplate && (
-                <div className="flex items-center justify-center gap-4 mt-4">
-                  <button
-                    onClick={() => setZoom(Math.max(0.5, zoom - 0.1))}
-                    className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
-                  >
-                    <ZoomOut className="w-5 h-5 text-[#3A3A3A]" />
-                  </button>
-                  <span className="text-sm font-medium text-[#3A3A3A] min-w-[60px] text-center">
-                    {Math.round(zoom * 100)}%
-                  </span>
-                  <button
-                    onClick={() => setZoom(Math.min(1.5, zoom + 0.1))}
-                    className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
-                  >
-                    <ZoomIn className="w-5 h-5 text-[#3A3A3A]" />
-                  </button>
+                <div className="flex items-center justify-between mt-4">
+                  <div className="text-sm text-[#7F6A47] font-medium">
+                    📐 Format: <span className="font-bold">{format === '1:1' ? '1080×1080 (Kare)' : '1080×1920 (Dikey)'}</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={() => setZoom(Math.max(0.5, zoom - 0.1))}
+                      className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
+                    >
+                      <ZoomOut className="w-5 h-5 text-[#3A3A3A]" />
+                    </button>
+                    <span className="text-sm font-medium text-[#3A3A3A] min-w-[60px] text-center">
+                      {Math.round(zoom * 100)}%
+                    </span>
+                    <button
+                      onClick={() => setZoom(Math.min(1.5, zoom + 0.1))}
+                      className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
+                    >
+                      <ZoomIn className="w-5 h-5 text-[#3A3A3A]" />
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
