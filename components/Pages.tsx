@@ -68,119 +68,272 @@ export const MenHairPage: React.FC<MenHairPageProps> = ({ content, sysConfig }) 
             </div>
 
             <div className="container mx-auto px-6 py-20">
-                {/* Saç ekimi nedir */}
-                <section id="nedir" className="mb-16">
-                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Saç əkimi nədir?</h2>
-                    <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
-                        <p>Baş dərisində həddindən artıq saç tökülməsi keçəlliyə yol açır. Keçəlliyin ən yayğın səbəbi irsi saç tökülməsidir. Hər kəsin saçları tökülə bilər, lakin bu, kişilərdə daha çox rast gəlinir. Saç tökülməsi çox ciddi hal alıbsa və keçəl bölgələr nəzərə çarpan dərəcədə genişlənibsə, o zaman problemin çarəsi saç əkimidir.</p>
-                        <h3 className="text-xl font-bold text-[#7F6A47]">Saç əkimi üçün uyğun namizədlər</h3>
-                        <p>Yaşı mümkün olduğu qədər böyük olan, həm transplantasiya, həm də gələcək ehtiyaclar üçün kifayət qədər güclü donora sahib olan və nəticələr barədə real gözləntiləri olan şəxslər saç əkimi üçün ideal namizədlərdir. Təbii ki, pasiyentin səhhətinin əməliyyata tam uyğun olması da vacibdir.</p>
-                        <p>Qeyd edək ki, kişilər saç əkimindən əvvəl saç tökülməsinin stabil olduğuna və aktiv tökülmə fazasında olmadığına əmin olmalıdır. Hormonal promlemlər, anemiya, qalxanabənzər vəz xəstəlikləri və ya vitamin çatışmazlığı kimi bilinən problemlər var isə, saç əkimindən əvvəl mütləq yoxlanmalı və müalicə olunmalıdır ki, əkilən saç köklərinin sağ qalma ehtimalı yüksək olsun.</p>
-                        <h3 className="text-xl font-bold text-[#7F6A47]">Saç əkiminin 3 əsas mərhələsi</h3>
-                        <ul className="list-disc pl-6 space-y-2">
-                            <li>Birinci mərhələdə saç follikulları tək-tək başın arxa hissəsindən çıxarılır.</li>
-                            <li>İkinci mərhələdə xüsusi iynələr vasitəsilə kanallar açılır.</li>
-                            <li>Üçüncü və son mərhələdə isə saç follikulları keçəlləşmiş sahələrə transplantasiya olunur.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                {/* Metodlar: FUE ve LONG FUE */}
-                <section id="metodlar" className="mb-16">
-                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Ən çox istifadə edilən metodlar</h2>
+        {/* Saç ekimi nedir */}
+        <section id="nedir" className="mb-20">
+          <h2 className="text-3xl lg:text-5xl font-serif mb-8 text-[#3A3A3A]">Saç əkimi nədir?</h2>
+          <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
+            <h3 className="text-2xl font-bold text-[#7F6A47] mt-8">Saç tökülməsi və saç əkimi</h3>
+            <p>Baş dərisində həddindən artıq saç tökülməsi keçəlliyə yol açır. Keçəlliyin ən yayğın səbəbi irsi saç tökülməsidir. Hər kəsin saçları tökülə bilər, lakin bu, kişilərdə daha çox rast gəlinir. Saç tökülməsi çox ciddi hal alıbsa və keçəl bölgələr nəzərə çarpan dərəcədə genişlənibsə, o zaman problemin çarəsi saç əkimidir.</p>
+            
+            <h3 className="text-2xl font-bold text-[#7F6A47] mt-8">Saç əkimi proseduru üçün uyğun kandidatlar</h3>
+            <p>Yaşı mümkün olduğu qədər böyük olan, həm transplantasiya, həm də gələcək ehtiyaclar üçün kifayət qədər güclü donora sahib olan və nəticələr barədə real gözləntiləri olan şəxslər saç əkimi üçün ideal namizədlərdir. Təbii ki, pasiyentin səhhətinin əməliyyata tam uyğun olması da vacibdir.</p>
+            <p>Qeyd edək ki, kişilər saç əkimindən əvvəl saç tökülməsinin stabil olduğuna və aktiv tökülmə fazasında olmadığına əmin olmalıdır. Hormonal promlemlər, anemiya, qalxanabənzər vəz xəstəlikləri və ya vitamin çatışmazlığı kimi bilinən problemlər var isə, saç əkimindən əvvəl mütləq yoxlanmalı və müalicə olunmalıdır ki, əkilən saç köklərinin sağ qalma ehtimalı yüksək olsun.</p>
+            
+            <h3 className="text-2xl font-bold text-[#7F6A47] mt-8">Saç əkiminin 3 əsas mərhələsi</h3>
+            <div className="bg-white p-8 rounded border border-[#7F6A47]/20 shadow-lg">
+              <ul className="space-y-4">
+                <li className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-[#7F6A47] text-[#F8F3E6] flex items-center justify-center font-bold flex-shrink-0">1</div>
+                  <p className="pt-1">Birinci mərhələdə saç follikulları tək-tək başın arxa hissəsindən çıxarılır.</p>
+                </li>
+                <li className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-[#7F6A47] text-[#F8F3E6] flex items-center justify-center font-bold flex-shrink-0">2</div>
+                  <p className="pt-1">İkinci mərhələdə xüsusi iynələr vasitəsilə kanallar açılır.</p>
+                </li>
+                <li className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-[#7F6A47] text-[#F8F3E6] flex items-center justify-center font-bold flex-shrink-0">3</div>
+                  <p className="pt-1">Üçüncü və son mərhələdə isə saç follikulları keçəlləşmiş sahələrə transplantasiya olunur.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>                {/* Metodlar: FUE ve LONG FUE */}
+                <section id="metodlar" className="mb-20">
+                    <h2 className="text-3xl lg:text-5xl font-serif mb-8 text-[#3A3A3A]">Saç əkimində ən geniş istifadə olunan metodlar</h2>
+                    <p className="text-lg text-[#3A3A3A]/80 mb-10 leading-relaxed">Son 10 ildə FUE metodu ilə həyata keçirilən saç əkimi prosedurlarının sayı ciddi şəkildə çoxalmışdır. FUE metodu ilə əməliyyat zamanı başın arqa hissəsindən xüsusi cihaz vasitəsilə çıxarılan saç kökləri sonrakı mərhələdə xüsusi pinsetlərdən istifadə edilərək başın keçəl nahiyələrinə əkilir.</p>
+                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="bg-white p-8 border border-[#7F6A47]/20 shadow-lg">
-                            <h3 className="text-2xl font-serif mb-3 text-[#7F6A47]">FUE Metodu</h3>
-                            <p className="opacity-80 mb-4">Son 10 ildə FUE metodu ilə həyata keçirilən saç əkimi prosedurlarının sayı ciddi şəkildə çoxalmışdır. FUE metodu ilə əməliyyat zamanı başın arxa hissəsindən xüsusi cihaz vasitəsilə çıxarılan saç kökləri sonrakı mərhələdə xüsusi pinsetlərdən istifadə edilərək başın keçəl nahiyələrinə əkilir.</p>
-                            <h4 className="font-bold mb-3">Üstün cəhətləri</h4>
-                            <ul className="list-disc pl-6 space-y-2 text-[#3A3A3A]/80">
-                                <li>Dəridə yara izləri buraxmır</li>
-                                <li>Pasiyentlər izlərdən narahat olmadan saçlarını qısa kəsdirə bilər</li>
-                                <li>Əməliyyatdan sonra dəri tez sağalır və xəstə normal rutin həyatına dönə bilir</li>
-                                <li>FUT metoduna görə ağrılar ciddi şəkildə azdır</li>
-                                <li>Bədənin digər nahiyələrindən tük almaq üçün istifadə edilə bilər</li>
+                        <div className="bg-white p-10 border-2 border-[#7F6A47]/30 shadow-xl hover:shadow-2xl transition-all">
+                            <h3 className="text-2xl font-serif mb-4 text-[#7F6A47]">FUE Metodu</h3>
+                            <p className="opacity-80 mb-6 leading-relaxed">FUE metodu ilə əməliyyat zamanı başın arqa hissəsindən xüsusi cihaz vasitəsilə çıxarılan saç kökləri sonrakı mərhələdə xüsusi pinsetlərdən istifadə edilərək başın keçəl nahiyələrinə əkilir.</p>
+                            <h4 className="font-bold mb-4 text-[#3A3A3A]">FUE metodunun ən üstün cəhətləri:</h4>
+                            <ul className="space-y-3 text-[#3A3A3A]/80">
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={20} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <span>Dəridə yara izləri buraxmır</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={20} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <span>Pasiyentlər izlərdən narahat olmadan saçlarını qısa kəsdirə bilər</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={20} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <span>Əməliyyatdan sonra dəri tez sağalır və xəstə normal rutin həyatına dönə bilir</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={20} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <span>FUT metoduna görə ağrılar ciddi şəkildə azdır</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={20} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <span>Bədənin digər nahiyələrindən tük almaq üçün istifadə edilə bilər</span>
+                                </li>
                             </ul>
                         </div>
-                        <div className="bg-white p-8 border border-[#7F6A47]/20 shadow-lg">
-                            <h3 className="text-2xl font-serif mb-3 text-[#7F6A47]">LONG FUE Metodu</h3>
-                            <p className="opacity-80 mb-4">LONG FUE — FUE metodunun fərqli bir növüdür. Ənənəvi FUE metodundan əsas fərqi odur ki, prosedur zamanı saçlar kəsilmir və qırxılmır.</p>
-                            <h4 className="font-bold mb-3">Üstün cəhətləri</h4>
-                            <ul className="list-disc pl-6 space-y-2 text-[#3A3A3A]/80">
-                                <li>Saçları kəsməyə və qırxmağa ehtiyac yoxdur</li>
-                                <li>Yara izləri qalmır</li>
-                                <li>Donor sahəsi daha az travma olur</li>
-                                <li>Dəri daha sürətli sağalır</li>
-                                <li>Estetik baxımdan prosedur olduğunuz nəzərə çarpmır</li>
+                        
+                        <div className="bg-gradient-to-br from-[#7F6A47]/10 to-[#7F6A47]/5 p-10 border-2 border-[#7F6A47] shadow-xl hover:shadow-2xl transition-all">
+                            <h3 className="text-2xl font-serif mb-4 text-[#7F6A47]">LONG FUE Metodu</h3>
+                            <p className="opacity-90 mb-6 leading-relaxed">Son illərdə sürətlə yayılan və geniş istifadə edilən yeni saç əkimi metodu LONG FUE-dir. Adından göründüyü kimi bu metod FUE-nin fərqli bir növüdür. Ənənəvi FUE metodundan tək, amma ən əsas fərqi isə odur ki, prosedur zamanı saçlar kəsilmir və qırxılmır.</p>
+                            <h4 className="font-bold mb-4 text-[#3A3A3A]">LONG FUE metodunun ən üstün cəhətləri:</h4>
+                            <ul className="space-y-3 text-[#3A3A3A]/90">
+                                <li className="flex items-start gap-3">
+                                    <Star size={20} className="text-[#7F6A47] fill-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <span>Saçları kəsməyə və qırxmağa ehtiyac yoxdur</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <Star size={20} className="text-[#7F6A47] fill-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <span>Yara izləri qalmır</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <Star size={20} className="text-[#7F6A47] fill-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <span>Donor sahəsi daha az travma olur</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <Star size={20} className="text-[#7F6A47] fill-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <span>Dəri daha sürətli sağalır</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <Star size={20} className="text-[#7F6A47] fill-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <span>Estetik baxımdan xəstələrin daha çox xoşuna gəlir, çünki prosedur olduğunuz nəzərə çarpmır</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </section>
 
                 {/* Komanda */}
-                <section id="komanda" className="mb-16">
-                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Saç əkimi komandamız</h2>
-                    <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
-                        <p>Uzun illərdir Türkiyə həkimləri həyata keçirdikləri yüz minlərlə saç əkimi prosedurlarının sayına görə dünya ölkələri arasında lider səviyyədədir. Bu ardıcıl prosedurlar sayəsində mütəxəssislərimiz əvəzolunmaz təcrübə qazanmışdır.</p>
-                        <p>Mütəxəssislər tibbi sertifikatlara sahibdirlər, protokollara uyğun şəkildə tam gigiyenik şəraitdə prosedurları icra edirlər. Yerli dermatoloqlarımız prosedurlar zamanı dəstək verir və ümumi gedişata nəzarət edir.</p>
-                        <p>Türkiyədən gələn mütəxəssislərin və yerli dermatoloqların bu ortaq işi xəstələr üçün keyfiyyətli əməliyyat və əməliyyatdan sonra diqqətli baxım üçün mükəmməl şərait yaradır.</p>
+                <section id="komanda" className="mb-20">
+                    <h2 className="text-3xl lg:text-5xl font-serif mb-8 text-[#3A3A3A]">Saç əkimi komandamız</h2>
+                    <div className="bg-white p-10 border border-[#7F6A47]/20 shadow-lg rounded">
+                        <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
+                            <p>Xəstələrimizi keyfiyyətli və beynəlxalq standartlara cavab verən saç əkimi proseduru ilə təmin etmək üçün yeni bir ideya ilə qarşınıza çıxdıq. Uzun illərdir Türkiyə həkimləri həyata keçirdikləri yüz minlərlə saç əkimi prosedurlarının sayına görə dünya ölkələri arasında lider səviyyədədir. Və ard-arda keçirilən bu prosedurlar sayəsində saç əkimi mütəxəssislərimiz əvəzolunmaz təcrübə qazanmışdır.</p>
+                            <p>Çünki hər yeni xəstə – yeni saç tökülmə tipi, yeni saç xarakteristikası, yeni dəri xüsusiyyətləri, yeni prosedur və yeni individual yanaşma deməkdir. Hər yeni əməliyyatda mütəxəssislərimiz öz peşəkarlıq səviyyələrini daha da yüksəldiblər.</p>
+                            <p>Mütəxəssislər tibbi sertifikatlara sahibdirlər. İllərdir səhiyyə qurumları tərəfindən verilən protokollara görə əməliyyatları icra ediblər və tam gigiyenik şəraitdə prosedurları həyata keçirirlər. Bununla yanaşı, yerli dermatoloqlarımız onlara prosedurlar zamanı dəstək verir və ümumi gedişata nəzarət edirlər.</p>
+                            <p>Dermatoloq komandamız isə Azərbaycanın ən öndə gedən həkimlərindən ibarətdir. Onlar on illərdir öz təcrübələri ilə öz adlarını xəstələrin yaddaşına həkk ediblər. Türkiyədən gələn mütəxəssislərin və yerli dermatoloqların bu ortaq işi xəstələrin keyfiyyətli əməliyyat olması üçün və əməliyyatdan sonra diqqətli baxım üçün mükəmməl şərait yaradır.</p>
+                        </div>
                     </div>
                 </section>
 
                 {/* Ağrı */}
-                <section id="agri" className="mb-16">
-                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Saç əkimi ağrılıdırmı?</h2>
-                    <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
-                        <h3 className="text-xl font-bold text-[#7F6A47]">Prosedur zamanı</h3>
-                        <p>Yerlı anesteziya ilə dərinin keyləşdirilməsi sayəsində prosedur zamanı ağrı və diskomfort hiss edilmir. Başlanğıc iynə uygulamaları qısa sürən diskomfort yarada bilər.</p>
-                        <h3 className="text-xl font-bold text-[#7F6A47]">Prosedurdan sonra</h3>
-                        <p>Anesteziyanın təsiri azalınca diskomfort artabilir; ağrıkəsicilər və istifadə qaydaları öncədən izah edilir və sonrakı mərhələlərdə rahatlıq sağlar.</p>
+                <section id="agri" className="mb-20">
+                    <h2 className="text-3xl lg:text-5xl font-serif mb-8 text-[#3A3A3A]">Saç əkimi ağrılıdır?</h2>
+                    <p className="text-lg text-[#3A3A3A]/80 mb-10 leading-relaxed">Pasiyentləri ən çox maraqlandıran suallardan biri odur ki, saç əkimi ağrılı bir prosedurdur, yoxsa ağrısız. Təbii ki, digər prosedurlar kimi saç əkiminin də yaratdığı diskomfortlar var. Bu diskomfortları 2 hissəyə bölməyimiz daha məntiqli olar.</p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="bg-white p-8 border border-[#7F6A47]/20 shadow-lg">
+                            <h3 className="text-2xl font-bold text-[#7F6A47] mb-4">Prosedur zamanı</h3>
+                            <p className="text-[#3A3A3A]/80 leading-relaxed">Saç əkimi proseduru icra edilərkən pasiyentlərin dərisinə müəyyən qədər yerli anesteziya verilməsinə ehtiyac vardır. Bu, pasiyentin dərisinin keyləşməsini təmin edir və prosedur zamanı ağrı və diskomfort hiss edilmir. Anesteziya xüsusi iynələrlə verildiyi üçün əməliyyatın başlanğıc mərhələsində pasiyentlər müəyyən diskomfort hiss edə bilər. Lakin qısa zaman içində diskomfort tamamilə yoxa çıxır və pasiyentlər ağrısız bir prosedura davam edir.</p>
+                        </div>
+                        <div className="bg-white p-8 border border-[#7F6A47]/20 shadow-lg">
+                            <h3 className="text-2xl font-bold text-[#7F6A47] mb-4">Prosedur bitdikdən sonra</h3>
+                            <p className="text-[#3A3A3A]/80 leading-relaxed">Prosedur bitdikdən sonra pasiyentlərə diqqət etməli olduqları bütün qaydalar tək-tək izah edilir. Nəzərə almalıyıq ki, prosedurdan sonra bir neçə saat içində yerli anesteziyanın təsiri azalır və diskomfort hissi çoxalmağa başlayır. Pasiyentin diskomfortunu azaltmaq üçün öncədən ağrıkəsicilər və istifadə qaydaları izah edilir. Bu da öz növbəsində əməliyyatdan sonrakı mərhələlərdə öz müsbət təsirini göstərir.</p>
+                        </div>
                     </div>
                 </section>
 
                 {/* Rehabilitasiya */}
-                <section id="rehab" className="mb-16">
-                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Reabilitasiya dövrü</h2>
-                    <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
-                        <p>Prosedurdan sonra xüsusi şampun və losyonların doğru istifadəsi izah olunur; 1–2 gün sonra sarğılar adətən çıxarıla bilər.</p>
-                        <p>İlk 2 həftə qreftlər kök atdığı üçün çox diqqətli yanaşmaq lazımdır; ilk ay ağır fiziki işlər azaldılmalıdır. Transplantasiya olunan sahəyə toxunmaq qadağandır.</p>
-                        <p>Bəzi həftələr içində transplantasiya olunan saçlar tökülüb yenidən çıxmağa başlayır; ~4 ayda yeni saçlar görünür, 10–16 ayda yekun nəticələr əldə edilir.</p>
+                <section id="rehab" className="mb-20">
+                    <h2 className="text-3xl lg:text-5xl font-serif mb-8 text-[#3A3A3A]">Saç əkimindən sonra reabilitasiya dövrü necə keçir?</h2>
+                    <p className="text-lg text-[#3A3A3A]/80 mb-10 leading-relaxed">Əməliyyatdan sonrakı dövr prosedurun özü qədər vacibdir. Prosedurdan sonra pasiyentlərə əkilmiş saçlara necə qulluq etməli olduqları ətraflı izah edilir. Xüsusi şampunlar və losyonların necə düzgün istifadə olunması da izah olunur, çünki bunlar prosedurdan sonra dərinin bərpasına kömək edir. 1–2 gün sonra sarğılar adətən çıxarıla bilər.</p>
+                    
+                    <div className="bg-white p-10 border border-[#7F6A47]/20 shadow-lg rounded space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
+                        <div>
+                            <h3 className="text-xl font-bold text-[#7F6A47] mb-3">İlk 2 həftə</h3>
+                            <p>Prosedurdan sonra ilk 2 həftə transplantasiya olunmuş saçlara çox diqqətli yanaşmaq lazımdır. Qreftlər hələ zəifdir və onların kök atması üçün vaxt lazımdır. İlk ay ərzində ağır fiziki işləri azaltmaq tövsiyə olunur ki, bütün mümkün risklər minimuma endirilsin.</p>
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-bold text-[#7F6A47] mb-3">Gündəlik həyat</h3>
+                            <p>Siz normal fəaliyyətinizə davam edə və gündəlik işlərinizlə məşğul ola bilərsiniz. Yalnız unutmayın ki, transplantasiya olunan sahəyə toxunmaq və kontakt etmək qadağandır.</p>
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-bold text-[#7F6A47] mb-3">Nəticələr</h3>
+                            <p>Bir neçə həftə sonra transplantasiya olunmuş saçlar tökülür, sonra isə yenidən çıxmağa başlayır. 4 ay sonra adətən yeni saçlar görünməyə başlayır. 10–16 ay ərzində isə yekun nəticələr əldə edilmiş olur.</p>
+                        </div>
                     </div>
                 </section>
 
                 {/* Ömürlük nəticə */}
-                <section id="omurluk" className="mb-16">
-                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Ömürlük nəticə</h2>
-                    <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
-                        <p>Donor sahədən götürülən və genetik saç tökülməsinə dayanıqlı follikullar yeni bölgədə də güclü qalır; nəticələr uzun ömürlüdür.</p>
-                        <p className="opacity-80">Nəticəyə təsir edən faktorlar: saçın dalğalı/sıx olması, saç-deri rəng kontrastı, yaş ve devam eden doğal dökülme vb. Təcrübəli mütəxəssis qreftləri doğru yerləşdirərək sağ qalma və təbii görünüşü təmin edir.</p>
+                <section id="omurluk" className="mb-20">
+                    <h2 className="text-3xl lg:text-5xl font-serif mb-8 text-[#3A3A3A]">Saç əkiminin nəticəsi ömürlükdür?</h2>
+                    <div className="bg-white p-10 border border-[#7F6A47]/20 shadow-lg rounded">
+                        <div className="space-y-6 text-lg leading-relaxed text-[#3A3A3A]/80">
+                            <p className="text-xl font-semibold text-[#3A3A3A]">Saç əkiminizin nəticəsi bütün həyatınız boyunca qalıcı olacaq və sizi sevindirəcəkdir.</p>
+                            <p>Hər şey saçlarınızın unikal xüsusiyyətlərindən asılıdır. Bu saçlar adətən başın arxa və ya yan hissələrindən götürülür və genetik saç tökülməsinə səbəb olan hormonlara qarşı təbii şəkildə dayanıqlıdır. Bu follikullar seyrək bölgələrə köçürüldükdən sonra da güclü qalmağa davam edirlər.</p>
+                            
+                            <h3 className="text-2xl font-bold text-[#7F6A47] mt-8">Saç əkimi nəticəsinə təsir edən faktorlar</h3>
+                            <p>Bir çox digər faktorlar da nəticəyə təsir göstərə bilər, bu isə pasiyentin anatomik xüsusiyyətlərindən asılıdır. Məsələn, dalğalı saçlar, daha sıx saçlar və dərinin rəngindən az fərqlənən saçlar — bunlar hamısı saçları vizual olaraq daha sıx göstərən müsbət xüsusiyyətlərdir. Lakin əgər siz gəncsinizsə, təbii saç tökülməsi davam etdikcə əlavə prosedurlara ehtiyacınız ola bilər.</p>
+                            <p>Nəhayət, həkiminizin təcrübəsi nəticələrin uzun müddət qalmasında əsas rol oynayır. Təcrübəli mütəxəssis qreftlərin düzgün yərləşdirilməsini təmin edərək onların sağ qalmasını və zamanla təbii görünüşünü qoruyur.</p>
+                        </div>
                     </div>
                 </section>
 
                 {/* Xidmətlər paketi */}
-                <section id="paket" className="mb-16">
-                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Xidmətlərimizə nələr daxildir?</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-8 border border-[#7F6A47]/20 shadow-lg">
-                        <ul className="list-disc pl-6 space-y-2 text-[#3A3A3A]/80">
-                            <li>Prosedur öncəsi konsultasiyalar</li>
-                            <li>Prosedur öncəsi dermatoloq müayinəsi</li>
-                            <li>Prosedurun özü</li>
-                            <li>Prosedur sonrası dərmanlar və dəriyə qulluq məhsulları</li>
-                        </ul>
-                        <ul className="list-disc pl-6 space-y-2 text-[#3A3A3A]/80">
-                            <li>Prosedurdan sonra klinikada müayinələr</li>
-                            <li>Şəxsi koordinator</li>
-                            <li>Prosedurdan sonra 1 il ərzində dəstək</li>
-                            <li>Fərdiləşdirilə bilən paket seçenekleri</li>
-                        </ul>
+                <section id="paket" className="mb-20">
+                    <h2 className="text-3xl lg:text-5xl font-serif mb-8 text-[#3A3A3A]">Saç əkimi xidmətlərimizə nələr daxildir?</h2>
+                    <p className="text-lg text-[#3A3A3A]/80 mb-10 leading-relaxed">Sizin rahatlığınızı düşündüyümüz üçün saç əkimi prosedurlarımızı geniş paket şəklində sizə təqdim edirik.</p>
+                    
+                    <div className="bg-gradient-to-br from-[#7F6A47]/5 to-white p-10 border-2 border-[#7F6A47]/30 shadow-xl rounded">
+                        <h3 className="text-2xl font-serif text-[#7F6A47] mb-8 text-center">Saç əkimi paketlərimizə daxildir:</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <ul className="space-y-4">
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={24} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <div>
+                                        <span className="font-bold text-[#3A3A3A]">Prosedur öncəsi konsultasiyalar</span>
+                                        <p className="text-sm text-[#3A3A3A]/70 mt-1">Ətraflı müayinə və planlaşdırma</p>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={24} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <div>
+                                        <span className="font-bold text-[#3A3A3A]">Prosedur öncəsi dermatoloq müayinəsi</span>
+                                        <p className="text-sm text-[#3A3A3A]/70 mt-1">Təms təhlil və dərinin qiymətləndirilməsi</p>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={24} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <div>
+                                        <span className="font-bold text-[#3A3A3A]">Prosedurun özü</span>
+                                        <p className="text-sm text-[#3A3A3A]/70 mt-1">Professional komanda ilə təmsənuatın icrası</p>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={24} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <div>
+                                        <span className="font-bold text-[#3A3A3A]">Prosedur sonrası dərmanlar</span>
+                                        <p className="text-sm text-[#3A3A3A]/70 mt-1">Dəriyə qulluq məhsulları və ağrıkəsicilər</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul className="space-y-4">
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={24} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <div>
+                                        <span className="font-bold text-[#3A3A3A]">Prosedurdan sonra klinikada müayinələr</span>
+                                        <p className="text-sm text-[#3A3A3A]/70 mt-1">Müntəzəm izləmə və nəzarət</p>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={24} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <div>
+                                        <span className="font-bold text-[#3A3A3A]">Şəxsi koordinator</span>
+                                        <p className="text-sm text-[#3A3A3A]/70 mt-1">24/7 dəstək və əlaqə</p>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={24} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <div>
+                                        <span className="font-bold text-[#3A3A3A]">1 il ərzində dəstək</span>
+                                        <p className="text-sm text-[#3A3A3A]/70 mt-1">Prosedurdan sonra tam iliyə izləmə</p>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle size={24} className="text-[#7F6A47] flex-shrink-0 mt-1"/>
+                                    <div>
+                                        <span className="font-bold text-[#3A3A3A]">Fərdiləşdirilmiş paketlər</span>
+                                        <p className="text-sm text-[#3A3A3A]/70 mt-1">Şəxsi ehtiyaclarınıza uyğun xidmətlər</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <p className="text-center text-[#3A3A3A]/70 mt-8 italic">Bu paketlər tamamilə fərdiləşdirilə bilər və şəxsi ehtiyaclarınıza uyğun olaraq müxtəlif xidmətlər əlavə edilə bilər.</p>
                     </div>
                 </section>
 
                 {/* Qiymətlər */}
-                <section id="qiymet" className="mb-4">
-                    <h2 className="text-3xl lg:text-4xl font-serif mb-6 text-[#3A3A3A]">Saç əkimi qiymətləri</h2>
-                    <div className="space-y-4 text-lg leading-relaxed text-[#3A3A3A]/80">
-                        <p>Qərb ölkələrində: 4,000–17,000 USD • Türkiyədə: 2,500–6,000 USD • Azərbaycanda: 1,000–4,000 AZN</p>
-                        <p>Qiymətlər mütəxəssislərin təcrübəsi, avadanlıq keyfiyyəti və xidmətlərin kapsamına görə dəyişir. Sığorta ilə karşılanmaz.</p>
+                <section id="qiymet" className="mb-20">
+                    <h2 className="text-3xl lg:text-5xl font-serif mb-8 text-[#3A3A3A]">Saç əkimi qiymətləri</h2>
+                    <p className="text-lg text-[#3A3A3A]/80 mb-10 leading-relaxed">Saç əkimi prosedurunun qiymətləri pasiyentlər üçün prosedurun özü qədər araqlandir. Nəzərə almalıyıq ki, saç əkimi prosedurları siğorta şirkətləri tərəfindən ödənilmir. Pasiyentlər bu prosedurun pulunu öz ciblərindən ödəyirlər və bu qiymətlərə mütəxəssislərin təcrübəsindən başlayaraq istifadə olunan avadanlıqlara qədər bir çox amillər təsir edir.</p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                        <div className="bg-white p-8 border-t-4 border-[#3A3A3A] shadow-lg">
+                            <h3 className="text-xl font-bold text-[#3A3A3A] mb-4">Qərb ölkələri</h3>
+                            <div className="text-4xl font-serif text-[#7F6A47] mb-2">$4,000–$17,000</div>
+                            <p className="text-sm text-[#3A3A3A]/70">ABŞ, İngiltərə, Avropa ölkələri</p>
+                        </div>
+                        <div className="bg-white p-8 border-t-4 border-[#7F6A47] shadow-lg">
+                            <h3 className="text-xl font-bold text-[#7F6A47] mb-4">Türkiyə</h3>
+                            <div className="text-4xl font-serif text-[#7F6A47] mb-2">$2,500–$6,000</div>
+                            <p className="text-sm text-[#3A3A3A]/70">Lider bazar, yüksək təcrübə</p>
+                        </div>
+                        <div className="bg-gradient-to-br from-[#7F6A47] to-[#6e583d] p-8 border-t-4 border-[#7F6A47] shadow-xl text-white">
+                            <h3 className="text-xl font-bold mb-4">Azərbaycan</h3>
+                            <div className="text-4xl font-serif mb-2">1,000–4,000 ₼</div>
+                            <p className="text-sm opacity-90">Yerli mütəxəssislər + Türk komandası</p>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-white p-10 border border-[#7F6A47]/20 shadow-lg rounded">
+                        <h3 className="text-2xl font-serif text-[#7F6A47] mb-6">Qərb ölkələrində və Türkiyədə saç əkimi qiymətləri</h3>
+                        <p className="text-lg text-[#3A3A3A]/80 leading-relaxed mb-6">Uzun illərdir saç əkimi Qərb ölkələrində və Türkiyədə populyar prosedur olmağa davam edir. Bu prosedurun qiyməti son 10 il ərzində ciddi şəkildə dəyişmişdir. 10 il öncə saç əkimi nadir mütəxəssislər tərəfindən icra olunurdusa, indi bir çox həkim və tibb işçiləri tərəfindən icra olunur. Bu səbəbdən prosedurun qiyməti ciddi şəkildə azalmışdır.</p>
+                        <p className="text-lg text-[#3A3A3A]/80 leading-relaxed mb-6">Hal-hazırda prosedurun qiyməti Qərb ölkələrində 4,000–17,000 dollar arasında dəyişir. Türkiyədə isə qiymətlər 2,500–6,000 dollar arasındadır.</p>
+                        
+                        <h3 className="text-2xl font-serif text-[#7F6A47] mb-6 mt-8">Azərbaycanda saç əkimi qiymətləri</h3>
+                        <p className="text-lg text-[#3A3A3A]/80 leading-relaxed mb-6">Azərbaycanda saç əkimi prosedurları son bir neçə ildə populyarlıq qazanıb. Yerli pasiyentlər əvvəllər xaricə üz tutururdularsa, indi yerli mütəxəssislərə müraciət edirlər. Bu prosedurun qiyməti ölkəmizdə 1,000–4,000 manat arasında dəyişir.</p>
+                        <div className="bg-[#7F6A47]/10 p-6 rounded border-l-4 border-[#7F6A47]">
+                            <p className="text-[#3A3A3A] font-semibold mb-2">⚠️ Nəzərə almaq lazımdır:</p>
+                            <p className="text-[#3A3A3A]/80">Keyfiyyətli prosedur üçün pasiyentlər qiymətləri araşdırarkən mütəxəssislərin təcrübəsinə, istifadə olunan avadanlıqların keyfiyyətinə və xidmətlərin siyahısına diqqət yetirsinlər.</p>
+                        </div>
                     </div>
                 </section>
 
