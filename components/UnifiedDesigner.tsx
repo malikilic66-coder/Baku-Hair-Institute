@@ -1376,6 +1376,15 @@ export const UnifiedDesigner = () => {
       // Current canvas display dimensions
       const currentWidth = canvasDims.displayWidth;
       const currentHeight = canvasDims.displayHeight;
+
+      // Temporarily remove CSS transforms to avoid capture distortion
+      const el = canvasRef.current as HTMLDivElement;
+      const prevTransform = el.style.transform;
+      const prevTransition = el.style.transition;
+      el.style.transform = 'none';
+      el.style.transition = 'none';
+      // Wait a tick so styles apply before capture
+      await new Promise(requestAnimationFrame);
       
       // Calculate scale to maintain aspect ratio
       const scaleX = targetWidth / currentWidth;
@@ -1391,6 +1400,10 @@ export const UnifiedDesigner = () => {
         width: currentWidth,
         height: currentHeight
       });
+
+      // Restore previous transforms
+      el.style.transform = prevTransform;
+      el.style.transition = prevTransition;
 
       // Create final canvas with exact target dimensions
       const finalCanvas = document.createElement('canvas');
