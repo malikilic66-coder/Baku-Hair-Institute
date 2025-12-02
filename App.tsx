@@ -519,8 +519,11 @@ export default function App() {
     navLogo: sysConfig ? 'text-green-500' : (scrolled ? 'text-[#3A3A3A]' : 'text-white'),
   };
 
-  return (
-    <div className={`min-h-screen font-sans transition-colors duration-700 selection:bg-[#7F6A47] selection:text-[#F8F3E6] ${theme.bg} ${sysConfig ? 'font-mono' : ''}`}>
+   return (
+      <div 
+         className={`min-h-screen font-sans transition-colors duration-700 selection:bg-[#7F6A47] selection:text-[#F8F3E6] ${theme.bg} ${sysConfig ? 'font-mono' : ''}`}
+         style={{ transform: mobileMenuOpen ? 'translateX(-85vw)' : 'translateX(0)', transition: 'transform 300ms ease-out' }}
+      >
       
       <Preloader />
       <PageTransitionLoader active={isNavigating} />
@@ -577,8 +580,8 @@ export default function App() {
 
                {/* Mobile Menu Slide-in Drawer */}
                <>
-                  {/* Fullscreen Drawer */}
-                  <div className={`lg:hidden fixed inset-0 bg-[#1a1a1a]/98 z-[160] overflow-y-auto transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                  {/* Off-canvas Drawer (push content) */}
+                  <div className={`lg:hidden fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-[#1a1a1a]/98 z-[160] overflow-y-auto transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
               {/* Header */}
                      <div className="bg-[#1a1a1a]/98 border-b border-[#F8F3E6]/10 px-6 py-6 flex items-center justify-between">
                 <h2 className="text-[#F8F3E6] text-xl font-serif font-bold">Menu</h2>
