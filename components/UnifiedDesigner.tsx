@@ -1525,6 +1525,28 @@ export const UnifiedDesigner = () => {
     );
   };
 
+  // Update layer position (x/y in base units)
+  const updateLayerPosition = (layerId: string, pos: { x?: number; y?: number }) => {
+    setLayers(prevLayers =>
+      prevLayers.map(layer =>
+        layer.id === layerId
+          ? { ...layer, position: { x: pos.x ?? layer.position.x, y: pos.y ?? layer.position.y } }
+          : layer
+      )
+    );
+  };
+
+  // Update layer size (width/height in base units)
+  const updateLayerSize = (layerId: string, size: { width?: number; height?: number }) => {
+    setLayers(prevLayers =>
+      prevLayers.map(layer =>
+        layer.id === layerId
+          ? { ...layer, size: { width: size.width ?? layer.size.width, height: size.height ?? layer.size.height } }
+          : layer
+      )
+    );
+  };
+
   // Image drag handlers (pan)
   const beginImageDrag = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>, layer: EditableLayer) => {
     if (layer.locked) return;
@@ -1579,6 +1601,100 @@ export const UnifiedDesigner = () => {
     const delta = e.deltaY > 0 ? -5 : 5;
     const next = clamp(current + delta, 100, 300);
     updateLayerStyle(layer.id, { bgScale: next });
+  };
+
+  // Text drag handlers (move)
+  const beginTextDrag = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>, layer: EditableLayer) => {
+    if (layer.locked) return;
+    if (selectedLayerId !== layer.id) setSelectedLayerId(layer.id);
+    const point = 'touches' in e ? e.touches[0] : (e as React.MouseEvent).nativeEvent as MouseEvent;
+    const canvasEl = canvasRef.current;
+    if (!canvasEl) return;
+    const rect = canvasEl.getBoundingClientRect();
+    dragStateRef.current = {
+      active: true,
+      layerId: layer.id,
+      startX: point.clientX,
+      startY: point.clientY,
+      startPosX: layer.position.x,
+      startPosY: layer.position.y,
+      width: rect.width,
+      height: rect.height
+    };
+    window.addEventListener('mousemove', handleTextDragMove as any);
+    window.addEventListener('mouseup', endTextDrag as any);
+    window.addEventListener('touchmove', handleTextDragMove as any, { passive: false });
+    window.addEventListener('touchend', endTextDrag as any);
+  };
+
+  const handleTextDragMove = (e: MouseEvent | TouchEvent) => {
+    const st = dragStateRef.current;
+    if (!st || !st.active || !st.layerId) return;
+    const point = e instanceof TouchEvent ? e.touches[0] : e as MouseEvent;
+    if (!point) return;
+    if (e instanceof TouchEvent) e.preventDefault();
+    const baseHeight = format === '1:1' ? 1080 : 1920;
+    const dxBase = ((point.clientX - st.startX) / st.width) * 1080;
+    const dyBase = ((point.clientY - st.startY) / st.height) * baseHeight;
+    const nextX = clamp(st.startPosX + dxBase, 0, 1080);
+    const nextY = clamp(st.startPosY + dyBase, 0, baseHeight);
+    updateLayerPosition(st.layerId, { x: nextX, y: nextY });
+  };
+
+  const endTextDrag = () => {
+    if (!dragStateRef.current) return;
+    dragStateRef.current.active = false;
+    window.removeEventListener('mousemove', handleTextDragMove as any);
+    window.removeEventListener('mouseup', endTextDrag as any);
+    window.removeEventListener('touchmove', handleTextDragMove as any);
+    window.removeEventListener('touchend', endTextDrag as any);
+  };
+
+  // Text resize handlers (width/height)
+  const beginTextResize = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>, layer: EditableLayer) => {
+    if (layer.locked) return;
+    if (selectedLayerId !== layer.id) setSelectedLayerId(layer.id);
+    const point = 'touches' in e ? e.touches[0] : (e as React.MouseEvent).nativeEvent as MouseEvent;
+    const canvasEl = canvasRef.current;
+    if (!canvasEl) return;
+    const rect = canvasEl.getBoundingClientRect();
+    dragStateRef.current = {
+      active: true,
+      layerId: layer.id,
+      startX: point.clientX,
+      startY: point.clientY,
+      startPosX: layer.size.width,
+      startPosY: layer.size.height,
+      width: rect.width,
+      height: rect.height
+    };
+    window.addEventListener('mousemove', handleTextResizeMove as any);
+    window.addEventListener('mouseup', endTextResize as any);
+    window.addEventListener('touchmove', handleTextResizeMove as any, { passive: false });
+    window.addEventListener('touchend', endTextResize as any);
+  };
+
+  const handleTextResizeMove = (e: MouseEvent | TouchEvent) => {
+    const st = dragStateRef.current;
+    if (!st || !st.active || !st.layerId) return;
+    const point = e instanceof TouchEvent ? e.touches[0] : e as MouseEvent;
+    if (!point) return;
+    if (e instanceof TouchEvent) e.preventDefault();
+    const baseHeight = format === '1:1' ? 1080 : 1920;
+    const dwBase = ((point.clientX - st.startX) / st.width) * 1080;
+    const dhBase = ((point.clientY - st.startY) / st.height) * baseHeight;
+    const nextW = clamp(st.startPosX + dwBase, 100, 1080);
+    const nextH = clamp(st.startPosY + dhBase, 50, baseHeight);
+    updateLayerSize(st.layerId, { width: nextW, height: nextH });
+  };
+
+  const endTextResize = () => {
+    if (!dragStateRef.current) return;
+    dragStateRef.current.active = false;
+    window.removeEventListener('mousemove', handleTextResizeMove as any);
+    window.removeEventListener('mouseup', endTextResize as any);
+    window.removeEventListener('touchmove', handleTextResizeMove as any);
+    window.removeEventListener('touchend', endTextResize as any);
   };
 
   // Toggle layer visibility
@@ -1919,8 +2035,10 @@ export const UnifiedDesigner = () => {
                         return (
                           <div
                             key={layer.id}
-                            className={`absolute ${layer.locked ? 'cursor-default' : 'cursor-text'}`}
+                            className={`absolute ${layer.locked ? 'cursor-default' : selectedLayerId === layer.id ? 'cursor-move' : 'cursor-text'}`}
                             onClick={() => !layer.locked && setSelectedLayerId(layer.id)}
+                            onMouseDown={(e) => !layer.locked && beginTextDrag(e, layer)}
+                            onTouchStart={(e) => !layer.locked && beginTextDrag(e, layer)}
                             style={{
                               left: `${(layer.position.x / 1080) * 100}%`,
                               top: `${(layer.position.y / baseHeight) * 100}%`,
@@ -1939,6 +2057,13 @@ export const UnifiedDesigner = () => {
                             }}
                           >
                             {layer.content}
+                            {selectedLayerId === layer.id && !layer.locked && (
+                              <div
+                                className="absolute bottom-[-8px] right-[-8px] w-4 h-4 bg-[#7F6A47] rounded-sm cursor-nwse-resize"
+                                onMouseDown={(e) => beginTextResize(e, layer)}
+                                onTouchStart={(e) => beginTextResize(e, layer)}
+                              />
+                            )}
                           </div>
                         );
                       }
@@ -2091,13 +2216,101 @@ export const UnifiedDesigner = () => {
                         {selectedLayerId === layer.id && (
                           <div className="space-y-3 pt-3 border-t border-gray-200">
                             {layer.type === 'text' && (
-                              <textarea
-                                value={layer.content || ''}
-                                onChange={(e) => updateLayerText(layer.id, e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7F6A47] focus:border-transparent resize-none"
-                                rows={3}
-                                placeholder="Mətn daxil edin..."
-                              />
+                              <div className="space-y-4">
+                                <textarea
+                                  value={layer.content || ''}
+                                  onChange={(e) => updateLayerText(layer.id, e.target.value)}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7F6A47] focus:border-transparent resize-none"
+                                  rows={3}
+                                  placeholder="Mətn daxil edin..."
+                                />
+
+                                <div className="grid grid-cols-2 gap-4">
+                                  <div>
+                                    <label className="block text-xs font-medium text-[#3A3A3A] mb-1">X Konum (px)</label>
+                                    <input
+                                      type="range"
+                                      min={0}
+                                      max={1080}
+                                      step={1}
+                                      value={layer.position.x}
+                                      onChange={(e) => updateLayerPosition(layer.id, { x: Number(e.target.value) })}
+                                      className="w-full"
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="block text-xs font-medium text-[#3A3A3A] mb-1">Y Konum (px)</label>
+                                    <input
+                                      type="range"
+                                      min={0}
+                                      max={format === '1:1' ? 1080 : 1920}
+                                      step={1}
+                                      value={layer.position.y}
+                                      onChange={(e) => updateLayerPosition(layer.id, { y: Number(e.target.value) })}
+                                      className="w-full"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                  <div>
+                                    <label className="block text-xs font-medium text-[#3A3A3A] mb-1">Genişlik (px)</label>
+                                    <input
+                                      type="range"
+                                      min={100}
+                                      max={1080}
+                                      step={10}
+                                      value={layer.size.width}
+                                      onChange={(e) => updateLayerSize(layer.id, { width: Number(e.target.value) })}
+                                      className="w-full"
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="block text-xs font-medium text-[#3A3A3A] mb-1">Yazı Boyutu (px)</label>
+                                    <input
+                                      type="range"
+                                      min={12}
+                                      max={220}
+                                      step={1}
+                                      value={layer.style?.fontSize ?? 48}
+                                      onChange={(e) => updateLayerStyle(layer.id, { fontSize: Number(e.target.value) })}
+                                      className="w-full"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4 items-end">
+                                  <div>
+                                    <label className="block text-xs font-medium text-[#3A3A3A] mb-1">Rəng</label>
+                                    <input
+                                      type="color"
+                                      value={layer.style?.color ?? '#000000'}
+                                      onChange={(e) => updateLayerStyle(layer.id, { color: e.target.value })}
+                                      className="w-full h-8 p-0 border border-gray-300 rounded"
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="block text-xs font-medium text-[#3A3A3A] mb-1">Hiza</label>
+                                    <div className="flex gap-2">
+                                      <button
+                                        type="button"
+                                        onClick={() => updateLayerStyle(layer.id, { textAlign: 'left' })}
+                                        className={`px-2 py-1 text-xs rounded-md ${layer.style?.textAlign === 'left' ? 'bg-[#7F6A47] text-white' : 'bg-gray-100 text-[#3A3A3A]'}`}
+                                      >Sol</button>
+                                      <button
+                                        type="button"
+                                        onClick={() => updateLayerStyle(layer.id, { textAlign: 'center' })}
+                                        className={`px-2 py-1 text-xs rounded-md ${layer.style?.textAlign === 'center' ? 'bg-[#7F6A47] text-white' : 'bg-gray-100 text-[#3A3A3A]'}`}
+                                      >Orta</button>
+                                      <button
+                                        type="button"
+                                        onClick={() => updateLayerStyle(layer.id, { textAlign: 'right' })}
+                                        className={`px-2 py-1 text-xs rounded-md ${layer.style?.textAlign === 'right' ? 'bg-[#7F6A47] text-white' : 'bg-gray-100 text-[#3A3A3A]'}`}
+                                      >Sağ</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             )}
 
                             {layer.type === 'image' && (
