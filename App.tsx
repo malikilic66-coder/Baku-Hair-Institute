@@ -572,128 +572,98 @@ export default function App() {
               </div>
             </div>
 
-            {/* Mobile Toggle */}
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`lg:hidden interactive ${theme.navText} z-[141] relative`} aria-label="Menyunu aç">
-              {mobileMenuOpen ? <span className="text-2xl">✕</span> : <Menu/>}
-            </button>
+                  {/* Mobile toggle kaldırıldı: Alt sayfa menüsü kullanılacak */}
           </div>
 
-               {/* Mobile Menu Slide-in Drawer */}
+               {/* Mobil alt sayfa menüsü (Bottom Sheet) */}
                <>
-                  {/* Backdrop Overlay */}
+                  {/* Backdrop */}
                   <div 
                      className={`lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                      onClick={() => setMobileMenuOpen(false)}
                   />
-                  {/* Off-canvas Drawer */}
-                  <div className={`lg:hidden fixed top-0 right-0 h-full w-[80vw] max-w-sm bg-[#1a1a1a]/98 z-[160] overflow-y-auto transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-              {/* Header */}
-                     <div className="bg-[#1a1a1a]/98 border-b border-[#F8F3E6]/10 px-6 py-6 flex items-center justify-between">
-                <h2 className="text-[#F8F3E6] text-xl font-serif font-bold">Menu</h2>
-                <button 
-                  onClick={() => setMobileMenuOpen(false)} 
-                  className="text-[#F8F3E6] hover:text-[#7F6A47] transition-colors p-2"
-                  aria-label="Menüyü kapat"
-                >
-                  <span className="text-2xl">✕</span>
-                </button>
-              </div>
-
-              {/* Menu Content */}
-                     <div className="px-6 py-8 space-y-6">
-                {/* Men Section */}
-                <div className="border-b border-[#F8F3E6]/10 pb-6">
-                           <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.men}</h3>
-                  <div className="space-y-3 pl-4">
-                    {t.nav.men_items.map((item: any, idx: number) => (
-                      <button 
-                        key={idx} 
-                        onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} 
-                                    className="block text-[#F8F3E6] hover:text-[#7F6A47] hover:translate-x-2 transition-all w-full text-left py-3 text-base"
-                      >
-                        {item.label}
-                      </button>
-                    ))}
+                  {/* Bottom Sheet Panel */}
+                  <div className={`lg:hidden fixed left-0 right-0 bottom-0 z-[160] transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-y-0' : 'translate-y-full'}`}>
+                     <div className="mx-auto w-full max-w-md rounded-t-xl bg-[#1a1a1a]/98 shadow-2xl border border-[#F8F3E6]/10">
+                        {/* Grabber */}
+                        <div className="flex justify-center py-3">
+                           <div className="w-12 h-1.5 rounded-full bg-[#F8F3E6]/20"></div>
+                        </div>
+                        {/* Header */}
+                        <div className="px-6 pb-3 flex items-center justify-between">
+                           <h2 className="text-[#F8F3E6] text-lg font-serif font-bold">Menu</h2>
+                           <button onClick={() => setMobileMenuOpen(false)} className="text-[#F8F3E6] hover:text-[#7F6A47] transition-colors p-2" aria-label="Menüyü kapat">
+                              <span className="text-xl">✕</span>
+                           </button>
+                        </div>
+                        {/* Content */}
+                        <div className="px-6 py-4 space-y-6 max-h-[60vh] overflow-y-auto">
+                           {/* Men */}
+                           <div>
+                              <h3 className="text-[#F8F3E6] font-bold mb-3 uppercase tracking-wider text-xs">{t.nav.men}</h3>
+                              <div className="space-y-2">
+                                 {t.nav.men_items.map((item: any, idx: number) => (
+                                    <button key={idx} onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} className="block w-full text-left py-3 px-4 rounded border border-[#F8F3E6]/10 text-[#F8F3E6] hover:text-[#7F6A47] hover:border-[#7F6A47] transition-all">
+                                       {item.label}
+                                    </button>
+                                 ))}
+                              </div>
+                           </div>
+                           {/* Women */}
+                           <div>
+                              <h3 className="text-[#F8F3E6] font-bold mb-3 uppercase tracking-wider text-xs">{t.nav.women}</h3>
+                              <div className="space-y-2">
+                                 {t.nav.women_items.map((item: any, idx: number) => (
+                                    <button key={idx} onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} className="block w-full text-left py-3 px-4 rounded border border-[#F8F3E6]/10 text-[#F8F3E6] hover:text-[#7F6A47] hover:border-[#7F6A47] transition-all">
+                                       {item.label}
+                                    </button>
+                                 ))}
+                              </div>
+                           </div>
+                           {/* Other */}
+                           <div>
+                              <h3 className="text-[#F8F3E6] font-bold mb-3 uppercase tracking-wider text-xs">{t.nav.other}</h3>
+                              <div className="space-y-2">
+                                 {t.nav.other_items.map((item: any, idx: number) => (
+                                    <button key={idx} onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} className="block w-full text-left py-3 px-4 rounded border border-[#F8F3E6]/10 text-[#F8F3E6] hover:text-[#7F6A47] hover:border-[#7F6A47] transition-all">
+                                       {item.label}
+                                    </button>
+                                 ))}
+                              </div>
+                           </div>
+                           {/* About */}
+                           <div>
+                              <h3 className="text-[#F8F3E6] font-bold mb-3 uppercase tracking-wider text-xs">{t.nav.about}</h3>
+                              <div className="space-y-2">
+                                 {t.nav.about_items.map((item: any, idx: number) => (
+                                    <a key={idx} href={item.href} onClick={() => setMobileMenuOpen(false)} className="block w-full text-left py-3 px-4 rounded border border-[#F8F3E6]/10 text-[#F8F3E6] hover:text-[#7F6A47] hover:border-[#7F6A47] transition-all">
+                                       {item.label}
+                                    </a>
+                                 ))}
+                              </div>
+                           </div>
+                           {/* Contact */}
+                           <button onClick={() => { document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} className="block w-full text-left py-3 px-4 rounded bg-[#7F6A47] text-[#F8F3E6] font-bold hover:bg-[#6e583d] transition-colors">
+                              {t.nav.contact}
+                           </button>
+                           {/* Language */}
+                           <div className="flex gap-3">
+                              <button onClick={() => { setLang('az'); }} className={`flex-1 py-3 rounded border-2 font-bold transition-all ${lang === 'az' ? 'border-[#7F6A47] bg-[#7F6A47] text-[#F8F3E6]' : 'border-[#F8F3E6]/30 text-[#F8F3E6]/80 hover:border-[#7F6A47]/50'}`}>AZ</button>
+                              <button onClick={() => { setLang('ru'); }} className={`flex-1 py-3 rounded border-2 font-bold transition-all ${lang === 'ru' ? 'border-[#7F6A47] bg-[#7F6A47] text-[#F8F3E6]' : 'border-[#F8F3E6]/30 text-[#F8F3E6]/80 hover:border-[#7F6A47]/50'}`}>RU</button>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-                </div>
-
-                {/* Women Section */}
-                <div className="border-b border-[#F8F3E6]/10 pb-6">
-                           <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.women}</h3>
-                  <div className="space-y-3 pl-4">
-                    {t.nav.women_items.map((item: any, idx: number) => (
-                      <button 
-                        key={idx} 
-                        onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} 
-                                    className="block text-[#F8F3E6] hover:text-[#7F6A47] hover:translate-x-2 transition-all w-full text-left py-3 text-base"
-                      >
-                        {item.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Other Section */}
-                <div className="border-b border-[#F8F3E6]/10 pb-6">
-                           <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.other}</h3>
-                  <div className="space-y-3 pl-4">
-                    {t.nav.other_items.map((item: any, idx: number) => (
-                      <button 
-                        key={idx} 
-                        onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} 
-                                    className="block text-[#F8F3E6] hover:text-[#7F6A47] hover:translate-x-2 transition-all w-full text-left py-3 text-base"
-                      >
-                        {item.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* About Section */}
-                <div className="border-b border-[#F8F3E6]/10 pb-6">
-                           <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.about}</h3>
-                  <div className="space-y-3 pl-4">
-                    {t.nav.about_items.map((item: any, idx: number) => (
-                      <a 
-                        key={idx} 
-                        href={item.href} 
-                        onClick={() => setMobileMenuOpen(false)}
-                                    className="block text-[#F8F3E6] hover:text-[#7F6A47] hover:translate-x-2 transition-all w-full text-left py-3 text-base"
-                      >
-                        {item.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Contact */}
-                <button 
-                  onClick={() => { document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} 
-                           className="block w-full text-left text-[#F8F3E6] font-bold py-4 border-b border-[#F8F3E6]/10 hover:text-[#7F6A47] transition-colors text-base"
-                >
-                  {t.nav.contact}
-                </button>
-
-                {/* Language */}
-                <div className="flex gap-4 pt-4">
-                  <button 
-                    onClick={() => { setLang('az'); }} 
-                    className={`flex-1 px-6 py-3 border-2 transition-all font-bold ${lang === 'az' ? 'border-[#7F6A47] bg-[#7F6A47] text-[#F8F3E6]' : 'border-[#F8F3E6]/30 text-[#F8F3E6]/70 hover:border-[#7F6A47]/50'}`}
-                  >
-                    AZ
-                  </button>
-                  <button 
-                    onClick={() => { setLang('ru'); }} 
-                    className={`flex-1 px-6 py-3 border-2 transition-all font-bold ${lang === 'ru' ? 'border-[#7F6A47] bg-[#7F6A47] text-[#F8F3E6]' : 'border-[#F8F3E6]/30 text-[#F8F3E6]/70 hover:border-[#7F6A47]/50'}`}
-                  >
-                    RU
-                  </button>
-                </div>
-              </div>
-            </div>
-          </>
+               </>
         </div>
       </nav>
+
+         {/* Alt merkez FAB: mobil/tablette menüyü açar */}
+         <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[155]">
+            <button onClick={() => setMobileMenuOpen(true)} className="px-6 py-3 rounded-full bg-[#7F6A47] text-[#F8F3E6] shadow-2xl font-bold uppercase tracking-wider">
+               Menu
+            </button>
+         </div>
 
          {/* --- DYNAMIC CONTENT (Routes) --- */}
          <main className="transition-opacity duration-500 ease-in-out">
