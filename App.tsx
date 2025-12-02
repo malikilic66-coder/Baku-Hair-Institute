@@ -577,16 +577,10 @@ export default function App() {
 
                {/* Mobile Menu Slide-in Drawer */}
                <>
-                  {/* Backdrop Overlay */}
-                  <div 
-                     className={`lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-                     onClick={() => setMobileMenuOpen(false)}
-                  />
-            
-                  {/* Drawer from Right */}
-                  <div className={`lg:hidden fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-[#2A2A2A] shadow-2xl z-[160] overflow-y-auto transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                  {/* Fullscreen Drawer */}
+                  <div className={`lg:hidden fixed inset-0 bg-[#1a1a1a]/98 z-[160] overflow-y-auto transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
               {/* Header */}
-                     <div className="bg-[#2A2A2A] border-b border-[#F8F3E6]/10 px-6 py-6 flex items-center justify-between">
+                     <div className="bg-[#1a1a1a]/98 border-b border-[#F8F3E6]/10 px-6 py-6 flex items-center justify-between">
                 <h2 className="text-[#F8F3E6] text-xl font-serif font-bold">Menu</h2>
                 <button 
                   onClick={() => setMobileMenuOpen(false)} 
@@ -598,16 +592,16 @@ export default function App() {
               </div>
 
               {/* Menu Content */}
-              <div className="px-6 py-8 space-y-6">
+                     <div className="px-6 py-8 space-y-6">
                 {/* Men Section */}
                 <div className="border-b border-[#F8F3E6]/10 pb-6">
-                  <h3 className="text-[#7F6A47] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.men}</h3>
+                           <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.men}</h3>
                   <div className="space-y-3 pl-4">
                     {t.nav.men_items.map((item: any, idx: number) => (
                       <button 
                         key={idx} 
                         onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} 
-                        className="block text-[#F8F3E6]/80 hover:text-[#F8F3E6] hover:translate-x-2 transition-all w-full text-left py-2 text-base"
+                                    className="block text-[#F8F3E6] hover:text-[#7F6A47] hover:translate-x-2 transition-all w-full text-left py-3 text-base"
                       >
                         {item.label}
                       </button>
@@ -617,13 +611,13 @@ export default function App() {
 
                 {/* Women Section */}
                 <div className="border-b border-[#F8F3E6]/10 pb-6">
-                  <h3 className="text-[#7F6A47] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.women}</h3>
+                           <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.women}</h3>
                   <div className="space-y-3 pl-4">
                     {t.nav.women_items.map((item: any, idx: number) => (
                       <button 
                         key={idx} 
                         onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} 
-                        className="block text-[#F8F3E6]/80 hover:text-[#F8F3E6] hover:translate-x-2 transition-all w-full text-left py-2 text-base"
+                                    className="block text-[#F8F3E6] hover:text-[#7F6A47] hover:translate-x-2 transition-all w-full text-left py-3 text-base"
                       >
                         {item.label}
                       </button>
@@ -633,13 +627,13 @@ export default function App() {
 
                 {/* Other Section */}
                 <div className="border-b border-[#F8F3E6]/10 pb-6">
-                  <h3 className="text-[#7F6A47] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.other}</h3>
+                           <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.other}</h3>
                   <div className="space-y-3 pl-4">
                     {t.nav.other_items.map((item: any, idx: number) => (
                       <button 
                         key={idx} 
                         onClick={() => { handleNavigation(item.view); setMobileMenuOpen(false); }} 
-                        className="block text-[#F8F3E6]/80 hover:text-[#F8F3E6] hover:translate-x-2 transition-all w-full text-left py-2 text-base"
+                                    className="block text-[#F8F3E6] hover:text-[#7F6A47] hover:translate-x-2 transition-all w-full text-left py-3 text-base"
                       >
                         {item.label}
                       </button>
@@ -649,14 +643,14 @@ export default function App() {
 
                 {/* About Section */}
                 <div className="border-b border-[#F8F3E6]/10 pb-6">
-                  <h3 className="text-[#7F6A47] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.about}</h3>
+                           <h3 className="text-[#F8F3E6] font-bold mb-4 uppercase tracking-wider text-sm">{t.nav.about}</h3>
                   <div className="space-y-3 pl-4">
                     {t.nav.about_items.map((item: any, idx: number) => (
                       <a 
                         key={idx} 
                         href={item.href} 
                         onClick={() => setMobileMenuOpen(false)}
-                        className="block text-[#F8F3E6]/80 hover:text-[#F8F3E6] hover:translate-x-2 transition-all w-full text-left py-2 text-base"
+                                    className="block text-[#F8F3E6] hover:text-[#7F6A47] hover:translate-x-2 transition-all w-full text-left py-3 text-base"
                       >
                         {item.label}
                       </a>
@@ -667,7 +661,7 @@ export default function App() {
                 {/* Contact */}
                 <button 
                   onClick={() => { document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} 
-                  className="block w-full text-left text-[#F8F3E6] font-bold py-4 border-b border-[#F8F3E6]/10 hover:text-[#7F6A47] transition-colors text-base"
+                           className="block w-full text-left text-[#F8F3E6] font-bold py-4 border-b border-[#F8F3E6]/10 hover:text-[#7F6A47] transition-colors text-base"
                 >
                   {t.nav.contact}
                 </button>
