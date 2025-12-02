@@ -181,7 +181,7 @@ export const PageTransitionLoader: React.FC<{ active: boolean }> = ({ active }) 
 
 export const Dropdown: React.FC<{ 
   title: string; 
-  items: string[]; 
+  items: Array<{label: string; view?: string; href?: string}>; 
   specialMode: boolean;
   onNavigate?: (page: string) => void; 
 }> = ({ title, items, specialMode, onNavigate }) => (
@@ -191,47 +191,26 @@ export const Dropdown: React.FC<{
     </button>
     <div className={`absolute top-full left-0 w-56 py-4 bg-[#F8F3E6]/95 backdrop-blur-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 border-t-2 border-[#7F6A47] ${specialMode ? 'bg-black border-green-500 shadow-green-900/20' : ''}`}>
       {items.map((item, idx) => (
-        <a 
-          key={idx} 
-          href="#" 
-          onClick={(e) => {
-            e.preventDefault();
-            if (onNavigate) {
-              // Men items
-              if (item.includes("Saç Əkimi") || item.includes("Пересадка Волос")) {
-                onNavigate('men-hair');
-              }
-              else if (item.includes("Sakal Əkimi") || item.includes("Пересадка Бороды")) {
-                onNavigate('men-beard');
-              }
-              // Women items
-              else if (item.includes("Kaş Əkimi") || item.includes("Пересадка Бровей")) {
-                onNavigate('women-eyebrow');
-              }
-              // Other procedures
-              else if (item === "PRP") {
-                onNavigate('prp');
-              }
-              else if (item.includes("Mezoterapiya") || item.includes("Мезотерапия")) {
-                onNavigate('mesotherapy');
-              }
-              else if (item.includes("Medikal") || item.includes("Медицинское")) {
-                onNavigate('medical');
-              }
-              // About & Contact - scroll to sections
-              else if (item.includes("Konsültasyon") || item.includes("Форма")) {
-                onNavigate('home');
-                setTimeout(() => document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' }), 100);
-              }
-              else {
-                onNavigate('home');
-              }
-            }
-          }}
-          className={`block px-6 py-3 text-xs font-medium uppercase tracking-wider hover:bg-[#7F6A47]/10 hover:pl-8 transition-all duration-300 ${specialMode ? 'text-green-500 hover:bg-green-900/20' : 'text-[#3A3A3A] hover:text-[#7F6A47]'}`}
-        >
-          {item}
-        </a>
+        item.view ? (
+          <button
+            key={idx}
+            onClick={(e) => {
+              e.preventDefault();
+              if (onNavigate && item.view) onNavigate(item.view);
+            }}
+            className={`block w-full text-left px-6 py-3 text-sm transition-colors hover:bg-[#7F6A47]/10 ${specialMode ? 'text-green-500 hover:bg-green-900/20' : 'text-[#3A3A3A] hover:text-[#7F6A47]'}`}
+          >
+            {item.label}
+          </button>
+        ) : (
+          <a
+            key={idx}
+            href={item.href || '#'}
+            className={`block px-6 py-3 text-sm transition-colors hover:bg-[#7F6A47]/10 ${specialMode ? 'text-green-500 hover:bg-green-900/20' : 'text-[#3A3A3A] hover:text-[#7F6A47]'}`}
+          >
+            {item.label}
+          </a>
+        )
       ))}
     </div>
   </div>
