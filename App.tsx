@@ -539,7 +539,7 @@ export default function App() {
       )}
 
       {/* --- NAVBAR --- */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${theme.navBg}`}>
+      <nav className={`fixed top-0 w-full z-[70] transition-all duration-500 ${theme.navBg}`}>
         <div className="container mx-auto px-6 h-full">
           <div className="relative flex items-center justify-between h-full">
             
@@ -570,14 +570,14 @@ export default function App() {
             </div>
 
             {/* Mobile Toggle */}
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`lg:hidden interactive ${theme.navText} z-50`} aria-label="Menyunu aç">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`lg:hidden interactive ${theme.navText} z-[70] relative`} aria-label="Menyunu aç">
               {mobileMenuOpen ? <span className="text-2xl">✕</span> : <Menu/>}
             </button>
           </div>
 
           {/* Mobile Menu Overlay */}
           {mobileMenuOpen && (
-            <div className="lg:hidden fixed inset-0 top-[80px] bg-[#3A3A3A]/98 backdrop-blur-lg z-40 overflow-y-auto">
+            <div className="lg:hidden fixed inset-0 top-0 bg-[#3A3A3A]/98 backdrop-blur-lg z-[60] overflow-y-auto pt-20">
               <div className="container mx-auto px-6 py-8 space-y-6">
                 {/* Men Section */}
                 <div className="border-b border-[#F8F3E6]/10 pb-6">
