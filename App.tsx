@@ -253,7 +253,13 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
                      <div className="absolute -inset-4 border-2 border-[#7F6A47] hidden lg:block transition-all duration-500 group-hover:inset-0"></div>
                      <div className="relative z-10 w-full h-[500px] overflow-hidden shadow-2xl">
                         <img 
-                           src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1000&fm=webp" 
+                           src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop&fm=webp" 
+                           srcSet="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=600&auto=format&fit=crop&fm=webp 600w, https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1000&auto=format&fit=crop&fm=webp 1000w, https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop&fm=webp 1600w"
+                           sizes="(max-width: 1024px) 100vw, 50vw"
+                           width="1200"
+                           height="500"
+                           loading="lazy"
+                           decoding="async"
                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700" 
                            alt="Happy Couple"
                         />
@@ -340,8 +346,12 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
                            <div className="relative overflow-hidden group-hover:shadow-2xl transition-shadow duration-500">
                               <div className="absolute inset-0 bg-gradient-to-t from-[#7F6A47]/30 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                               <img 
-                                 src={doc.image} 
+                                 src={`${doc.image}&fm=webp`} 
                                  alt={doc.name} 
+                                 loading="lazy"
+                                 decoding="async"
+                                 width="800"
+                                 height="600"
                                  className="w-full h-[600px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
                               />
                               {/* Decorative Corner */}
@@ -399,11 +409,11 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
                         <div key={idx} className={`overflow-hidden shadow-xl border border-[#7F6A47]/20 hover:shadow-2xl transition-all ${sysConfig ? 'border-green-900/30' : ''}`}>
                            <div className="grid grid-cols-2 h-64">
                               <div className="relative">
-                                 <img src={`${item.before}&fm=webp`} className="w-full h-full object-cover grayscale" alt="Before" />
+                                 <img src={`${item.before}&fm=webp`} className="w-full h-full object-cover grayscale" alt="Before" loading="lazy" decoding="async" width="400" height="256" />
                                  <div className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 uppercase">Öncə</div>
                               </div>
                               <div className="relative">
-                                 <img src={`${item.after}&fm=webp`} className="w-full h-full object-cover" alt="After" />
+                                 <img src={`${item.after}&fm=webp`} className="w-full h-full object-cover" alt="After" loading="lazy" decoding="async" width="400" height="256" />
                                  <div className="absolute top-2 right-2 bg-[#7F6A47] text-white text-xs px-2 py-1 uppercase">Sonra</div>
                               </div>
                            </div>
@@ -550,7 +560,7 @@ export default function App() {
             </div>
 
             {/* Mobile Toggle */}
-            <button className={`lg:hidden interactive ${theme.navText}`}><Menu/></button>
+            <button className={`lg:hidden interactive ${theme.navText}`} aria-label="Menyunu aç"><Menu/></button>
           </div>
         </div>
       </nav>
