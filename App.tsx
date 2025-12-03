@@ -703,8 +703,8 @@ export default function App() {
          )}
 
          {/* --- DYNAMIC CONTENT (Routes) --- */}
-         <main className="transition-opacity duration-500 ease-in-out">
-            <Suspense fallback={<div className="py-32 text-center">Yükleniyor...</div>}>
+         <main className="transition-opacity duration-500 ease-in-out min-h-screen">
+            <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#F8F3E6]"><div className="animate-pulse text-[#7F6A47] text-xl font-serif tracking-widest">YÜKLƏNİR...</div></div>}>
                <Routes>
                   <Route path="/" element={<HomeView t={t} theme={theme} sysConfig={sysConfig} onNavigate={handleNavigation} />} />
                   <Route path="/men-hair" element={<Pages.MenHairPage content={t.men_hair_page} sysConfig={sysConfig} />} />
