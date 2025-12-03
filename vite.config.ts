@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => {
             assetFileNames: 'assets/[name]-[hash].[ext]'
           }
         },
+        target: 'esnext',
         cssCodeSplit: true,
         minify: 'terser',
         terserOptions: {
