@@ -729,7 +729,7 @@ export default function App() {
       {/* --- CONTACT / FORM (Shared across all pages) --- */}
       <section id="form" className={`py-32 ${sysConfig ? 'bg-black' : 'bg-[#3A3A3A]'} text-[#F8F3E6]`}>
          <div className="container mx-auto px-6">
-            <div className="flex flex-col lg:flex-row gap-20">
+            <div className="flex flex-col lg:flex-row gap-20 min-h-[600px]">
                
                {/* Map / Info */}
                <div className="lg:w-1/2">

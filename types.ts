@@ -5,11 +5,11 @@ export interface NavItems {
   other: string;
   about: string;
   contact: string;
-  men_items: string[];
-  women_items: string[];
-  other_items: string[];
-  about_items: string[];
-  contact_items: string[];
+  men_items: { label: string; view: string }[];
+  women_items: { label: string; view: string }[];
+  other_items: { label: string; view: string }[];
+  about_items: { label: string; href: string }[];
+  contact_items?: string[];
 }
 
 export interface HeroSection {
