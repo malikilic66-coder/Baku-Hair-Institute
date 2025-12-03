@@ -33,6 +33,7 @@ export default defineConfig(({ mode }) => {
         },
         target: 'esnext',
         cssCodeSplit: true,
+        assetsInlineLimit: 20480, // 20KB
         minify: 'terser',
         terserOptions: {
           compress: {
