@@ -60,7 +60,7 @@ export const MenHairPage: React.FC<MenHairPageProps> = ({ content, sysConfig }) 
         <div className={`min-h-screen ${sysConfig ? 'bg-black text-green-500' : 'bg-[#F8F3E6] text-[#3A3A3A]'}`}>
             {/* Hero başlık */}
             <div className="relative h-[50vh] bg-[#3A3A3A] overflow-hidden flex items-center justify-center">
-                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=70&w=1000&auto=format&fit=crop&fm=webp" width="1000" height="563" fetchPriority="high" loading="eager" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-40" alt="Hair Transplant"/>
+                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1200&auto=format&fit=crop&fm=webp" width="1200" height="675" fetchPriority="high" loading="eager" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-40" alt="Hair Transplant"/>
                 <div className="relative z-10 text-center px-4">
                     <h1 className="text-5xl md:text-7xl font-serif text-[#F8F3E6] mb-4">Bəylər • Saç Əkimi</h1>
                     <p className="text-[#F8F3E6]/80 text-lg md:text-xl font-light max-w-2xl mx-auto">Premium saç əkimi rehberi</p>

@@ -53,13 +53,13 @@ const HomeView = ({ t, theme, sysConfig, onNavigate }: { t: any, theme: any, sys
         {/* Full Width Banner Image */}
         <div className="absolute inset-0 z-0">
                 <img 
-                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=75&w=1600&auto=format&fit=crop&fm=webp" 
+                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1920&auto=format&fit=crop&fm=webp" 
                   className={`w-full h-full object-cover ${sysConfig ? 'grayscale invert opacity-30' : ''}`} 
                   alt="Baku Hair Institute"
                   decoding="async"
                   fetchpriority="high"
-                  width="1600"
-                  height="900"
+                  width="1920"
+                  height="1080"
                />
           {/* Gradient Overlay for text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40"></div>
@@ -729,7 +729,7 @@ export default function App() {
       {/* --- CONTACT / FORM (Shared across all pages) --- */}
       <section id="form" className={`py-32 ${sysConfig ? 'bg-black' : 'bg-[#3A3A3A]'} text-[#F8F3E6]`}>
          <div className="container mx-auto px-6">
-            <div className="flex flex-col lg:flex-row gap-20" style={{ minHeight: '700px' }}>
+            <div className="flex flex-col lg:flex-row gap-20">
                
                {/* Map / Info */}
                <div className="lg:w-1/2">
